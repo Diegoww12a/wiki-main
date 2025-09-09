@@ -110,7 +110,7 @@ export default function PlayerModal({ player, onClose }: PlayerModalProps) {
               </div>
               <div className="text-center">
                 <div className="text-2xl font-bold text-cyan-400">{player.stats.missions}</div>
-                <div className="text-gray-400 text-sm">Missões</div>
+                <div className="text-gray-400 text-sm">AÇÕES</div>
               </div>
             </div>
           </div>
