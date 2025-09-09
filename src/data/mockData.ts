@@ -2897,7 +2897,7 @@ export const mockWars: War[] = [
       
           {
     playerId: '1',
-    playerName: '',
+    playerName: 'Connor',
     avatar: 'https://i.pinimg.com/236x/21/9e/ae/219eaea67aafa864db091919ce3f5d82.jpg',
     role: 'Leader',
     kills: 0,
@@ -2906,7 +2906,7 @@ export const mockWars: War[] = [
   },
   {
     playerId: '2',
-    playerName: '',
+    playerName: 'Tsuuki',
     avatar: 'https://i.pinimg.com/236x/21/9e/ae/219eaea67aafa864db091919ce3f5d82.jpg',
     role: 'Leader',
     kills: 0,
@@ -2915,7 +2915,7 @@ export const mockWars: War[] = [
   },
   {
     playerId: '3',
-    playerName: '',
+    playerName: 'Luna',
     avatar: 'https://i.pinimg.com/236x/21/9e/ae/219eaea67aafa864db091919ce3f5d82.jpg',
     role: 'Leader',
     kills: 0,
@@ -2924,7 +2924,7 @@ export const mockWars: War[] = [
   },
   {
     playerId: '4',
-    playerName: '',
+    playerName: 'Nara',
     avatar: 'https://i.pinimg.com/236x/21/9e/ae/219eaea67aafa864db091919ce3f5d82.jpg',
     role: 'Leader',
     kills: 0,
@@ -2933,7 +2933,7 @@ export const mockWars: War[] = [
   },
   {
     playerId: '5',
-    playerName: '',
+    playerName: 'Luanz7',
     avatar: 'https://i.pinimg.com/236x/21/9e/ae/219eaea67aafa864db091919ce3f5d82.jpg',
     role: 'Leader',
     kills: 0,
@@ -2942,7 +2942,7 @@ export const mockWars: War[] = [
   },
   {
     playerId: '6',
-    playerName: '',
+    playerName: 'Facada',
     avatar: 'https://i.pinimg.com/236x/21/9e/ae/219eaea67aafa864db091919ce3f5d82.jpg',
     role: 'Leader',
     kills: 0,
@@ -2951,7 +2951,7 @@ export const mockWars: War[] = [
   },
   {
     playerId: '7',
-    playerName: '',
+    playerName: 'KroozzNS',
     avatar: 'https://i.pinimg.com/236x/21/9e/ae/219eaea67aafa864db091919ce3f5d82.jpg',
     role: 'Leader',
     kills: 0,
@@ -2960,7 +2960,7 @@ export const mockWars: War[] = [
   },
   {
     playerId: '8',
-    playerName: '',
+    playerName: 'Bisnaga',
     avatar: 'https://i.pinimg.com/236x/21/9e/ae/219eaea67aafa864db091919ce3f5d82.jpg',
     role: 'Leader',
     kills: 0,
@@ -2969,7 +2969,7 @@ export const mockWars: War[] = [
   },
   {
     playerId: '9',
-    playerName: '',
+    playerName: 'GaleguiNS',
     avatar: 'https://i.pinimg.com/236x/21/9e/ae/219eaea67aafa864db091919ce3f5d82.jpg',
     role: 'Leader',
     kills: 0,
@@ -2978,7 +2978,7 @@ export const mockWars: War[] = [
   },
   {
     playerId: '10',
-    playerName: '',
+    playerName: 'Biro',
     avatar: 'https://i.pinimg.com/236x/21/9e/ae/219eaea67aafa864db091919ce3f5d82.jpg',
     role: 'Leader',
     kills: 0,
@@ -2987,7 +2987,7 @@ export const mockWars: War[] = [
   },
   {
     playerId: '11',
-    playerName: '',
+    playerName: 'Rafinha',
     avatar: 'https://i.pinimg.com/236x/21/9e/ae/219eaea67aafa864db091919ce3f5d82.jpg',
     role: 'Leader',
     kills: 0,
@@ -2996,7 +2996,7 @@ export const mockWars: War[] = [
   },
   {
     playerId: '12',
-    playerName: '',
+    playerName: 'Dede',
     avatar: 'https://i.pinimg.com/236x/21/9e/ae/219eaea67aafa864db091919ce3f5d82.jpg',
     role: 'Leader',
     kills: 0,
@@ -3005,7 +3005,7 @@ export const mockWars: War[] = [
   },
   {
     playerId: '13',
-    playerName: '',
+    playerName: 'Mitsuke',
     avatar: 'https://i.pinimg.com/236x/21/9e/ae/219eaea67aafa864db091919ce3f5d82.jpg',
     role: 'Leader',
     kills: 0,
@@ -3014,7 +3014,7 @@ export const mockWars: War[] = [
   },
   {
     playerId: '14',
-    playerName: '',
+    playerName: 'Locking',
     avatar: 'https://i.pinimg.com/236x/21/9e/ae/219eaea67aafa864db091919ce3f5d82.jpg',
     role: 'Leader',
     kills: 0,
@@ -3023,7 +3023,7 @@ export const mockWars: War[] = [
   },
   {
     playerId: '15',
-    playerName: '',
+    playerName: 'Purpou',
     avatar: 'https://i.pinimg.com/236x/21/9e/ae/219eaea67aafa864db091919ce3f5d82.jpg',
     role: 'Leader',
     kills: 0,
@@ -3032,7 +3032,7 @@ export const mockWars: War[] = [
   },
   {
     playerId: '16',
-    playerName: '',
+    playerName: 'Sheik',
     avatar: 'https://i.pinimg.com/236x/21/9e/ae/219eaea67aafa864db091919ce3f5d82.jpg',
     role: 'Leader',
     kills: 0,
@@ -3041,7 +3041,7 @@ export const mockWars: War[] = [
   },
   {
     playerId: '17',
-    playerName: '',
+    playerName: 'Ublack',
     avatar: 'https://i.pinimg.com/236x/21/9e/ae/219eaea67aafa864db091919ce3f5d82.jpg',
     role: 'Leader',
     kills: 0,
@@ -3050,7 +3050,7 @@ export const mockWars: War[] = [
   },
   {
     playerId: '18',
-    playerName: '',
+    playerName: 'Ovotz',
     avatar: 'https://i.pinimg.com/236x/21/9e/ae/219eaea67aafa864db091919ce3f5d82.jpg',
     role: 'Leader',
     kills: 0,
@@ -3059,7 +3059,7 @@ export const mockWars: War[] = [
   },
   {
     playerId: '19',
-    playerName: '',
+    playerName: 'Dubem',
     avatar: 'https://i.pinimg.com/236x/21/9e/ae/219eaea67aafa864db091919ce3f5d82.jpg',
     role: 'Leader',
     kills: 0,
@@ -3068,7 +3068,7 @@ export const mockWars: War[] = [
   },
   {
     playerId: '20',
-    playerName: '',
+    playerName: 'PaNiiCz',
     avatar: 'https://i.pinimg.com/236x/21/9e/ae/219eaea67aafa864db091919ce3f5d82.jpg',
     role: 'Leader',
     kills: 0,
@@ -3077,7 +3077,7 @@ export const mockWars: War[] = [
   },
   {
     playerId: '21',
-    playerName: '',
+    playerName: 'Gordão',
     avatar: 'https://i.pinimg.com/236x/21/9e/ae/219eaea67aafa864db091919ce3f5d82.jpg',
     role: 'Leader',
     kills: 0,
@@ -3086,7 +3086,7 @@ export const mockWars: War[] = [
   },
   {
     playerId: '22',
-    playerName: '',
+    playerName: 'Leleozn',
     avatar: 'https://i.pinimg.com/236x/21/9e/ae/219eaea67aafa864db091919ce3f5d82.jpg',
     role: 'Leader',
     kills: 0,
@@ -3095,7 +3095,7 @@ export const mockWars: War[] = [
   },
   {
     playerId: '23',
-    playerName: '',
+    playerName: 'BaianoNS',
     avatar: 'https://i.pinimg.com/236x/21/9e/ae/219eaea67aafa864db091919ce3f5d82.jpg',
     role: 'Leader',
     kills: 0,
@@ -3104,7 +3104,7 @@ export const mockWars: War[] = [
   },
   {
     playerId: '24',
-    playerName: '',
+    playerName: 'Albara',
     avatar: 'https://i.pinimg.com/236x/21/9e/ae/219eaea67aafa864db091919ce3f5d82.jpg',
     role: 'Leader',
     kills: 0,
@@ -3113,7 +3113,7 @@ export const mockWars: War[] = [
   },
   {
     playerId: '25',
-    playerName: '',
+    playerName: 'Ivy',
     avatar: 'https://i.pinimg.com/236x/21/9e/ae/219eaea67aafa864db091919ce3f5d82.jpg',
     role: 'Leader',
     kills: 0,
@@ -3122,7 +3122,7 @@ export const mockWars: War[] = [
   },
   {
     playerId: '26',
-    playerName: '',
+    playerName: 'LenoNS',
     avatar: 'https://i.pinimg.com/236x/21/9e/ae/219eaea67aafa864db091919ce3f5d82.jpg',
     role: 'Leader',
     kills: 0,
@@ -3131,7 +3131,7 @@ export const mockWars: War[] = [
   },
   {
     playerId: '27',
-    playerName: '',
+    playerName: 'CloudNs',
     avatar: 'https://i.pinimg.com/236x/21/9e/ae/219eaea67aafa864db091919ce3f5d82.jpg',
     role: 'Leader',
     kills: 0,
@@ -3140,7 +3140,7 @@ export const mockWars: War[] = [
   },
   {
     playerId: '28',
-    playerName: '',
+    playerName: 'Gordinhoxs',
     avatar: 'https://i.pinimg.com/236x/21/9e/ae/219eaea67aafa864db091919ce3f5d82.jpg',
     role: 'Leader',
     kills: 0,
@@ -3149,7 +3149,7 @@ export const mockWars: War[] = [
   },
   {
     playerId: '29',
-    playerName: '',
+    playerName: 'Trinda',
     avatar: 'https://i.pinimg.com/236x/21/9e/ae/219eaea67aafa864db091919ce3f5d82.jpg',
     role: 'Leader',
     kills: 0,
@@ -3158,7 +3158,7 @@ export const mockWars: War[] = [
   },
   {
     playerId: '30',
-    playerName: '',
+    playerName: 'Bernadin',
     avatar: 'https://i.pinimg.com/236x/21/9e/ae/219eaea67aafa864db091919ce3f5d82.jpg',
     role: 'Leader',
     kills: 0,
@@ -3444,23 +3444,23 @@ export const mockWars: War[] = [
     battles: [
       {
         id: '1',
-        date: '2024-01-15',
-        location: 'Vinewood Sign',
-        winner: 'França',
+        date: '2025-09-11',
+        location: 'Norte',
+        winner: '',
         faction1Kills: 0,
-        faction2Kills: 18,
-        duration: '45 min',
-        description: 'Primeira batalha pela torre de comunicações'
+        faction2Kills: 0,
+        duration: '1 dia',
+        description: ''
       },
       {
         id: '2',
-        date: '2024-01-17',
-        location: 'Observatory',
-        winner: 'Russia',
-        faction1Kills: 19,
-        faction2Kills: 25,
-        duration: '1h 12min',
-        description: 'Contra-ataque russo no observatório'
+        date: 'Não definida',
+        location: 'Ilha',
+        winner: '0',
+        faction1Kills: 0,
+        faction2Kills: 0,
+        duration: '1 dia',
+        description: ''
       }
     ]
   },]

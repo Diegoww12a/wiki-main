@@ -278,9 +278,9 @@ export default function WarModal({ war, onClose }: WarModalProps) {
               </div>
             )}
 
-            {activeTab === 'battles' && (
+               {activeTab === 'battles' && (
               <div className="space-y-4">
-                <h3 className="text-xl font-bold text-white">Histórico de Batalhas</h3>
+                <h3 className="text-xl font-bold text-white">Proximas Guerra</h3>
                 {war.battles.length === 0 ? (
                   <div className="text-center py-8">
                     <Target className="w-16 h-16 text-gray-600 mx-auto mb-4" />
@@ -298,7 +298,7 @@ export default function WarModal({ war, onClose }: WarModalProps) {
                               {index + 1}
                             </div>
                             <div>
-                              <h4 className="text-white font-medium">Batalha #{index + 1}</h4>
+                              <h4 className="text-white font-medium">Esperando o Resultado da Guerra</h4>
                               <p className="text-sm text-gray-400">{new Date(battle.date).toLocaleDateString('pt-BR')}</p>
                             </div>
                           </div>
