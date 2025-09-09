@@ -84,10 +84,10 @@ export default function PlayerModal({ player, onClose }: PlayerModalProps) {
 
             <div className="bg-gray-800/50 rounded-xl p-4">
               <div className="flex items-center space-x-2 mb-2">
-                <Zap className="w-5 h-5 text-orange-400" />
-                <span className="text-orange-300 font-medium">Reputação</span>
+                <Zap className="w-5 h-5 text-red-400" />
+                <span className="text-red-300 font-medium">Kill</span>
               </div>
-              <p className="text-white text-lg">{player.reputation.toLocaleString()}</p>
+              <p className="text-white text-lg">{player.stats.kills.toLocaleString()}</p>
             </div>
           </div>
 

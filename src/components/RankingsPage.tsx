@@ -12,7 +12,7 @@ interface RankingsPageProps {
 export default function RankingsPage({ onPlayerClick }: RankingsPageProps) {
   const [activeTab, setActiveTab] = useState<'players' | 'rp-servers' | 'pvp-servers'>('players');
 
-  const topPlayers = mockPlayers.sort((a, b) => b.reputation - a.reputation);
+  const topPlayers = mockPlayers.sort((a, b) => b.stats.kills - a.stats.kills);
   const topRPServers = mockServers.filter(s => s.type === 'RP').sort((a, b) => b.rating - a.rating);
   const topPVPServers = mockServers.filter(s => s.type === 'PVP').sort((a, b) => b.rating - a.rating);
 
@@ -81,7 +81,7 @@ export default function RankingsPage({ onPlayerClick }: RankingsPageProps) {
                 >
                   <div className={`bg-gradient-to-b ${
                     index === 0 
-                      ? 'from-yellow-500/20 to-yellow-900/20 border-yellow-500/30' 
+                      ? 'from-yellow-500/55 to-yellow-900/20 border-yellow-500/50' 
                       : index === 1 
                         ? 'from-gray-500/20 to-gray-900/20 border-gray-500/30'
                         : 'from-orange-500/20 to-orange-900/20 border-orange-500/30'
@@ -107,9 +107,9 @@ export default function RankingsPage({ onPlayerClick }: RankingsPageProps) {
                     <h3 className="text-xl font-bold text-white mb-2">{player.name}</h3>
                     <p className="text-sm text-gray-300 mb-2">{player.faction}</p>
                     <div className="text-2xl font-bold text-purple-400">
-                      {player.reputation.toLocaleString()}
+                      {player.stats.kills.toLocaleString()}
                     </div>
-                    <p className="text-xs text-gray-400">reputação</p>
+                    <p className="text-xs text-gray-400">TOP KILL</p>
                   </div>
                 </div>
               ))}

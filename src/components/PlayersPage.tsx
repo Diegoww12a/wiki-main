@@ -50,8 +50,8 @@ export default function PlayersPage({ onPlayerClick, searchQuery }: PlayersPageP
         bValue = b.level;
         break;
       case 'reputation':
-        aValue = a.reputation;
-        bValue = b.reputation;
+        aValue = a.stats.kills;
+        bValue = b.stats.kills;
         break;
       case 'kd':
         aValue = a.stats.kills / Math.max(a.stats.deaths, 1);
@@ -94,7 +94,7 @@ export default function PlayersPage({ onPlayerClick, searchQuery }: PlayersPageP
               onChange={(e) => setSortBy(e.target.value as typeof sortBy)}
               className="w-full bg-gray-700 border border-gray-600 rounded-lg px-3 py-2 text-white focus:border-purple-500 focus:ring-1 focus:ring-purple-500"
             >
-              <option value="reputation">Reputação</option>
+              <option value="reputation">KILL</option>
               <option value="level">Level</option>
               <option value="name">Nome</option>
               <option value="kd">K/D Ratio</option>
