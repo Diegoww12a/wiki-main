@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Header from './components/Header';
 import HomePage from './components/HomePage';
 import PlayersPage from './components/PlayersPage';
@@ -87,11 +87,6 @@ export default function App() {
         <footer className="border-t border-gray-700/50 mt-16 py-8">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-gray-400">
             <p>&copy; 2025 FiveM Wiki. Feito pela comunidade, para a comunidade.</p>
-             <div className="mt-4">
-              {/* eu quero meu privado do discord */}
-                <span className="text-blue-300 hover:underline cursor-pointer">Me chame no Discord:  ghost_xxz</span>   
-
-            </div>
           </div>
         </footer>
       </div>

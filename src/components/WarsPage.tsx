@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { mockWars } from '../data/mockData';
 import { War } from '../types';
 import WarCard from './WarCard';
-import { Sword, Filter, SortAsc, SortDesc, Flame, Clock, Trophy, Target } from 'lucide-react';
+import { Sword, SortAsc, SortDesc, Flame, Clock, Trophy, Target } from 'lucide-react';
 
 interface WarsPageProps {
   onWarClick: (war: War) => void;
@@ -139,7 +139,6 @@ export default function WarsPage({ onWarClick, searchQuery }: WarsPageProps) {
               className="w-full bg-gray-700 border border-gray-600 rounded-lg px-3 py-2 text-white focus:border-red-500 focus:ring-1 focus:ring-red-500"
             >
               <option value="startDate">Data de Início</option>
-              <option value="timeDate">Hora de Início</option>
               <option value="name">Nome</option>
               <option value="kills">Total de Kills</option>
               <option value="battles">Número de Batalhas</option>

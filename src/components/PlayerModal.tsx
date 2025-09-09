@@ -1,6 +1,5 @@
-import React from 'react';
 import { Player } from '../types';
-import { X, Shield, Users, Award, Target, Clock, Calendar, Zap } from 'lucide-react';
+import { X, Shield, Users, Award, Clock, Calendar, Zap } from 'lucide-react';
 
 interface PlayerModalProps {
   player: Player;
@@ -16,9 +15,7 @@ export default function PlayerModal({ player, onClose }: PlayerModalProps) {
     return status === 'online' ? 'text-green-400 bg-green-400/10 border-green-400/30' : 'text-gray-400 bg-gray-400/10 border-gray-400/30';
   };
 
-
   return (
-    // Modal Background and Container
     <div className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 z-50">
       <div className="bg-gray-900 border border-gray-700 rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
         <div className="p-6">
@@ -87,10 +84,10 @@ export default function PlayerModal({ player, onClose }: PlayerModalProps) {
 
             <div className="bg-gray-800/50 rounded-xl p-4">
               <div className="flex items-center space-x-2 mb-2">
-                <Zap className="w-5 h-5 text-red-400" />
-                <span className="text-red-300 font-medium">KILL</span>
+                <Zap className="w-5 h-5 text-orange-400" />
+                <span className="text-orange-300 font-medium">Reputação</span>
               </div>
-              <p className="text-white text-lg">{player.stats.kills.toLocaleString()}</p>
+              <p className="text-white text-lg">{player.reputation.toLocaleString()}</p>
             </div>
           </div>
 
@@ -123,6 +120,10 @@ export default function PlayerModal({ player, onClose }: PlayerModalProps) {
               <div className="flex items-center text-gray-400">
                 <Calendar className="w-4 h-4 mr-2" />
                 Entrou em: <span className="text-white ml-1">{new Date(player.joinDate).toLocaleDateString('pt-BR')}</span>
+              </div>
+              <div className="flex items-center text-gray-400">
+                <Clock className="w-4 h-4 mr-2" />
+                Tempo jogado: <span className="text-white ml-1">{player.stats.playtime}</span>
               </div>
             </div>
           </div>

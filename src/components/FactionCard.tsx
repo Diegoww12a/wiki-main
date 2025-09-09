@@ -1,6 +1,5 @@
-import React from 'react';
 import { Faction } from '../types';
-import { Shield, Users, Trophy, Target, DollarSign, Crown, Sword, AlertTriangle } from 'lucide-react';
+import { Shield, Users, Trophy, Target, Crown } from 'lucide-react';
 
 interface FactionCardProps {
   faction: Faction;

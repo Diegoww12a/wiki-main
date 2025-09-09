@@ -71,8 +71,8 @@ export interface War {
   };
   status: 'active' | 'ended' | 'scheduled';
   startDate: string;
-  endDate?: string;
   timeDate: string;
+  endDate?: string;
   winner?: string;
   territory: string;
   reason: string;

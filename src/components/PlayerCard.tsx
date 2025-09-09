@@ -1,6 +1,5 @@
-import React from 'react';
 import { Player } from '../types';
-import { Shield, Zap, Clock, Target, Award, Users } from 'lucide-react';
+import { Shield, Target, Award, Users } from 'lucide-react';
 
 interface PlayerCardProps {
   player: Player;
@@ -19,11 +18,10 @@ export default function PlayerCard({ player, onClick }: PlayerCardProps) {
   return (
     <div
       onClick={() => onClick(player)}
-      className="bg-gray-800/55 backdrop-blur-sm border border-gray-700/50 rounded-xl p-6 hover:border-purple-500/50 hover:shadow-lg hover:shadow-purple-500/10 transition-all duration-300 cursor-pointer group"
+      className="bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 rounded-xl p-6 hover:border-purple-500/50 hover:shadow-lg hover:shadow-purple-500/10 transition-all duration-300 cursor-pointer group"
     >
       <div className="flex items-start space-x-4">
         <div className="relative">
-          {/* Mudar a foto do jogador */}
           <img
             src={player.avatar}
             alt={player.name}
@@ -76,7 +74,8 @@ export default function PlayerCard({ player, onClick }: PlayerCardProps) {
       
       <div className="mt-4 pt-4 border-t border-gray-700/50">
         <div className="flex justify-between text-sm text-gray-400">
-          <span>KILL: <span className="text-purple-400 font-medium">{player.stats.kills.toLocaleString()}</span></span>
+          <span>Reputação: <span className="text-purple-400 font-medium">{player.reputation.toLocaleString()}</span></span>
+          <span>Tempo: <span className="text-cyan-400 font-medium">{player.stats.playtime}</span></span>
         </div>
       </div>
     </div>

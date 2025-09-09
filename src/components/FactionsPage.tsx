@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+
+import { useState } from 'react';
 import { mockFactions } from '../data/mockData';
 import { Faction } from '../types';
 import FactionCard from './FactionCard';
-import { Shield, Filter, SortAsc, SortDesc, Users, Trophy, Target } from 'lucide-react';
+import { Shield, SortAsc, SortDesc, Users, Trophy, Target } from 'lucide-react';
+
 
 interface FactionsPageProps {
   onFactionClick: (faction: Faction) => void;
@@ -107,6 +109,9 @@ export default function FactionsPage({ onFactionClick, searchQuery }: FactionsPa
           </h1>
         </div>
         <p className="text-gray-400">Explore todas as facções, clãs e organizações do FiveM</p>
+
+        <p className="text-gray-400">Explore todas as facções, e organizações do FiveM</p>
+
         <span className="bg-purple-500/20 text-purple-300 px-3 py-1 rounded-full text-sm mt-2 inline-block">
           {filteredFactions.length} facções encontradas
         </span>

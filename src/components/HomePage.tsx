@@ -1,4 +1,3 @@
-import React from 'react';
 import { mockPlayers, mockServers } from '../data/mockData';
 import { Player } from '../types';
 import PlayerCard from './PlayerCard';
@@ -26,9 +25,9 @@ export default function HomePage({ onPlayerClick }: HomePageProps) {
 
   const stats = [
     { label: 'Players Registrados', value: '100', icon: Users, color: 'text-purple-400' },
-    { label: 'Facções Ativas', value: '6', icon: Shield, color: 'text-red-400' },
-    { label: 'Servidores Ativos', value: '3', icon: Server, color: 'text-cyan-400' },
-    { label: 'Players Online', value: '5,823', icon: TrendingUp, color: 'text-green-400' }
+    { label: 'Facções Ativas', value: '12', icon: Shield, color: 'text-red-400' },
+    { label: 'Servidores Ativos', value: '247', icon: Server, color: 'text-cyan-400' },
+    { label: 'Players Online', value: '100', icon: TrendingUp, color: 'text-green-400' }
   ];
 
   return (
@@ -44,10 +43,10 @@ export default function HomePage({ onPlayerClick }: HomePageProps) {
         </p>
         <div className="flex flex-wrap justify-center gap-4">
           <div className="bg-purple-500/20 px-6 py-3 rounded-full text-purple-300 border border-purple-500/30">
-            🔥 Mais de 12k players cadastrados
+            🔥 Mais de 100 players cadastrados
           </div>
           <div className="bg-cyan-500/20 px-6 py-3 rounded-full text-cyan-300 border border-cyan-500/30">
-            ⚡ Atualizado Todos os Dias
+            ⚡ Atualizado em tempo real
           </div>
         </div>
       </div>
@@ -107,7 +106,6 @@ export default function HomePage({ onPlayerClick }: HomePageProps) {
             <ServerCard key={server.id} server={server} rank={index + 1} />
           ))}
         </div>
-        
       </section>
     </div>
   );
