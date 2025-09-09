@@ -3169,15 +3169,6 @@ export const mockWars: War[] = [
 
       ],
       faction2Players: [
-         {
-    playerId: '30',
-    playerName: '',
-    avatar: 'https://i.pinimg.com/236x/21/9e/ae/219eaea67aafa864db091919ce3f5d82.jpg',
-    role: 'Leader',
-    kills: 0,
-    deaths: 0,
-    status: 'active'
-  },
   {
     playerId: '31',
     playerName: '',
