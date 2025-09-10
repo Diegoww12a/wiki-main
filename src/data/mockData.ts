@@ -4,7 +4,7 @@ export const mockPlayers: Player[] = [
   {
     id: '1',
     name: 'KROOZZNS',
-    avatar: 'https://media.discordapp.net/attachments/1373720326579556525/1414764573013049445/KROOZZ.png?ex=68c0c1af&is=68bf702f&hm=977b6af608757243c82be037770b478858b95c4ea26a90f535b504117e1f4ab8&=&format=webp&quality=lossless',
+    avatar: 'https://pbs.twimg.com/media/G0cpj46XAAAKfHD?format=jpg&name=120x120',
     faction: 'FRANÇA',
     role: 'PVP',
     level: 0,
@@ -22,7 +22,7 @@ export const mockPlayers: Player[] = [
   {
     id: '2',
     name: 'FACADA',
-    avatar: 'https://media.discordapp.net/attachments/1373720326579556525/1414764573294334074/FACADA.png?ex=68c0c1af&is=68bf702f&hm=32cb322330cbb6d2c5bf1c2e0ea923b738acd3209dbd229dfadbc1d19632ae81&=&format=webp&quality=lossless',
+    avatar: 'https://pbs.twimg.com/media/G0cpj1mWwAEtoy0?format=jpg&name=120x120',
     faction: 'FRANÇA',
     role: 'PVP',
     level: 0,
@@ -40,7 +40,7 @@ export const mockPlayers: Player[] = [
   {
     id: '4',
     name: 'LUANZ7',
-    avatar: 'https://media.discordapp.net/attachments/1373720326579556525/1414764573650845726/luan.png?ex=68c0c1af&is=68bf702f&hm=f1911df65c31a4b46f76cd54bb47dd04f96f91ca3986354762d25484651eaae4&=&format=webp&quality=lossless',
+    avatar: 'https://pbs.twimg.com/media/G0cp-dYXEAA68yz?format=jpg&name=120x120',
     faction: 'FRANÇA',
     role: 'PVP',
     level: 1,
@@ -58,7 +58,7 @@ export const mockPlayers: Player[] = [
   {
     id: '5',
     name: 'VINAOLEK',
-    avatar: 'https://media.discordapp.net/attachments/1373720326579556525/1414764489412313128/VINAO.png?ex=68c0c19b&is=68bf701b&hm=99d844a34a558375237c50c1b7e131c62e8e6a562520b5b4aac646c063f8fee8&=&format=webp&quality=lossless',
+    avatar: 'https://pbs.twimg.com/media/G0cpDsDX0AAf-Ix?format=jpg&name=120x120',
     faction: 'FRANÇA',
     role: 'PVP',
     level: 1,
@@ -76,7 +76,7 @@ export const mockPlayers: Player[] = [
   {
     id: '6',
     name: 'LELEOZN',
-    avatar: 'https://media.discordapp.net/attachments/1373720326579556525/1414764208263794840/LELEON.png?ex=68c0c158&is=68bf6fd8&hm=6fcb904bd15319cb1d0423c57e55322458ac27d5e8fe7bbb10f9489879156590&=&format=webp&quality=lossless',
+    avatar: 'https://pbs.twimg.com/media/G0cnoDNXUAAbzZo?format=jpg&name=120x120',
     faction: 'FRANÇA',
     role: 'PVP',
     level: 0,
@@ -94,7 +94,7 @@ export const mockPlayers: Player[] = [
   {
     id: '7',
     name: 'UBLACK',
-    avatar: 'https://media.discordapp.net/attachments/1373720326579556525/1414764413290024991/UBLACK.png?ex=68c0c189&is=68bf7009&hm=95f3c953f0a3c4d290c5ae8fee88c997f432d4ef0946bda797d2fbd12fb7cb4c&=&format=webp&quality=lossless',
+    avatar: 'https://pbs.twimg.com/media/G0cogUHWMAAN1dd?format=jpg&name=120x120',
     faction: 'FRANÇA',
     role: 'PVP',
     level: 1,
@@ -112,7 +112,7 @@ export const mockPlayers: Player[] = [
   {
     id: '8',
     name: 'GORDAONS',
-    avatar: 'https://media.discordapp.net/attachments/1373720326579556525/1414764490398109706/GORDAO.png?ex=68c0c19b&is=68bf701b&hm=6be75d3b6c36a7159baaff8b25075df730f39182eb19177c6213dcb40dde95b0&=&format=webp&quality=lossless',
+    avatar: 'https://pbs.twimg.com/media/G0cpUJeXMAArqzT?format=jpg&name=120x120',
     faction: 'FRANÇA',
     role: 'PVP',
     level: 0,
@@ -130,7 +130,7 @@ export const mockPlayers: Player[] = [
   {
     id: '9',
     name: 'OVOTZ',
-    avatar: 'https://media.discordapp.net/attachments/1373720326579556525/1414762321980559461/OVOTZ.png?ex=68c21116&is=68c0bf96&hm=b89302965f6f0712bc36415d811e5f4f3696cc3ab3d0b783fbd22a61ac86412e&=&format=webp&quality=lossless',
+    avatar: 'https://pbs.twimg.com/media/G0cnoDUW8AAX9O7?format=jpg&name=120x120',
     faction: 'FRANÇA',
     role: 'PVP',
     level: 1,
@@ -148,7 +148,7 @@ export const mockPlayers: Player[] = [
   {
     id: '10',
     name: 'MITSUKE',
-    avatar: 'https://media.discordapp.net/attachments/1373720326579556525/1414764490058109020/MITSUKE.png?ex=68c0c19b&is=68bf701b&hm=616815076869b4c2a15a62005728871939a8d9cd3d934470431793b62679105a&=&format=webp&quality=lossless',
+    avatar: 'https://pbs.twimg.com/media/G0cpUJiWgAEeTqZ?format=jpg&name=120x120',
     faction: 'FRANÇA',
     role: 'PVP',
     level: 1,
@@ -166,7 +166,7 @@ export const mockPlayers: Player[] = [
   {
     id: '11',
     name: 'LENONS',
-    avatar: 'https://media.discordapp.net/attachments/1373720326579556525/1414764208871964802/LENONS.png?ex=68c0c158&is=68bf6fd8&hm=6c4b5b423d0c570862d4eb3c916611db11200f6dfdea7676ec5f48b2bc3afbe5&=&format=webp&quality=lossless',
+    avatar: 'https://pbs.twimg.com/media/G0cnoFeW0AAd2p0?format=jpg&name=120x120',
     faction: 'FRANÇA',
     role: 'PVP',
     level: 0,
@@ -184,7 +184,7 @@ export const mockPlayers: Player[] = [
   {
     id: '12',
     name: 'PURPOU',
-    avatar: 'https://media.discordapp.net/attachments/1373720326579556525/1414764414367961189/PURPOU.png?ex=68c0c189&is=68bf7009&hm=1bc719b9b39b09623871cd68b5eda7b4b4bf7c3721a7a952e4689bc56432b9c9&=&format=webp&quality=lossless',
+    avatar: 'https://pbs.twimg.com/media/G0cpDr5XEAA9ja0?format=jpg&name=120x120',
     faction: 'FRANÇA',
     role: 'PVP',
     level: 1,
@@ -202,7 +202,7 @@ export const mockPlayers: Player[] = [
   {
     id: '13',
     name: 'BISNAGA',
-    avatar: 'https://media.discordapp.net/attachments/1373720326579556525/1414764326186913853/BISNAGA.png?ex=68c0c174&is=68bf6ff4&hm=dbc7156ece4e9983ad536e02ef4e7cab664ac194acd348347bb194f5cfea34a7&=&format=webp&quality=lossless',
+    avatar: 'https://pbs.twimg.com/media/G0cogT9XkAAvHCy?format=jpg&name=120x120',
     faction: 'FRANÇA',
     role: 'PVP',
     level: 0,
@@ -220,7 +220,7 @@ export const mockPlayers: Player[] = [
   {
     id: '14',
     name: 'PANIICZ',
-    avatar: 'https://media.discordapp.net/attachments/1373720326579556525/1414764489760309258/PANICZ.png?ex=68c0c19b&is=68bf701b&hm=47d10698fc9e46b03a5d82cdaadd4a8bba63917290f5beb156d2e6e28a86545b&=&format=webp&quality=lossless',
+    avatar: 'https://pbs.twimg.com/media/G0cpUzoWkAAXpph?format=jpg&name=120x120',
     faction: 'FRANÇA',
     role: 'PVP',
     level: 1,
@@ -237,8 +237,8 @@ export const mockPlayers: Player[] = [
   },
   {
     id: '15',
-    name: 'TSUKII',
-    avatar: 'https://media.discordapp.net/attachments/1373720326579556525/1414764572279312395/TSUKII.png?ex=68c0c1af&is=68bf702f&hm=34adab274971055557e84f4593c38f9442d59cc20f92a87134e4c367003ada96&=&format=webp&quality=lossless',
+    name: 'LOCKING',
+    avatar: 'https://pbs.twimg.com/media/G0cogT4WwAA-rLD?format=jpg&name=360x360',
     faction: 'FRANÇA',
     role: 'PVP',
     level: 0,
@@ -256,7 +256,7 @@ export const mockPlayers: Player[] = [
   {
     id: '16',
     name: 'BIRO',
-    avatar: 'https://media.discordapp.net/attachments/1373720326579556525/1414764490762752081/BIRO.png?ex=68c0c19b&is=68bf701b&hm=af83d507d0baa5aa62e7cb9f81857f168fdd844b307cbf1097b99d2ec6b3a743&=&format=webp&quality=lossless',
+    avatar: 'https://pbs.twimg.com/media/G0cpUHbW8AAdAJp?format=jpg&name=120x120',
     faction: 'FRANÇA',
     role: 'PVP',
     level: 0,
@@ -274,7 +274,7 @@ export const mockPlayers: Player[] = [
   {
     id: '17',
     name: 'SHEIK',
-    avatar: 'https://media.discordapp.net/attachments/1373720326579556525/1414764414820810812/SHEIK.png?ex=68c0c189&is=68bf7009&hm=262e635d87dda6a823b0f9eb83e30ee7dfe57bb22f5b137a4cb6dd99a832660b&=&format=webp&quality=lossless',
+    avatar: 'https://pbs.twimg.com/media/G0cpDsTWQAEnzU6?format=jpg&name=120x120',
     faction: 'FRANÇA',
     role: 'PVP',
     level: 0,
@@ -292,7 +292,7 @@ export const mockPlayers: Player[] = [
   {
     id: '18',
     name: 'NARA',
-    avatar: 'https://media.discordapp.net/attachments/1373720326579556525/1414764325628936213/NARA.png?ex=68c0c174&is=68bf6ff4&hm=eb06728833a0ae7b5ff8e9d26c5da21dc9cf1f8abaf7143d272806d466c3095f&=&format=webp&quality=lossless',
+    avatar: 'https://pbs.twimg.com/media/G0coQovWIAAoszI?format=jpg&name=120x120',
     faction: 'FRANÇA',
     role: 'PVP',
     level: 0,
@@ -310,7 +310,7 @@ export const mockPlayers: Player[] = [
   {
     id: '19',
     name: 'LUNA',
-    avatar: 'https://media.discordapp.net/attachments/1373720326579556525/1414764325897375815/LUNA.png?ex=68c0c174&is=68bf6ff4&hm=45954cebe410ec232dd5f26fb6e33399e50407455801caa33d5f68a4e8c2239f&=&format=webp&quality=lossless',
+    avatar: 'https://pbs.twimg.com/media/G0coQmqXUAAqIB1?format=jpg&name=120x120',
     faction: 'FRANÇA',
     role: 'PVP',
     level: 0,
@@ -328,7 +328,7 @@ export const mockPlayers: Player[] = [
   {
     id: '20',
     name: 'IVYBANKS',
-    avatar: 'https://media.discordapp.net/attachments/1373720326579556525/1414764208570110045/IVY.png?ex=68c0c158&is=68bf6fd8&hm=fbfef7f69ff6fdb82247a025be959e7b39b7c12bef0ee1188fb36dc50648b961&=&format=webp&quality=lossless',
+    avatar: 'https://pbs.twimg.com/media/G0cnoDTWgAA0N2H?format=jpg&name=120x120',
     faction: 'FRANÇA',
     role: 'PVP',
     level: 0,
@@ -346,7 +346,7 @@ export const mockPlayers: Player[] = [
   {
     id: '21',
     name: 'ALBARA',
-    avatar: 'https://media.discordapp.net/attachments/1373720326579556525/1414762494689284206/ALBARA.png?ex=68c0bfbf&is=68bf6e3f&hm=1e15b3d9e3851854bacc56b6ece364dbd9d81d4a9e56fee1a0bf6ec9ca1e06bf&=&format=webp&quality=lossless',
+    avatar: 'https://pbs.twimg.com/media/G0cnXpbWAAA_Aso?format=jpg&name=120x120',
     faction: 'FRANÇA',
     role: 'PVP',
     level: 0,
@@ -364,7 +364,7 @@ export const mockPlayers: Player[] = [
   {
     id: '22',
     name: 'BAIANONS',
-    avatar: 'https://media.discordapp.net/attachments/1373720326579556525/1414764572623110308/BAIANO.png?ex=68c0c1af&is=68bf702f&hm=32013fc8dfe3bd4134ce1c4fcb4ad22d3bb8cbb41cb0eba9cf8ca0f5187bf941&=&format=webp&quality=lossless',
+    avatar: 'https://pbs.twimg.com/media/G0cpj1uWwAA_BU0?format=jpg&name=120x120',
     faction: 'FRANÇA',
     role: 'PVP',
     level: 0,
@@ -382,7 +382,7 @@ export const mockPlayers: Player[] = [
   {
     id: '23',
     name: 'DEDE',
-    avatar: 'https://media.discordapp.net/attachments/1373720326579556525/1414764412841230437/DEDE.png?ex=68c0c189&is=68bf7009&hm=650c2737ebd4fd6d6065bf161a9527e9470b1cc8076a11d55fa165741b63710e&=&format=webp&quality=lossless',
+    avatar: 'https://pbs.twimg.com/media/G0cogT-XQAAmZrx?format=jpg&name=120x120',
     faction: 'FRANÇA',
     role: 'PVP',
     level: 0,
@@ -400,7 +400,7 @@ export const mockPlayers: Player[] = [
   {
     id: '24',
     name: 'GALEGUINS',
-    avatar: 'https://media.discordapp.net/attachments/1373720326579556525/1414764209207640084/GALEGUIN.png?ex=68c0c158&is=68bf6fd8&hm=0473e3417a1f0a9d3df6f3c8ce297cccbd3d80d09d293fcdbcfa2524bd3c1ccd&=&format=webp&quality=lossless',
+    avatar: 'https://pbs.twimg.com/media/G0coQonWUAE4qdL?format=jpg&name=120x120',
     faction: 'FRANÇA',
     role: 'PVP',
     level: 0,
@@ -418,7 +418,7 @@ export const mockPlayers: Player[] = [
   {
     id: '25',
     name: 'DUMAL',
-    avatar: 'https://media.discordapp.net/attachments/1373720326579556525/1414764209488662690/DUMAL.png?ex=68c0c158&is=68bf6fd8&hm=1158388d816554502e497a6af8c8e3eeaaad56b7eb66680335e7601dc55cf869&=&format=webp&quality=lossless',
+    avatar: 'https://pbs.twimg.com/media/G0coQosWMAAtIOR?format=jpg&name=120x120',
     faction: 'FRANÇA',
     role: 'PVP',
     level: 0,
@@ -436,7 +436,7 @@ export const mockPlayers: Player[] = [
   {
     id: '26',
     name: 'RAFINHA',
-    avatar: 'https://media.discordapp.net/attachments/1373720326579556525/1414764413822697472/RAFINHA.png?ex=68c0c189&is=68bf7009&hm=63bc90e3e97f2921d81751f3b134260760fe15c6597adbc96028e3cbd1ececb7&=&format=webp&quality=lossless',
+    avatar: 'https://pbs.twimg.com/media/G0cpDrzWAAAkQVX?format=jpg&name=120x120',
     faction: 'FRANÇA',
     role: 'PVP',
     level: 2,
@@ -1123,7 +1123,7 @@ export const mockFactions: Faction[] = [
     id: '1',
     name: 'França',
     tag: '[FR]',
-    logo: 'https://media.discordapp.net/attachments/1373720326579556525/1414782121439920158/franca.jpg?ex=68c0d207&is=68bf8087&hm=e364fcafb3e236c5dd64fa44d083b1592e577510ddfc9dd66ea42337259916b3&=&format=webp&width=501&height=890',
+    logo: 'https://pbs.twimg.com/media/G0cqV_yXgAAshLb?format=jpg&name=small',
     type: 'Gang',
     status: 'active',
     level: 50,
