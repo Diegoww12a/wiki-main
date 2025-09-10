@@ -124,13 +124,13 @@ export const mockPlayers: Player[] = [
       kills: 0,
       deaths: 0,
       playtime: '0',
-      missions: 0
+      missions: 1
     }
   },
   {
     id: '9',
     name: 'OVOTZ',
-    avatar: 'https://media.discordapp.net/attachments/1373720326579556525/1414762321980559461/OVOTZ.png?ex=68c0bf96&is=68bf6e16&hm=25af4b81ba99a2ea9e775c7cd29bcb35501a8f528da5434bef4052f92d6e12b0&=&format=webp&quality=lossless',
+    avatar: 'https://media.discordapp.net/attachments/1373720326579556525/1414762321980559461/OVOTZ.png?ex=68c21116&is=68c0bf96&hm=b89302965f6f0712bc36415d811e5f4f3696cc3ab3d0b783fbd22a61ac86412e&=&format=webp&quality=lossless',
     faction: 'FRANÇA',
     role: 'PVP',
     level: 1,
@@ -142,7 +142,7 @@ export const mockPlayers: Player[] = [
       kills: 2,
       deaths: 0,
       playtime: '0',
-      missions: 1
+      missions: 2
     }
   },
   {
@@ -178,7 +178,7 @@ export const mockPlayers: Player[] = [
       kills: 0,
       deaths: 0,
       playtime: '0',
-      missions: 0
+      missions: 1
     }
   },
   {
@@ -196,7 +196,7 @@ export const mockPlayers: Player[] = [
       kills: 2,
       deaths: 0,
       playtime: '0',
-      missions: 1
+      missions: 2
     }
   },
   {
@@ -232,7 +232,7 @@ export const mockPlayers: Player[] = [
       kills: 2,
       deaths: 1,
       playtime: '0',
-      missions: 1
+      missions: 2
     }
   },
   {
@@ -358,7 +358,7 @@ export const mockPlayers: Player[] = [
       kills: 0,
       deaths: 0,
       playtime: '0',
-      missions: 0
+      missions: 1
     }
   },
   {
@@ -376,7 +376,7 @@ export const mockPlayers: Player[] = [
       kills: 0,
       deaths: 0,
       playtime: '0',
-      missions: 0
+      missions: 1
     }
   },
   {

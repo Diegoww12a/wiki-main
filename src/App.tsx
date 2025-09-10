@@ -10,6 +10,7 @@ import FactionModal from './components/FactionModal';
 import WarModal from './components/WarModal';
 import { Player, Faction, War } from './types';
 
+
 export default function App() {
   const [activeSection, setActiveSection] = useState('home');
   const [searchQuery, setSearchQuery] = useState('');
@@ -56,6 +57,7 @@ export default function App() {
         return <HomePage onPlayerClick={handlePlayerClick} />;
     }
   };
+  
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-purple-900/20 to-gray-900">

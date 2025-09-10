@@ -1,3 +1,4 @@
+
 import { Faction } from '../types';
 import { Shield, Users, Trophy, Target, Crown } from 'lucide-react';
 
