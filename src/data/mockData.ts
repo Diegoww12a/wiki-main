@@ -4,7 +4,7 @@ export const mockPlayers: Player[] = [
   {
     id: '1',
     name: 'KROOZZNS',
-    avatar: 'https://pbs.twimg.com/media/G0cpj46XAAAKfHD?format=jpg&name=120x120',
+    avatar: 'public/KROOZZ.png',
     faction: 'FRANÇA',
     role: 'PVP',
     level: 0,
@@ -22,7 +22,7 @@ export const mockPlayers: Player[] = [
   {
     id: '2',
     name: 'FACADA',
-    avatar: 'https://pbs.twimg.com/media/G0cpj1mWwAEtoy0?format=jpg&name=120x120',
+    avatar: 'public/FACADA.png',
     faction: 'FRANÇA',
     role: 'PVP',
     level: 0,
@@ -40,7 +40,7 @@ export const mockPlayers: Player[] = [
   {
     id: '4',
     name: 'LUANZ7',
-    avatar: 'https://pbs.twimg.com/media/G0cp-dYXEAA68yz?format=jpg&name=120x120',
+    avatar: 'public/luan.png',
     faction: 'FRANÇA',
     role: 'PVP',
     level: 1,
@@ -58,7 +58,7 @@ export const mockPlayers: Player[] = [
   {
     id: '5',
     name: 'VINAOLEK',
-    avatar: 'https://pbs.twimg.com/media/G0cpDsDX0AAf-Ix?format=jpg&name=120x120',
+    avatar: 'public/VINAO.png',
     faction: 'FRANÇA',
     role: 'PVP',
     level: 1,
@@ -76,7 +76,7 @@ export const mockPlayers: Player[] = [
   {
     id: '6',
     name: 'LELEOZN',
-    avatar: 'https://pbs.twimg.com/media/G0cnoDNXUAAbzZo?format=jpg&name=120x120',
+    avatar: 'public/LELEON.png',
     faction: 'FRANÇA',
     role: 'PVP',
     level: 0,
@@ -94,7 +94,7 @@ export const mockPlayers: Player[] = [
   {
     id: '7',
     name: 'UBLACK',
-    avatar: 'https://pbs.twimg.com/media/G0cogUHWMAAN1dd?format=jpg&name=120x120',
+    avatar: 'public/UBLACK.png',
     faction: 'FRANÇA',
     role: 'PVP',
     level: 1,
@@ -112,7 +112,7 @@ export const mockPlayers: Player[] = [
   {
     id: '8',
     name: 'GORDAONS',
-    avatar: 'https://pbs.twimg.com/media/G0cpUJeXMAArqzT?format=jpg&name=120x120',
+    avatar: 'public/GORDAO.png',
     faction: 'FRANÇA',
     role: 'PVP',
     level: 0,
@@ -121,16 +121,34 @@ export const mockPlayers: Player[] = [
     status: 'online',
     joinDate: '2025-09-08',
     stats: {
-      kills: 0,
-      deaths: 0,
+      kills: 3,
+      deaths: 2,
       playtime: '0',
-      missions: 1
+      missions: 2
     }
   },
   {
     id: '9',
     name: 'OVOTZ',
-    avatar: 'https://pbs.twimg.com/media/G0cnoDUW8AAX9O7?format=jpg&name=120x120',
+    avatar: 'public/OVOTZ.png',
+    faction: 'FRANÇA',
+    role: 'PVP',
+    level: 1,
+    reputation: 5,
+    server: '0',
+    status: 'online',
+    joinDate: '2025-09-08',
+    stats: {
+      kills: 4,
+      deaths: 2,
+      playtime: '0',
+      missions: 3
+    }
+  },
+  {
+    id: '10',
+    name: 'MITSUKE',
+    avatar: 'public/MITSUKE.png',
     faction: 'FRANÇA',
     role: 'PVP',
     level: 1,
@@ -140,33 +158,15 @@ export const mockPlayers: Player[] = [
     joinDate: '2025-09-08',
     stats: {
       kills: 2,
-      deaths: 0,
+      deaths: 1,
       playtime: '0',
       missions: 2
     }
   },
   {
-    id: '10',
-    name: 'MITSUKE',
-    avatar: 'https://pbs.twimg.com/media/G0cpUJiWgAEeTqZ?format=jpg&name=120x120',
-    faction: 'FRANÇA',
-    role: 'PVP',
-    level: 1,
-    reputation: 5,
-    server: '0',
-    status: 'online',
-    joinDate: '2025-09-08',
-    stats: {
-      kills: 1,
-      deaths: 0,
-      playtime: '0',
-      missions: 1
-    }
-  },
-  {
     id: '11',
     name: 'LENONS',
-    avatar: 'https://pbs.twimg.com/media/G0cnoFeW0AAd2p0?format=jpg&name=120x120',
+    avatar: 'public/LENONS.png',
     faction: 'FRANÇA',
     role: 'PVP',
     level: 0,
@@ -176,7 +176,7 @@ export const mockPlayers: Player[] = [
     joinDate: '2025-09-08',
     stats: {
       kills: 0,
-      deaths: 0,
+      deaths: 1,
       playtime: '0',
       missions: 1
     }
@@ -184,7 +184,7 @@ export const mockPlayers: Player[] = [
   {
     id: '12',
     name: 'PURPOU',
-    avatar: 'https://pbs.twimg.com/media/G0cpDr5XEAA9ja0?format=jpg&name=120x120',
+    avatar: 'public/PURPOU.png',
     faction: 'FRANÇA',
     role: 'PVP',
     level: 1,
@@ -193,16 +193,16 @@ export const mockPlayers: Player[] = [
     status: 'online',
     joinDate: '2025-09-08',
     stats: {
-      kills: 2,
-      deaths: 0,
+      kills: 6,
+      deaths: 1,
       playtime: '0',
-      missions: 2
+      missions: 3
     }
   },
   {
     id: '13',
     name: 'BISNAGA',
-    avatar: 'https://pbs.twimg.com/media/G0cogT9XkAAvHCy?format=jpg&name=120x120',
+    avatar: 'public/BISNAGA.png',
     faction: 'FRANÇA',
     role: 'PVP',
     level: 0,
@@ -220,7 +220,7 @@ export const mockPlayers: Player[] = [
   {
     id: '14',
     name: 'PANIICZ',
-    avatar: 'https://pbs.twimg.com/media/G0cpUzoWkAAXpph?format=jpg&name=120x120',
+    avatar: 'public/PANICZ.png',
     faction: 'FRANÇA',
     role: 'PVP',
     level: 1,
@@ -229,7 +229,7 @@ export const mockPlayers: Player[] = [
     status: 'online',
     joinDate: '2025-09-08',
     stats: {
-      kills: 2,
+      kills: 4,
       deaths: 1,
       playtime: '0',
       missions: 2
@@ -238,7 +238,7 @@ export const mockPlayers: Player[] = [
   {
     id: '15',
     name: 'LOCKING',
-    avatar: 'https://pbs.twimg.com/media/G0cogT4WwAA-rLD?format=jpg&name=360x360',
+    avatar: 'public/LOCKING.png',
     faction: 'FRANÇA',
     role: 'PVP',
     level: 0,
@@ -256,7 +256,7 @@ export const mockPlayers: Player[] = [
   {
     id: '16',
     name: 'BIRO',
-    avatar: 'https://pbs.twimg.com/media/G0cpUHbW8AAdAJp?format=jpg&name=120x120',
+    avatar: 'public/BIRO.png',
     faction: 'FRANÇA',
     role: 'PVP',
     level: 0,
@@ -274,7 +274,7 @@ export const mockPlayers: Player[] = [
   {
     id: '17',
     name: 'SHEIK',
-    avatar: 'https://pbs.twimg.com/media/G0cpDsTWQAEnzU6?format=jpg&name=120x120',
+    avatar: 'public/SHEIK.png',
     faction: 'FRANÇA',
     role: 'PVP',
     level: 0,
@@ -292,7 +292,7 @@ export const mockPlayers: Player[] = [
   {
     id: '18',
     name: 'NARA',
-    avatar: 'https://pbs.twimg.com/media/G0coQovWIAAoszI?format=jpg&name=120x120',
+    avatar: 'public/NARA.png',
     faction: 'FRANÇA',
     role: 'PVP',
     level: 0,
@@ -310,7 +310,7 @@ export const mockPlayers: Player[] = [
   {
     id: '19',
     name: 'LUNA',
-    avatar: 'https://pbs.twimg.com/media/G0coQmqXUAAqIB1?format=jpg&name=120x120',
+    avatar: 'public/LUNA.png',
     faction: 'FRANÇA',
     role: 'PVP',
     level: 0,
@@ -328,7 +328,7 @@ export const mockPlayers: Player[] = [
   {
     id: '20',
     name: 'IVYBANKS',
-    avatar: 'https://pbs.twimg.com/media/G0cnoDTWgAA0N2H?format=jpg&name=120x120',
+    avatar: 'public/IVY.png',
     faction: 'FRANÇA',
     role: 'PVP',
     level: 0,
@@ -346,7 +346,7 @@ export const mockPlayers: Player[] = [
   {
     id: '21',
     name: 'ALBARA',
-    avatar: 'https://pbs.twimg.com/media/G0cnXpbWAAA_Aso?format=jpg&name=120x120',
+    avatar: 'public/ALBARA.png',
     faction: 'FRANÇA',
     role: 'PVP',
     level: 0,
@@ -355,7 +355,7 @@ export const mockPlayers: Player[] = [
     status: 'online',
     joinDate: '2025-09-08',
     stats: {
-      kills: 0,
+      kills: 3,
       deaths: 0,
       playtime: '0',
       missions: 1
@@ -364,7 +364,7 @@ export const mockPlayers: Player[] = [
   {
     id: '22',
     name: 'BAIANONS',
-    avatar: 'https://pbs.twimg.com/media/G0cpj1uWwAA_BU0?format=jpg&name=120x120',
+    avatar: 'public/BAIANO.png',
     faction: 'FRANÇA',
     role: 'PVP',
     level: 0,
@@ -373,16 +373,16 @@ export const mockPlayers: Player[] = [
     status: 'online',
     joinDate: '2025-09-08',
     stats: {
-      kills: 0,
-      deaths: 0,
+      kills: 1,
+      deaths: 2,
       playtime: '0',
-      missions: 1
+      missions: 2
     }
   },
   {
     id: '23',
     name: 'DEDE',
-    avatar: 'https://pbs.twimg.com/media/G0cogT-XQAAmZrx?format=jpg&name=120x120',
+    avatar: 'public/DEDE.png',
     faction: 'FRANÇA',
     role: 'PVP',
     level: 0,
@@ -400,7 +400,7 @@ export const mockPlayers: Player[] = [
   {
     id: '24',
     name: 'GALEGUINS',
-    avatar: 'https://pbs.twimg.com/media/G0coQonWUAE4qdL?format=jpg&name=120x120',
+    avatar: 'public/GALEGUIN.png',
     faction: 'FRANÇA',
     role: 'PVP',
     level: 0,
@@ -418,7 +418,7 @@ export const mockPlayers: Player[] = [
   {
     id: '25',
     name: 'DUMAL',
-    avatar: 'https://pbs.twimg.com/media/G0coQosWMAAtIOR?format=jpg&name=120x120',
+    avatar: 'public/DUMAL.png',
     faction: 'FRANÇA',
     role: 'PVP',
     level: 0,
@@ -436,7 +436,7 @@ export const mockPlayers: Player[] = [
   {
     id: '26',
     name: 'RAFINHA',
-    avatar: 'https://pbs.twimg.com/media/G0cpDrzWAAAkQVX?format=jpg&name=120x120',
+    avatar: 'public/RAFINHA.png',
     faction: 'FRANÇA',
     role: 'PVP',
     level: 2,
@@ -451,620 +451,25 @@ export const mockPlayers: Player[] = [
       missions: 1
     }
   },
-    {
-    id: '27',
-    name: 'TRALHANS',
-    avatar: 'https://media.discordapp.net/attachments/1373720326579556525/1414812313868828733/TRALHA.png?ex=68c0ee25&is=68bf9ca5&hm=d645dfe65f4ab3ecb5541f10b7160f5a47240a85a6dd41a5feb1e0d7a40b680b&=&format=webp&quality=lossless',
-    faction: 'LA7',
+  {
+    id: '12',
+    name: 'CLOUDNS',
+    avatar: 'public/CLOUD.png',
+    faction: 'FRANÇA',
     role: 'PVP',
-    level: 0,
-    reputation: 0,
-    server: '0',
+    level: 1,
+    reputation: 5,
+    server: 'METROPOLE',
     status: 'online',
     joinDate: '2025-09-08',
     stats: {
-      kills: 0,
-      deaths: 0,
+      kills: 1,
+      deaths: 1,
       playtime: '0',
-      missions: 0
-    }
-  },
-    {
-    id: '28',
-    name: 'PETER',
-    avatar: 'https://media.discordapp.net/attachments/1373720326579556525/1414812313541935135/PETER.png?ex=68c0ee25&is=68bf9ca5&hm=e782f15e61e1b29eb806688897261ce7388fc9a6149a2f4c78475f76f4da0c41&=&format=webp&quality=lossless',
-    faction: 'LA7',
-    role: 'PVP',
-    level: 0,
-    reputation: 0,
-    server: '0',
-    status: 'online',
-    joinDate: '2025-09-08',
-    stats: {
-      kills: 0,
-      deaths: 0,
-      playtime: '0',
-      missions: 0
-    }
-  },
-    {
-    id: '29',
-    name: 'PANDORA',
-    avatar: 'https://media.discordapp.net/attachments/1373720326579556525/1414812313180966982/PANDORA.png?ex=68c0ee25&is=68bf9ca5&hm=c25c4067568af7ffc07759e11ff754a348e094be0420cacb19b56e13a5b38034&=&format=webp&quality=lossless',
-    faction: 'F/A',
-    role: 'PVP',
-    level: 0,
-    reputation: 0,
-    server: '0',
-    status: 'online',
-    joinDate: '2025-09-08',
-    stats: {
-      kills: 0,
-      deaths: 0,
-      playtime: '0',
-      missions: 0
-    }
-  },
-    {
-    id: '30',
-    name: 'ZINA',
-    avatar: 'https://media.discordapp.net/attachments/1373720326579556525/1414812312568860773/zina.png?ex=68c0ee25&is=68bf9ca5&hm=0377a0ab95c750f0e1221b323f934fa7f5b68b0cf1114701218c4cc6e46de07a&=&format=webp&quality=lossless',
-    faction: 'LA7',
-    role: 'PVP',
-    level: 0,
-    reputation: 0,
-    server: '0',
-    status: 'online',
-    joinDate: '2025-09-08',
-    stats: {
-      kills: 0,
-      deaths: 0,
-      playtime: '0',
-      missions: 0
-    }
-  },
-  
-    {
-    id: '32',
-    name: 'JOTAEME',
-    avatar: 'https://pbs.twimg.com/profile_images/1955112314958422016/cetxHqC5_400x400.jpg',
-    faction: 'Rússia',
-    role: 'PVP',
-    level: 0,
-    reputation: 0,
-    server: '0',
-    status: 'online',
-    joinDate: '2025-09-08',
-    stats: {
-      kills: 0,
-      deaths: 0,
-      playtime: '0',
-      missions: 0
-    }
-  },
-    {
-    id: '33',
-    name: 'MORAIS',
-    avatar: 'https://pbs.twimg.com/profile_images/1783633644457721857/JmAAaCAe_400x400.jpg',
-    faction: 'Rússia',
-    role: 'PVP',
-    level: 0,
-    reputation: 0,
-    server: '0',
-    status: 'online',
-    joinDate: '2025-09-08',
-    stats: {
-      kills: 0,
-      deaths: 0,
-      playtime: '0',
-      missions: 0
-    }
-  },
-    {
-    id: '34',
-    name: 'YERK',
-    avatar: 'https://pbs.twimg.com/profile_images/1964761927155953664/MhuSnH3v_400x400.jpg',
-    faction: 'F/A',
-    role: 'PVP',
-    level: 0,
-    reputation: 0,
-    server: '0',
-    status: 'online',   
-    joinDate: '2025-09-08',
-    stats: {
-      kills: 0,
-      deaths: 0,
-      playtime: '0',
-      missions: 0
-    }
-  },
-    {
-    id: '35',
-    name: 'PTZNFPS',
-    avatar: 'https://pbs.twimg.com/profile_images/1964497830589952000/oejdcYDo_400x400.jpg',
-    faction: 'Rússia',
-    role: 'PVP',
-    level: 0,
-    reputation: 0,
-    server: '0',
-    status: 'online',
-    joinDate: '2025-09-08',
-    stats: {
-      kills: 0,
-      deaths: 0,
-      playtime: '0',
-      missions: 0
+      missions: 1
     }
   },
 
-    {
-    id: '36',
-    name: 'ABNT',
-    avatar: 'https://pbs.twimg.com/profile_images/1947464582257111041/u7CACK24_400x400.jpg',
-    faction: 'Rússia',
-    role: 'PVP',
-    level: 0,
-    reputation: 0,
-    server: '0',
-    status: 'online',
-    joinDate: '2025-09-08',
-    stats: {
-      kills: 0,
-      deaths: 0,
-      playtime: '0',
-      missions: 0
-    }
-  },
-   {
-    id: '37',
-    name: 'MITO7',
-    avatar: 'https://pbs.twimg.com/profile_images/1962931322264932353/yR7fL2fS_400x400.jpg',
-    faction: 'Rússia',
-    role: 'PVP',
-    level: 0,
-    reputation: 0,
-    server: '0',
-    status: 'online',
-    joinDate: '2025-09-08',
-    stats: {
-      kills: 0,
-      deaths: 0,
-      playtime: '0',
-      missions: 0
-    }
-  },
-  {
-    id: '38',
-    name: 'HELPZIN',
-    avatar: 'https://pbs.twimg.com/profile_images/1962931322264932353/yR7fL2fS_400x400.jpg',
-    faction: 'Rússia',
-    role: 'PVP',
-    level: 0,
-    reputation: 0,
-    server: '0',
-    status: 'online',
-    joinDate: '2025-09-08',
-    stats: {
-      kills: 0,
-      deaths: 0,
-      playtime: '0',
-      missions: 0
-    }
-  },
-  {
-    id: '39',
-    name: 'PUGA',
-    avatar: 'https://pbs.twimg.com/profile_images/1929224319936176130/IX3cRJPQ_400x400.jpg',
-    faction: 'F/A',
-    role: 'PVP',
-    level: 0,
-    reputation: 0,
-    server: '0',
-    status: 'online',
-    joinDate: '2025-09-08',
-    stats: {
-      kills: 0,
-      deaths: 0,
-      playtime: '0',
-      missions: 0
-    }
-  },
-  {
-    id: '40',
-    name: 'NABRIZA',
-    avatar: 'https://pbs.twimg.com/profile_images/1959438475280752640/VVWYV_Fw_400x400.jpg',
-    faction: 'underground',
-    role: 'PVP',
-    level: 0,
-    reputation: 0,
-    server: '0',
-    status: 'online',
-    joinDate: '2025-09-08',
-    stats: {
-      kills: 0,
-      deaths: 0,
-      playtime: '0',
-      missions: 0
-    }
-  },
-  {
-    id: '41',
-    name: 'GUIZN',
-    avatar: 'https://media.discordapp.net/attachments/1373720326579556525/1414820798736240692/guizn.png?ex=68c0f60c&is=68bfa48c&hm=ad842641c62245d78772559072256377750f6b3c095df5e6d5ed9d365491bf7d&=&format=webp&quality=lossless',
-    faction: 'PM',
-    role: 'PVP',
-    level: 0,
-    reputation: 0,
-    server: '0',
-    status: 'online',
-    joinDate: '2025-09-08',
-    stats: {
-      kills: 0,
-      deaths: 0,
-      playtime: '0',
-      missions: 0
-    }
-  },
-  {
-    id: '42',
-    name: 'HL',
-    avatar: 'https://media.discordapp.net/attachments/1373720326579556525/1414820798237114408/hl.png?ex=68c0f60c&is=68bfa48c&hm=b6f8ace99ea421d87bc9cc2df1e7ee30fd6d394f9a263c2230a01e873d67585a&=&format=webp&quality=lossless',
-    faction: 'PM',
-    role: 'PVP',
-    level: 0,
-    reputation: 0,
-    server: '0',
-    status: 'online',
-    joinDate: '2025-09-08',
-    stats: {
-      kills: 0,
-      deaths: 0,
-      playtime: '0',
-      missions: 0
-    }
-  },
-  {
-    id: '43',
-    name: 'GORDINN9J',
-    avatar: 'https://media.discordapp.net/attachments/1373720326579556525/1414820797822013490/gordin.png?ex=68c0f60c&is=68bfa48c&hm=01afd5c1b189efe13abe646237b26eecbe2f51703b7ec0d7ce1fb6d461099526&=&format=webp&quality=lossless',
-    faction: 'PM',
-    role: 'PVP',
-    level: 0,
-    reputation: 0,
-    server: '0',
-    status: 'online',
-    joinDate: '2025-09-08',
-    stats: {
-      kills: 0,
-      deaths: 0,
-      playtime: '0',
-      missions: 0
-    }
-  },
-  {
-    id: '44',
-    name: 'NANFPS',
-    avatar: 'https://media.discordapp.net/attachments/1373720326579556525/1414820797406515281/NAN.png?ex=68c0f60c&is=68bfa48c&hm=9a4efedb210bf26d689c4e95bba5ecb40ed04a454d6aac3b5964a9e401a697db&=&format=webp&quality=lossless',
-    faction: 'PM',
-    role: 'PVP',
-    level: 0,
-    reputation: 0,
-    server: '0',
-    status: 'online',
-    joinDate: '2025-09-08',
-    stats: {
-      kills: 0,
-      deaths: 0,
-      playtime: '0',
-      missions: 0
-    }
-  },
-  {
-    id: '45',
-    name: 'SUZI',
-    avatar: 'https://media.discordapp.net/attachments/1373720326579556525/1414820796764782622/SUZI.png?ex=68c0f60c&is=68bfa48c&hm=912dfe630f59c03a256b8917c68c5ca66b619faba5376a924876032d100f253d&=&format=webp&quality=lossless',
-    faction: 'PM',
-    role: 'PVP',
-    level: 0,
-    reputation: 0,
-    server: '0',
-    status: 'online',
-    joinDate: '2025-09-08',
-    stats: {
-      kills: 0,
-      deaths: 0,
-      playtime: '0',
-      missions: 0
-    }
-  },
-  {
-    id: '46',
-    name: 'MARIFPS',
-    avatar: 'https://media.discordapp.net/attachments/1373720326579556525/1414820795758284890/MARIFPS.png?ex=68c0f60b&is=68bfa48b&hm=4efa8159c5a8de35b897f8f0d902896e521ddaf0020313c14d7fa0411e314bef&=&format=webp&quality=lossless',
-    faction: 'PM',
-    role: 'PVP',
-    level: 0,
-    reputation: 0,
-    server: '0',
-    status: 'online',
-    joinDate: '2025-09-08',
-    stats: {
-      kills: 0,
-      deaths: 0,
-      playtime: '0',
-      missions: 0
-    }
-  },
-  {
-    id: '47',
-    name: 'MQS',
-    avatar: 'https://media.discordapp.net/attachments/1373720326579556525/1414820795250770073/MQS.png?ex=68c0f60b&is=68bfa48b&hm=be9ecf09daba015aa414545b9294b8883aa80f678036dae96ef31ad2cf244041&=&format=webp&quality=lossless',
-    faction: 'LA7',
-    role: 'PVP',
-    level: 0,
-    reputation: 0,
-    server: '0',
-    status: 'online',
-    joinDate: '2025-09-08',
-    stats: {
-      kills: 0,
-      deaths: 0,
-      playtime: '0',
-      missions: 0
-    }
-  },
-  {
-    id: '48',
-    name: 'AUDAZ',
-    avatar: 'https://media.discordapp.net/attachments/1373720326579556525/1414820794839597106/AUDAZ.png?ex=68c0f60b&is=68bfa48b&hm=6f0c2316229d6faaa42a9478f83b80bc093bd9bd3941fa4543fd294dc9fe6a8d&=&format=webp&quality=lossless',
-    faction: 'Underground',
-    role: 'PVP',
-    level: 0,
-    reputation: 0,
-    server: '0',
-    status: 'online',
-    joinDate: '2025-09-08',
-    stats: {
-      kills: 0,
-      deaths: 0,
-      playtime: '0',
-      missions: 0
-    }
-  },
-  {
-    id: '49',
-    name: 'CAROLWXZ',
-    avatar: 'https://media.discordapp.net/attachments/1373720326579556525/1414820794508378223/CAROL.png?ex=68c0f60b&is=68bfa48b&hm=01feefaf7a8376c77dbb16744175f2a2ed1d82e786b2c1fa1829fa91058cdb7c&=&format=webp&quality=lossless',
-    faction: 'LA7',
-    role: 'PVP',
-    level: 0,
-    reputation: 0,
-    server: '0',
-    status: 'online',
-    joinDate: '2025-09-08',
-    stats: {
-      kills: 0,
-      deaths: 0,
-      playtime: '0',
-      missions: 0
-    }
-  },
-  {
-    id: '50',
-    name: 'TRINDA',
-    avatar: 'https://media.discordapp.net/attachments/1373720326579556525/1414820877832290344/TRINDA.png?ex=68c0f61f&is=68bfa49f&hm=c7261eae3c6cb5267d93b0a0c9f4826d661d1587c1ed19fae7471d027e0ef4c0&=&format=webp&quality=lossless',
-    faction: 'PM',
-    role: 'PVP',
-    level: 0,
-    reputation: 0,
-    server: '0',
-    status: 'online',
-    joinDate: '2025-09-08',
-    stats: {
-      kills: 0,
-      deaths: 0,
-      playtime: '0',
-      missions: 0
-    }
-  },
-  {
-      id: '51',
-      name: 'RAUZIN',
-      avatar: 'https://media.discordapp.net/attachments/1373720326579556525/1414820794164449410/rauzin.png?ex=68c0f60b&is=68bfa48b&hm=3045c14d4c025767803c6c6cdfc49e934483043869113fffdce66f83911815d0&=&format=webp&quality=lossless',
-      faction: 'HOLANDA',
-      role: 'PVP',
-      level: 0,
-      reputation: 0,
-      server: 'METROPOLE',
-      status: 'online',
-      joinDate: '2025-09-08',
-      stats: {
-        kills: 0,
-        deaths: 0,
-        playtime: '0',
-        missions: 0
-      }
-    },
-  {
-    id: '52',
-    name: 'RAFFASETE',
-    avatar: 'https://pbs.twimg.com/profile_images/1955380911446380545/Dq4L4oyg_400x400.jpg',
-    faction: 'underground',
-    role: 'PVP',
-    level: 0,
-    reputation: 0,
-    server: '0',
-    status: 'online',
-    joinDate: '2025-09-08',
-    stats: {
-      kills: 0,
-      deaths: 0,
-      playtime: '0',
-      missions: 0
-    }
-  },
-  {
-    id: '53',
-    name: 'FLOW',
-    avatar: 'https://pbs.twimg.com/profile_images/1875702114590105600/t_TrWJ-V_400x400.jpg',
-    faction: 'Rússia',
-    role: 'PVP',
-    level: 0,
-    reputation: 0,
-    server: '0',
-    status: 'online',
-    joinDate: '2025-09-08',
-    stats: {
-      kills: 0,
-      deaths: 0,
-      playtime: '0',
-      missions: 0
-    }
-  },
-  {
-    id: '54',
-    name: 'SAMAMBAIA',
-    avatar: 'https://pbs.twimg.com/profile_images/1963390804677763074/DgrxmJ3r_400x400.jpg',
-    faction: 'underground',
-    role: 'PVP',
-    level: 0,
-    reputation: 0,
-    server: '0',
-    status: 'online',
-    joinDate: '2025-09-08',
-    stats: {
-      kills: 0,
-      deaths: 0,
-      playtime: '0',
-      missions: 0
-    }
-  },
-  {
-    id: '55',
-    name: 'THAY',
-    avatar: 'https://media.discordapp.net/attachments/1373720326579556525/1414826232767578194/thay.png?ex=68c0fb1c&is=68bfa99c&hm=2264039d2d7b74547b8b18497ad8650fa68480a0bdff23bcb2560f8621b243f5&=&format=webp&quality=lossless',
-    faction: 'underground',
-    role: 'PVP',
-    level: 0,
-    reputation: 0,
-    server: '0',
-    status: 'online',
-    joinDate: '2025-09-08',
-    stats: {
-      kills: 0,
-      deaths: 0,
-      playtime: '0',
-      missions: 0
-    }
-  },
-  {
-    id: '56',
-    name: 'BRIEL',
-    avatar: 'https://pbs.twimg.com/profile_images/1718695068410744832/EdtCeGef_400x400.jpg',
-    faction: 'Rússia',
-    role: 'PVP',
-    level: 0,
-    reputation: 0,
-    server: '0',
-    status: 'online',
-    joinDate: '2025-09-08',
-    stats: {
-      kills: 0,
-      deaths: 0,
-      playtime: '0',
-      missions: 0
-    }
-  },
-  {
-    id: '57',
-    name: 'SEVEN',
-    avatar: 'https://pbs.twimg.com/profile_images/1909404653101412353/9iggzB5G_400x400.jpg',
-    faction: 'underground',
-    role: 'PVP',
-    level: 0,
-    reputation: 0,
-    server: '0',
-    status: 'online',
-    joinDate: '2025-09-08',
-    stats: {
-      kills: 0,
-      deaths: 0,
-      playtime: '0',
-      missions: 0
-    }
-  },
-  {
-    id: '58',
-    name: 'DANIKE',
-    avatar: 'https://pbs.twimg.com/profile_images/1954019460123127808/qYGVSORs_400x400.jpg',
-    faction: 'F/A',
-    role: 'PVP',
-    level: 0,
-    reputation: 0,
-    server: '0',
-    status: 'online',
-    joinDate: '2025-09-08',
-    stats: {
-      kills: 0,
-      deaths: 0,
-      playtime: '0',
-      missions: 0
-    }
-  },
-  {
-    id: '59',
-    name: 'DOLLYN',
-    avatar: 'https://pbs.twimg.com/profile_images/1589684684006559744/l-5QHw4S_400x400.jpg',
-    faction: 'PM',
-    role: 'PVP',
-    level: 0,
-    reputation: 0,
-    server: '0',
-    status: 'online',
-    joinDate: '2025-09-08',
-    stats: {
-      kills: 0,
-      deaths: 0,
-      playtime: '0',
-      missions: 0
-    }
-  },
-  {
-    id: '60',
-    name: 'CAIIOFX',
-    avatar: 'https://pbs.twimg.com/profile_images/1794750138910433281/9EQeRbSE_400x400.jpg',
-    faction: 'F/A',
-    role: 'PVP',
-    level: 0,
-    reputation: 0,
-    server: '0',
-    status: 'online',
-    joinDate: '2025-09-08',
-    stats: {
-      kills: 0,
-      deaths: 0,
-      playtime: '0',
-      missions: 0
-    }
-  },
-  {
-    id: '61',
-    name: 'CLOUDNS',
-    avatar: 'https://pbs.twimg.com/profile_images/1946047845535973379/QCzBoxSv_400x400.jpg',
-    faction: 'F/A',
-    role: 'PVP',
-    level: 0,
-    reputation: 0,
-    server: '0',
-    status: 'online',
-    joinDate: '2025-09-08',
-    stats: {
-      kills: 0,
-      deaths: 0,
-      playtime: '0',
-      missions: 0
-    }
-  },
 
 ];
 
@@ -1123,7 +528,7 @@ export const mockFactions: Faction[] = [
     id: '1',
     name: 'França',
     tag: '[FR]',
-    logo: 'https://pbs.twimg.com/media/G0cqV_yXgAAshLb?format=jpg&name=small',
+    logo: 'public/franca.jpg',
     type: 'Gang',
     status: 'active',
     level: 50,
@@ -2871,26 +2276,27 @@ export const mockWars: War[] = [
       id: '1',
       name: 'França',
       tag: '[FR]',
-      logo: 'https://media.discordapp.net/attachments/1373720326579556525/1415035354607521863/franca.jpg?ex=68c1bdde&is=68c06c5e&hm=e55dd07870c146faa4feb98a883c72e678ab648aa3bca15f9e0f8bff43d265af&=&format=webp&width=486&height=864'
+      logo: 'public/franca.jpg'
     },
     faction2: {
       id: '4',
       name: 'Russia',
       tag: '[RUS]',
-      logo: 'https://media.discordapp.net/attachments/1373720326579556525/1415035354066452491/russia.jpg?ex=68c1bdde&is=68c06c5e&hm=ca4853d85ec514b64253da1c33519f119bddb8232570914f492bfc746431b5e1&=&format=webp&width=1535&height=863'
+      logo: 'public/russia.jpg'
     },
-    status: 'scheduled',
+    status: 'ended',
     startDate: '2025-09-11',
     territory: 'Norte',
+    winner: 'França',
     timeDate: '21:00',
     reason: 'Disputa de poder',
     description: '🇫🇷 França x Rússia 🇷🇺 A guerra mais esperada dos tempos finalmente chegou! As duas facções mais fortes da metrópole entram em confronto direto, prometendo um embate épico.',
 
     stats: {
-      faction1Kills: 0,
-      faction2Kills: 0,
-      totalBattles: 0,
-      duration: '1 dia'
+      faction1Kills: 30,
+      faction2Kills: 9,
+      totalBattles: 1,
+      duration: '2 Horas'
     },
     escalation: {
       faction1Players: [
@@ -3140,16 +2546,7 @@ export const mockWars: War[] = [
   },
   {
     playerId: '28',
-    playerName: 'Gordinhoxs',
-    avatar: 'https://i.pinimg.com/236x/21/9e/ae/219eaea67aafa864db091919ce3f5d82.jpg',
-    role: 'Leader',
-    kills: 0,
-    deaths: 0,
-    status: 'active'
-  },
-  {
-    playerId: '29',
-    playerName: 'Trinda',
+    playerName: 'lUIZA',
     avatar: 'https://i.pinimg.com/236x/21/9e/ae/219eaea67aafa864db091919ce3f5d82.jpg',
     role: 'Leader',
     kills: 0,
@@ -3437,22 +2834,12 @@ export const mockWars: War[] = [
         id: '1',
         date: '2025-09-11',
         location: 'Norte',
-        winner: '',
-        faction1Kills: 0,
-        faction2Kills: 0,
-        duration: '1 dia',
+        winner: 'FRANÇA',
+        faction1Kills: 30,
+        faction2Kills: 9,
+        duration: '2 Horas',
         description: ''
       },
-      {
-        id: '2',
-        date: 'Não definida',
-        location: 'Ilha',
-        winner: '0',
-        faction1Kills: 0,
-        faction2Kills: 0,
-        duration: '1 dia',
-        description: ''
-      }
     ]
   },]
   
