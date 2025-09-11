@@ -2276,13 +2276,13 @@ export const mockWars: War[] = [
       id: '1',
       name: 'França',
       tag: '[FR]',
-      logo: '/images/avatars/franca.png'
+      logo: '/images/avatars/franca.jpg'
     },
     faction2: {
       id: '4',
       name: 'Russia',
       tag: '[RUS]',
-      logo: '/images/avatars/russia.png'
+      logo: '/images/avatars/russia.jpg'
     },
     status: 'ended',
     startDate: '2025-09-11',
