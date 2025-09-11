@@ -115,16 +115,16 @@ export const mockPlayers: Player[] = [
     avatar: '/images/avatars/GORDAO.png',
     faction: 'FRANÇA',
     role: 'PVP',
-    level: 0,
+    level: 3,
     reputation: 0,
     server: '0',
     status: 'online',
     joinDate: '2025-09-08',
     stats: {
-      kills: 3,
-      deaths: 2,
+      kills: 5,
+      deaths: 3,
       playtime: '0',
-      missions: 2
+      missions: 3
     }
   },
   {
@@ -133,7 +133,7 @@ export const mockPlayers: Player[] = [
     faction: 'FRANÇA',
     avatar: '/images/avatars/OVOTZ.png', // caminho correto
     role: 'PVP',
-    level: 1,
+    level: 2,
     reputation: 5,
     server: '0',
     status: 'online',
@@ -151,16 +151,16 @@ export const mockPlayers: Player[] = [
     avatar: '/images/avatars/MITSUKE.png',
     faction: 'FRANÇA',
     role: 'PVP',
-    level: 1,
+    level: 2,
     reputation: 5,
     server: '0',
     status: 'online',
     joinDate: '2025-09-08',
     stats: {
-      kills: 2,
+      kills: 3,
       deaths: 1,
       playtime: '0',
-      missions: 2
+      missions: 3
     }
   },
   {
@@ -187,16 +187,16 @@ export const mockPlayers: Player[] = [
     avatar: '/images/avatars/PURPOU.png',
     faction: 'FRANÇA',
     role: 'PVP',
-    level: 1,
+    level: 5,
     reputation: 5,
     server: 'METROPOLE',
     status: 'online',
     joinDate: '2025-09-08',
     stats: {
       kills: 6,
-      deaths: 1,
+      deaths: 2,
       playtime: '0',
-      missions: 3
+      missions: 4
     }
   },
   {
@@ -223,7 +223,7 @@ export const mockPlayers: Player[] = [
     avatar: '/images/avatars/PANICZ.png',
     faction: 'FRANÇA',
     role: 'PVP',
-    level: 1,
+    level: 2,
     reputation: 5,
     server: 'METROPOLE',
     status: 'online',
@@ -374,9 +374,9 @@ export const mockPlayers: Player[] = [
     joinDate: '2025-09-08',
     stats: {
       kills: 1,
-      deaths: 2,
+      deaths: 3,
       playtime: '0',
-      missions: 2
+      missions: 3
     }
   },
   {
@@ -439,20 +439,20 @@ export const mockPlayers: Player[] = [
     avatar: '/images/avatars/RAFINHA.png',
     faction: 'FRANÇA',
     role: 'PVP',
-    level: 2,
+    level: 6,
     reputation: 7,
     server: 'METROPOLE',
     status: 'online',
     joinDate: '2025-09-08',
     stats: {
-      kills: 3,
+      kills: 5,
       deaths: 1,
       playtime: '0',
-      missions: 1
+      missions: 2
     }
   },
   {
-    id: '12',
+    id: '27',
     name: 'CLOUDNS',
     avatar: '/images/avatars/CLOUD.png',
     faction: 'FRANÇA',
@@ -463,10 +463,64 @@ export const mockPlayers: Player[] = [
     status: 'online',
     joinDate: '2025-09-08',
     stats: {
-      kills: 1,
+      kills: 3,
       deaths: 1,
       playtime: '0',
+      missions: 2
+    }
+  },
+   {
+    id: '28',
+    name: 'LUIZADZB',
+    avatar: '/images/avatars/LUIZA.png',
+    faction: 'FRANÇA',
+    role: 'PVP',
+    level: 1,
+    reputation: 5,
+    server: 'METROPOLE',
+    status: 'online',
+    joinDate: '2025-09-08',
+    stats: {
+      kills: 2,
+      deaths: 0,
+      playtime: '0',
       missions: 1
+    }
+  },
+   {
+    id: '29',
+    name: 'BERNARDIN',
+    avatar: '/images/avatars/BERNARDIN.png',
+    faction: 'FRANÇA',
+    role: 'PVP',
+    level: 1,
+    reputation: 5,
+    server: 'METROPOLE',
+    status: 'online',
+    joinDate: '2025-09-08',
+    stats: {
+      kills: 0,
+      deaths: 0,
+      playtime: '0',
+      missions: 1
+    }
+  },
+   {
+    id: '28',
+    name: 'TSUKII',
+    avatar: '/images/avatars/tsuki.png',
+    faction: 'FRANÇA',
+    role: 'PVP',
+    level: 1,
+    reputation: 0,
+    server: 'METROPOLE',
+    status: 'online',
+    joinDate: '2025-09-08',
+    stats: {
+      kills: 0,
+      deaths: 0,
+      playtime: '0',
+      missions: 0
     }
   },
 
@@ -528,7 +582,7 @@ export const mockFactions: Faction[] = [
     id: '1',
     name: 'França',
     tag: '[FR]',
-    logo: '/images/avatars/franca.png',
+    logo: '/images/avatars/franca.jpg',
     type: 'Gang',
     status: 'active',
     level: 50,
