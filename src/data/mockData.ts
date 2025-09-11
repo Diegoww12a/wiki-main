@@ -130,8 +130,8 @@ export const mockPlayers: Player[] = [
   {
     id: '9',
     name: 'OVOTZ',
-    avatar: 'public/OVOTZ.png',
     faction: 'FRANÇA',
+    avatar: '/images/avatars/OVOTZ.png', // caminho correto
     role: 'PVP',
     level: 1,
     reputation: 5,
