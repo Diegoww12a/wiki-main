@@ -4,7 +4,7 @@ export const mockPlayers: Player[] = [
   {
     id: '1',
     name: 'KROOZZNS',
-    avatar: 'public/KROOZZ.png',
+    avatar: '/images/avatars/KROOZZ.png',
     faction: 'FRANÇA',
     role: 'PVP',
     level: 0,
@@ -22,7 +22,7 @@ export const mockPlayers: Player[] = [
   {
     id: '2',
     name: 'FACADA',
-    avatar: 'public/FACADA.png',
+    avatar: '/images/avatars/FACADA.png',
     faction: 'FRANÇA',
     role: 'PVP',
     level: 0,
@@ -40,7 +40,7 @@ export const mockPlayers: Player[] = [
   {
     id: '4',
     name: 'LUANZ7',
-    avatar: 'public/luan.png',
+    avatar: '/images/avatars/luan.png',
     faction: 'FRANÇA',
     role: 'PVP',
     level: 1,
@@ -58,7 +58,7 @@ export const mockPlayers: Player[] = [
   {
     id: '5',
     name: 'VINAOLEK',
-    avatar: 'public/VINAO.png',
+    avatar: '/images/avatars/VINAO.png',
     faction: 'FRANÇA',
     role: 'PVP',
     level: 1,
@@ -76,7 +76,7 @@ export const mockPlayers: Player[] = [
   {
     id: '6',
     name: 'LELEOZN',
-    avatar: 'public/LELEON.png',
+    avatar: '/images/avatars/LELEON.png',
     faction: 'FRANÇA',
     role: 'PVP',
     level: 0,
@@ -94,7 +94,7 @@ export const mockPlayers: Player[] = [
   {
     id: '7',
     name: 'UBLACK',
-    avatar: 'public/UBLACK.png',
+    avatar: '/images/avatars/UBLACK.png',
     faction: 'FRANÇA',
     role: 'PVP',
     level: 1,
@@ -112,7 +112,7 @@ export const mockPlayers: Player[] = [
   {
     id: '8',
     name: 'GORDAONS',
-    avatar: 'public/GORDAO.png',
+    avatar: '/images/avatars/GORDAO.png',
     faction: 'FRANÇA',
     role: 'PVP',
     level: 0,
@@ -148,7 +148,7 @@ export const mockPlayers: Player[] = [
   {
     id: '10',
     name: 'MITSUKE',
-    avatar: 'public/MITSUKE.png',
+    avatar: '/images/avatars/MITSUKE.png',
     faction: 'FRANÇA',
     role: 'PVP',
     level: 1,
@@ -166,7 +166,7 @@ export const mockPlayers: Player[] = [
   {
     id: '11',
     name: 'LENONS',
-    avatar: 'public/LENONS.png',
+    avatar: '/images/avatars/LENONS.png',
     faction: 'FRANÇA',
     role: 'PVP',
     level: 0,
@@ -184,7 +184,7 @@ export const mockPlayers: Player[] = [
   {
     id: '12',
     name: 'PURPOU',
-    avatar: 'public/PURPOU.png',
+    avatar: '/images/avatars/PURPOU.png',
     faction: 'FRANÇA',
     role: 'PVP',
     level: 1,
@@ -202,7 +202,7 @@ export const mockPlayers: Player[] = [
   {
     id: '13',
     name: 'BISNAGA',
-    avatar: 'public/BISNAGA.png',
+    avatar: '/images/avatars/BISNAGA.png',
     faction: 'FRANÇA',
     role: 'PVP',
     level: 0,
@@ -220,7 +220,7 @@ export const mockPlayers: Player[] = [
   {
     id: '14',
     name: 'PANIICZ',
-    avatar: 'public/PANICZ.png',
+    avatar: '/images/avatars/PANIICZ.png',
     faction: 'FRANÇA',
     role: 'PVP',
     level: 1,
@@ -238,7 +238,7 @@ export const mockPlayers: Player[] = [
   {
     id: '15',
     name: 'LOCKING',
-    avatar: 'public/LOCKING.png',
+    avatar: '/images/avatars/LOCKING.png',
     faction: 'FRANÇA',
     role: 'PVP',
     level: 0,
@@ -256,7 +256,7 @@ export const mockPlayers: Player[] = [
   {
     id: '16',
     name: 'BIRO',
-    avatar: 'public/BIRO.png',
+    avatar: '/images/avatars/BIRO.png',
     faction: 'FRANÇA',
     role: 'PVP',
     level: 0,
@@ -274,7 +274,7 @@ export const mockPlayers: Player[] = [
   {
     id: '17',
     name: 'SHEIK',
-    avatar: 'public/SHEIK.png',
+    avatar: '/images/avatars/SHEIK.png',
     faction: 'FRANÇA',
     role: 'PVP',
     level: 0,
@@ -292,7 +292,7 @@ export const mockPlayers: Player[] = [
   {
     id: '18',
     name: 'NARA',
-    avatar: 'public/NARA.png',
+    avatar: '/images/avatars/NARA.png',
     faction: 'FRANÇA',
     role: 'PVP',
     level: 0,
@@ -310,7 +310,7 @@ export const mockPlayers: Player[] = [
   {
     id: '19',
     name: 'LUNA',
-    avatar: 'public/LUNA.png',
+    avatar: '/images/avatars/LUNA.png',
     faction: 'FRANÇA',
     role: 'PVP',
     level: 0,
@@ -328,7 +328,7 @@ export const mockPlayers: Player[] = [
   {
     id: '20',
     name: 'IVYBANKS',
-    avatar: 'public/IVY.png',
+    avatar: '/images/avatars/IVY.png',
     faction: 'FRANÇA',
     role: 'PVP',
     level: 0,
@@ -346,7 +346,7 @@ export const mockPlayers: Player[] = [
   {
     id: '21',
     name: 'ALBARA',
-    avatar: 'public/ALBARA.png',
+    avatar: '/images/avatars/ALBARA.png',
     faction: 'FRANÇA',
     role: 'PVP',
     level: 0,
@@ -364,7 +364,7 @@ export const mockPlayers: Player[] = [
   {
     id: '22',
     name: 'BAIANONS',
-    avatar: 'public/BAIANO.png',
+    avatar: '/images/avatars/BAIANO.png',
     faction: 'FRANÇA',
     role: 'PVP',
     level: 0,
@@ -382,7 +382,7 @@ export const mockPlayers: Player[] = [
   {
     id: '23',
     name: 'DEDE',
-    avatar: 'public/DEDE.png',
+    avatar: '/images/avatars/DEDE.png',
     faction: 'FRANÇA',
     role: 'PVP',
     level: 0,
@@ -400,7 +400,7 @@ export const mockPlayers: Player[] = [
   {
     id: '24',
     name: 'GALEGUINS',
-    avatar: 'public/GALEGUIN.png',
+    avatar: '/images/avatars/GALEGUIN.png',
     faction: 'FRANÇA',
     role: 'PVP',
     level: 0,
@@ -418,7 +418,7 @@ export const mockPlayers: Player[] = [
   {
     id: '25',
     name: 'DUMAL',
-    avatar: 'public/DUMAL.png',
+    avatar: '/images/avatars/DUMAL.png',
     faction: 'FRANÇA',
     role: 'PVP',
     level: 0,
@@ -436,7 +436,7 @@ export const mockPlayers: Player[] = [
   {
     id: '26',
     name: 'RAFINHA',
-    avatar: 'public/RAFINHA.png',
+    avatar: '/images/avatars/RAFINHA.png',
     faction: 'FRANÇA',
     role: 'PVP',
     level: 2,
@@ -454,7 +454,7 @@ export const mockPlayers: Player[] = [
   {
     id: '12',
     name: 'CLOUDNS',
-    avatar: 'public/CLOUD.png',
+    avatar: '/images/avatars/CLOUD.png',
     faction: 'FRANÇA',
     role: 'PVP',
     level: 1,
@@ -528,7 +528,7 @@ export const mockFactions: Faction[] = [
     id: '1',
     name: 'França',
     tag: '[FR]',
-    logo: 'public/franca.jpg',
+    logo: '/images/avatars/franca.png',
     type: 'Gang',
     status: 'active',
     level: 50,
@@ -2276,13 +2276,13 @@ export const mockWars: War[] = [
       id: '1',
       name: 'França',
       tag: '[FR]',
-      logo: 'public/franca.jpg'
+      logo: '/images/avatars/franca.png'
     },
     faction2: {
       id: '4',
       name: 'Russia',
       tag: '[RUS]',
-      logo: 'public/russia.jpg'
+      logo: '/images/avatars/russia.png'
     },
     status: 'ended',
     startDate: '2025-09-11',
