@@ -1,6 +1,6 @@
 import React from 'react';
 import { Server } from '../types';
-import { Server as ServerIcon, Users, Star, Shield, Sword } from 'lucide-react';
+import { Server as  Users, Star, Shield, Sword } from 'lucide-react';
 
 interface ServerCardProps {
   server: Server;

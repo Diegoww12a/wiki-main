@@ -22,9 +22,9 @@ export default function HomePage({ onPlayerClick }: HomePageProps) {
   ];
 
   return (
-    <div className="space-y-12">
+    <div className="space-y-12  ">
       {/* Hero Section */}
-      <div className="text-center py-12">
+      <div className="text-center py-12 ju">
         <h1 className="text-4xl md:text-6xl font-bold text-white mb-4">
           França <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-cyan-400">Rp</span>
         </h1>
@@ -42,16 +42,16 @@ export default function HomePage({ onPlayerClick }: HomePageProps) {
       </div>
 
       {/* Stats */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+      <div className=" w-full grid-cols-2 border- justify-center flex  md:grid-cols-4  gap-4 md:gap-6">
         {stats.map((stat, index) => {
           const Icon = stat.icon;
           return (
-            <div key={index} className="bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 rounded-xl p-4 md:p-6">
-              <div className="flex items-center space-x-3 mb-2">
+            <div key={index} className="bg-gray-800/50 w-[20em]  backdrop-blur-sm border border-gray-700/50 rounded-xl p-4 md:p-6">
+              <div className="flex  items-center space-x-3 mb-2">
                 <Icon className={`w-6 h-6 ${stat.color}`} />
                 <span className="text-gray-400 text-sm">{stat.label}</span>
               </div>
-              <div className={`text-2xl md:text-3xl font-bold ${stat.color}`}>
+              <div className={`text-2xl md:text-3xl  font-bold ${stat.color}`}>
                 {stat.value}
               </div>
             </div>
