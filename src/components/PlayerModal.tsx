@@ -1,5 +1,5 @@
 import { Player } from '../types';
-import { X, Shield, Users, Award, Clock, Calendar, Zap } from 'lucide-react';
+import { X, Shield, Users, Award,  Calendar, Zap } from 'lucide-react';
 
 interface PlayerModalProps {
   player: Player;
@@ -121,10 +121,7 @@ export default function PlayerModal({ player, onClose }: PlayerModalProps) {
                 <Calendar className="w-4 h-4 mr-2" />
                 Entrou em: <span className="text-white ml-1">{new Date(player.joinDate).toLocaleDateString('pt-BR')}</span>
               </div>
-              <div className="flex items-center text-gray-400">
-                <Clock className="w-4 h-4 mr-2" />
-                Tempo jogado: <span className="text-white ml-1">{player.stats.playtime}</span>
-              </div>
+              
             </div>
           </div>
         </div>

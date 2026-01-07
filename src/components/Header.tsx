@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Search, User, Trophy, Server, Menu, X, Shield, Sword } from 'lucide-react';
+import { Search, User, Trophy, Server, Menu, X, } from 'lucide-react';
+import { Home } from 'lucide-react';
 
 interface HeaderProps {
   onSearch: (query: string) => void;
@@ -17,10 +18,10 @@ export default function Header({ onSearch, activeSection, onSectionChange }: Hea
   };
 
   const navItems = [
-    { id: 'home', label: 'Home', icon: Server },
+    { id: 'home', label: 'Home', icon: Home },
     { id: 'players', label: 'Players', icon: User },
-    { id: 'factions', label: 'Facções', icon: Shield },
-    { id: 'wars', label: 'Guerras', icon: Sword },
+    // { id: 'factions', label: 'Facções', icon: Shield },
+    // { id: 'wars', label: 'Guerras', icon: Sword },
     { id: 'rankings', label: 'Rankings', icon: Trophy }
   ];
 
@@ -30,35 +31,34 @@ export default function Header({ onSearch, activeSection, onSectionChange }: Hea
         <div className="flex justify-between items-center py-4">
           {/* Logo */}
           <div className="flex items-center space-x-3">
-            <div className="w-10 h-10 bg-gradient-to-r from-purple-500 to-cyan-500 rounded-lg flex items-center justify-center">
-              <Server className="w-6 h-6 text-white" />
-            </div>
+            <img src="/images/franca.png" alt="Logo" className="w-8 h-8" />
             <div>
-              <h1 className="text-xl font-bold text-white">FiveM Wiki</h1>
-              <p className="text-xs text-gray-400">Player Database</p>
+              <h1 className="text-xl font-bold text-white">França</h1>
+              <p className="text-xs text-gray-400">Players</p>
             </div>
           </div>
 
           {/* Navigation - Desktop */}
           <nav className="hidden md:flex space-x-8">
-            {navItems.map((item) => {
-              const Icon = item.icon;
-              return (
-                <button
-                  key={item.id}
-                  onClick={() => onSectionChange(item.id)}
-                  className={`flex items-center space-x-2 px-3 py-2 rounded-lg transition-all duration-200 ${
-                    activeSection === item.id
-                      ? 'bg-purple-500/20 text-purple-400'
-                      : 'text-gray-300 hover:text-white hover:bg-gray-800/50'
-                  }`}
-                >
-                  <Icon className="w-4 h-4" />
-                  <span>{item.label}</span>
-                </button>
-              );
-            })}
-          </nav>
+  {navItems.map((item) => {
+    const Icon = item.icon;
+
+    return (
+      <button
+        key={item.id}
+        onClick={() => onSectionChange(item.id)}
+        className={`flex items-center space-x-2 px-3 py-2 rounded-lg transition-all duration-200 ${
+          activeSection === item.id
+            ? 'bg-purple-500/20 text-purple-400'
+            : 'text-gray-300 hover:text-white hover:bg-gray-800/50'
+        }`}
+      >
+        <Icon className="w-4 h-4" />
+        <span>{item.label}</span>
+      </button>
+    );
+  })}
+</nav>
 
           {/* Search */}
           <form onSubmit={handleSearch} className="hidden sm:block">

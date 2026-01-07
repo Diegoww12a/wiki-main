@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { mockPlayers, mockServers } from '../data/mockData';
+import { mockPlayers } from '../data/mockData';
 import { Player } from '../types';
 import PlayerCard from './PlayerCard';
-import ServerCard from './ServerCard';
+// import ServerCard from './ServerCard';
 import { Trophy, Medal, Crown } from 'lucide-react';
 
 interface RankingsPageProps {
@@ -13,13 +13,11 @@ export default function RankingsPage({ onPlayerClick }: RankingsPageProps) {
   const [activeTab, setActiveTab] = useState<'players' | 'rp-servers' | 'pvp-servers'>('players');
 
   const topPlayers = mockPlayers.sort((a, b) => b.stats.kills - a.stats.kills);
-  const topRPServers = mockServers.filter(s => s.type === 'RP').sort((a, b) => b.rating - a.rating);
-  const topPVPServers = mockServers.filter(s => s.type === 'PVP').sort((a, b) => b.rating - a.rating);
-
+  
   const tabs = [
     { id: 'players', label: 'Top Players', icon: Crown },
-    { id: 'rp-servers', label: 'Servidores RP', icon: Medal },
-    { id: 'pvp-servers', label: 'Servidores PVP', icon: Trophy }
+    // { id: 'rp-servers', label: 'Servidores RP', icon: Medal },
+    // { id: 'pvp-servers', label: 'Servidores PVP', icon: Trophy }
   ];
 
   const getRankIcon = (rank: number) => {
@@ -40,7 +38,7 @@ export default function RankingsPage({ onPlayerClick }: RankingsPageProps) {
       {/* Header */}
       <div className="text-center">
         <h1 className="text-3xl font-bold text-white mb-2">Rankings</h1>
-        <p className="text-gray-400">Os melhores players e servidores da comunidade FiveM</p>
+        <p className="text-gray-400">Os melhores players da França</p>
       </div>
 
       {/* Tabs */}
@@ -106,10 +104,10 @@ export default function RankingsPage({ onPlayerClick }: RankingsPageProps) {
                     
                     <h3 className="text-xl font-bold text-white mb-2">{player.name}</h3>
                     <p className="text-sm text-gray-300 mb-2">{player.faction}</p>
-                    <div className="text-2xl font-bold text-purple-400">
+                    <div className="text-2xl font-bold text-purple-700">
                       {player.stats.kills.toLocaleString()}
                     </div>
-                    <p className="text-xs text-gray-400">TOP KILL</p>
+                    <p className="text-xs text-purple-900">TOP KILL</p>
                   </div>
                 </div>
               ))}
@@ -127,21 +125,10 @@ export default function RankingsPage({ onPlayerClick }: RankingsPageProps) {
           </>
         )}
 
-        {activeTab === 'rp-servers' && (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {topRPServers.map((server, index) => (
-              <ServerCard key={server.id} server={server} rank={index + 1} />
-            ))}
-          </div>
-        )}
+        
+        
 
-        {activeTab === 'pvp-servers' && (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {topPVPServers.map((server, index) => (
-              <ServerCard key={server.id} server={server} rank={index + 1} />
-            ))}
-          </div>
-        )}
+       
       </div>
     </div>
   );

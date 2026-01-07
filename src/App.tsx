@@ -2,21 +2,21 @@ import { useState } from 'react';
 import Header from './components/Header';
 import HomePage from './components/HomePage';
 import PlayersPage from './components/PlayersPage';
-import FactionsPage from './components/FactionsPage';
-import WarsPage from './components/WarsPage';
+// import FactionsPage from './components/FactionsPage';
+// import WarsPage from './components/WarsPage';
 import RankingsPage from './components/RankingsPage';
 import PlayerModal from './components/PlayerModal';
-import FactionModal from './components/FactionModal';
-import WarModal from './components/WarModal';
-import { Player, Faction, War } from './types';
+// import FactionModal from './components/FactionModal';
+// import WarModal from './components/WarModal';
+import { Player } from './types';
 
 
 export default function App() {
   const [activeSection, setActiveSection] = useState('home');
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedPlayer, setSelectedPlayer] = useState<Player | null>(null);
-  const [selectedFaction, setSelectedFaction] = useState<Faction | null>(null);
-  const [selectedWar, setSelectedWar] = useState<War | null>(null);
+  // const [selectedFaction, setSelectedFaction] = useState<Faction | null>(null);
+  // const [selectedWar, setSelectedWar] = useState<War | null>(null);
 
   const handleSearch = (query: string) => {
     setSearchQuery(query);
@@ -29,28 +29,21 @@ export default function App() {
     setSelectedPlayer(player);
   };
 
-  const handleFactionClick = (faction: Faction) => {
-    setSelectedFaction(faction);
-  };
+  
 
-  const handleWarClick = (war: War) => {
-    setSelectedWar(war);
-  };
-
+ 
   const handleCloseModal = () => {
     setSelectedPlayer(null);
-    setSelectedFaction(null);
-    setSelectedWar(null);
+    // setSelectedFaction(null);
+    // setSelectedWar(null);
   };
 
   const renderContent = () => {
     switch (activeSection) {
       case 'players':
         return <PlayersPage onPlayerClick={handlePlayerClick} searchQuery={searchQuery} />;
-      case 'factions':
-        return <FactionsPage onFactionClick={handleFactionClick} searchQuery={searchQuery} />;
-      case 'wars':
-        return <WarsPage onWarClick={handleWarClick} searchQuery={searchQuery} />;
+      // case 'factions':
+      // case 'wars':
       case 'rankings':
         return <RankingsPage onPlayerClick={handlePlayerClick} />;
       default:
@@ -78,13 +71,9 @@ export default function App() {
           <PlayerModal player={selectedPlayer} onClose={handleCloseModal} />
         )}
 
-        {selectedFaction && (
-          <FactionModal faction={selectedFaction} onClose={handleCloseModal} />
-        )}
+        
 
-        {selectedWar && (
-          <WarModal war={selectedWar} onClose={handleCloseModal} />
-        )}
+       
 
         <footer className="border-t border-gray-700/50 mt-16 py-8">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-gray-400">

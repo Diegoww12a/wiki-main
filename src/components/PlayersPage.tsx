@@ -18,13 +18,22 @@ export default function PlayersPage({ onPlayerClick, searchQuery }: PlayersPageP
   let filteredPlayers = mockPlayers;
 
   // Apply search filter
-  if (searchQuery && searchQuery.trim()) {
-    filteredPlayers = filteredPlayers.filter(player =>
-      player.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      player.faction.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      player.server.toLowerCase().includes(searchQuery.toLowerCase())
-    );
-  }
+ const normalize = (text: string) =>
+  text
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/(.)\1+/g, '$1'); // remove letras repetidas
+
+if (searchQuery && searchQuery.trim()) {
+  const query = normalize(searchQuery);
+
+  filteredPlayers = filteredPlayers.filter(player =>
+    normalize(player.name).includes(query) ||
+    normalize(player.faction).includes(query) ||
+    normalize(player.server).includes(query)
+  );
+}
 
   // Apply role filter
   if (filterRole !== 'all') {

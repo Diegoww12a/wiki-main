@@ -1,8 +1,8 @@
-import { mockPlayers, mockServers } from '../data/mockData';
+import { mockPlayers } from '../data/mockData';
 import { Player } from '../types';
 import PlayerCard from './PlayerCard';
-import ServerCard from './ServerCard';
-import { Trophy, Users, Server, TrendingUp, Shield } from 'lucide-react';
+// import ServerCard from './ServerCard';
+import { Trophy, Users,  TrendingUp,  } from 'lucide-react';
 
 interface HomePageProps {
   onPlayerClick: (player: Player) => void;
@@ -13,20 +13,11 @@ export default function HomePage({ onPlayerClick }: HomePageProps) {
     .sort((a, b) => b.reputation - a.reputation)
     .slice(0, 3);
 
-  const topRPServers = mockServers
-    .filter(s => s.type === 'RP')
-    .sort((a, b) => b.rating - a.rating)
-    .slice(0, 3);
-
-  const topPVPServers = mockServers
-    .filter(s => s.type === 'PVP')
-    .sort((a, b) => b.rating - a.rating)
-    .slice(0, 3);
-
+ 
   const stats = [
     { label: 'Players Registrados', value: '100', icon: Users, color: 'text-purple-400' },
-    { label: 'Facções Ativas', value: '12', icon: Shield, color: 'text-red-400' },
-    { label: 'Servidores Ativos', value: '247', icon: Server, color: 'text-cyan-400' },
+    // { label: 'Facções Ativas', value: '12', icon: Shield, color: 'text-red-400' },
+    // { label: 'Servidores Ativos', value: '247', icon: Server, color: 'text-cyan-400' },
     { label: 'Players Online', value: '100', icon: TrendingUp, color: 'text-green-400' }
   ];
 
@@ -35,18 +26,17 @@ export default function HomePage({ onPlayerClick }: HomePageProps) {
       {/* Hero Section */}
       <div className="text-center py-12">
         <h1 className="text-4xl md:text-6xl font-bold text-white mb-4">
-          FiveM <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-cyan-400">Wiki</span>
+          França <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-cyan-400">Rp</span>
         </h1>
         <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
-          A maior base de dados de players e servidores do FiveM. 
-          Encontre os melhores players, facções e servidores da comunidade.
+          A França é a maior facção registrada.
         </p>
         <div className="flex flex-wrap justify-center gap-4">
           <div className="bg-purple-500/20 px-6 py-3 rounded-full text-purple-300 border border-purple-500/30">
             🔥 Mais de 100 players cadastrados
           </div>
           <div className="bg-cyan-500/20 px-6 py-3 rounded-full text-cyan-300 border border-cyan-500/30">
-            ⚡ Atualizado em tempo real
+            ⚡ Atualizado diariamente
           </div>
         </div>
       </div>
@@ -83,30 +73,10 @@ export default function HomePage({ onPlayerClick }: HomePageProps) {
       </section>
 
       {/* Top RP Servers */}
-      <section>
-        <div className="flex items-center space-x-3 mb-6">
-          <Server className="w-6 h-6 text-blue-400" />
-          <h2 className="text-2xl font-bold text-white">Melhores Servidores RP</h2>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {topRPServers.map((server, index) => (
-            <ServerCard key={server.id} server={server} rank={index + 1} />
-          ))}
-        </div>
-      </section>
+     
 
       {/* Top PVP Servers */}
-      <section>
-        <div className="flex items-center space-x-3 mb-6">
-          <Server className="w-6 h-6 text-red-400" />
-          <h2 className="text-2xl font-bold text-white">Melhores Servidores PVP</h2>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {topPVPServers.map((server, index) => (
-            <ServerCard key={server.id} server={server} rank={index + 1} />
-          ))}
-        </div>
-      </section>
+    
     </div>
   );
 }

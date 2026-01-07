@@ -75,7 +75,7 @@ export default function PlayerCard({ player, onClick }: PlayerCardProps) {
       <div className="mt-4 pt-4 border-t border-gray-700/50">
         <div className="flex justify-between text-sm text-gray-400">
           <span>KILL: <span className="text-purple-400 font-medium">{player.stats.kills.toLocaleString()}</span></span>
-          <span>Tempo: <span className="text-cyan-400 font-medium">{player.stats.playtime}</span></span>
+          {/* <span>Tempo: <span className="text-cyan-400 font-medium">{player.stats.playtime}</span></span> */}
         </div>
       </div>
     </div>
