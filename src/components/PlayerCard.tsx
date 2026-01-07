@@ -22,11 +22,12 @@ export default function PlayerCard({ player, onClick }: PlayerCardProps) {
     >
       <div className="flex items-start space-x-4">
         <div className="relative">
-          <img
-            src={player.avatar}
-            alt={player.name}
-            className="w-16 h-16 rounded-lg object-cover border-2 border-gray-600 group-hover:border-purple-500 transition-colors"
-          />
+         <img
+  src={`${import.meta.env.BASE_URL}${player.avatar}`}
+  alt={player.name}
+  className="w-16 h-16 rounded-lg object-cover border-2 border-gray-600 group-hover:border-purple-500 transition-colors"
+/>
+
           <div className={`absolute -top-1 -right-1 w-4 h-4 rounded-full ${
             player.status === 'online' ? 'bg-green-500' : 'bg-gray-500'
           } border-2 border-gray-800`} />

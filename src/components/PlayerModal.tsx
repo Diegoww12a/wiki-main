@@ -24,7 +24,7 @@ export default function PlayerModal({ player, onClose }: PlayerModalProps) {
             <div className="flex items-center space-x-4">
               <div className="relative">
                 <img
-                  src={player.avatar}
+                  src={`${import.meta.env.BASE_URL}${player.avatar}`}
                   alt={player.name}
                   className="w-20 h-20 rounded-xl object-cover border-2 border-purple-500"
                 />

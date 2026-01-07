@@ -4,7 +4,7 @@ export const mockPlayers: Player[] = [
   {
     id: '1',
     name: 'KROOZZNS',
-    avatar: '/images/avatars/KROOZZ.png',
+    avatar: 'images/avatars/KROOZZ.png',
     faction: 'FRANÇA',
     role: 'PVP',
     level: 0,

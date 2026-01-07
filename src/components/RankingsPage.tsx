@@ -97,7 +97,7 @@ export default function RankingsPage({ onPlayerClick }: RankingsPageProps) {
                     </div>
                     
                     <img
-                      src={player.avatar}
+                      src={`${import.meta.env.BASE_URL}${player.avatar}`}
                       alt={player.name}
                       className="w-20 h-20 rounded-full mx-auto mb-4 mt-4 border-4 border-current"
                     />
