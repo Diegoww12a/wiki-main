@@ -31,7 +31,7 @@ export default function Header({ onSearch, activeSection, onSectionChange }: Hea
         <div className="flex justify-between items-center py-4">
           {/* Logo */}
           <div className="flex items-center space-x-3">
-            <img src='public/images/franca.png' alt="Logo" className="w-8 h-8" />
+            <img src={`${import.meta.env.BASE_URL}images/franca.png`} alt="Logo" className="w-8 h-8 rounded-md" />
             <div>
               <h1 className="text-xl font-bold text-white">França</h1>
               <p className="text-xs text-gray-400">Players</p>
