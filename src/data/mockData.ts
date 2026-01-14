@@ -43,16 +43,16 @@ export const mockPlayers: Player[] = [
     avatar: 'images/avatars/luan.png',
     faction: 'FRANÇA',
     role: 'PVP',
-    level: 1,
-    reputation: 5,
+    level: 0,
+    reputation: 0,
     server: 'METROPOLE',
     status: 'online',
     joinDate: '2025-09-08',
     stats: {
-      kills: 2,
+      kills: 0,
       deaths: 0,
       playtime: '0',
-      missions: 1
+      missions: 0
     }
   }, 
   {
@@ -61,16 +61,16 @@ export const mockPlayers: Player[] = [
     avatar: 'images/avatars/VINAO.png',
     faction: 'FRANÇA',
     role: 'PVP',
-    level: 1,
-    reputation: 5,
+    level: 0,
+    reputation: 0,
     server: 'METROPOLE',
     status: 'online',
     joinDate: '2025-09-08',
     stats: {
-      kills: 1,
-      deaths: 1,
+      kills: 0,
+      deaths: 0,
       playtime: '0',
-      missions: 1
+      missions: 0
     }
   },
   {
@@ -97,16 +97,16 @@ export const mockPlayers: Player[] = [
     avatar: 'images/avatars/UBLACK.png',
     faction: 'FRANÇA',
     role: 'PVP',
-    level: 1,
-    reputation: 5,
+    level: 0,
+    reputation: 0,
     server: '0',
     status: 'online',
     joinDate: '2025-09-08',
     stats: {
-      kills: 1,
-      deaths: 1,
+      kills: 0,
+      deaths: 0,
       playtime: '0',
-      missions: 1
+      missions: 0
     }
   },
   {
@@ -115,16 +115,16 @@ export const mockPlayers: Player[] = [
     avatar: 'images/avatars/GORDAO.png',
     faction: 'FRANÇA',
     role: 'PVP',
-    level: 3,
+    level: 0,
     reputation: 0,
     server: '0',
     status: 'online',
     joinDate: '2025-09-08',
     stats: {
-      kills: 5,
-      deaths: 3,
+      kills: 0,
+      deaths: 0,
       playtime: '0',
-      missions: 3
+      missions: 0
     }
   },
   {
@@ -133,16 +133,16 @@ export const mockPlayers: Player[] = [
     faction: 'FRANÇA',
     avatar: 'images/avatars/OVOTZ.png',
     role: 'PVP',
-    level: 2,
-    reputation: 5,
+    level: 0,
+    reputation: 0,
     server: '0',
     status: 'online',
     joinDate: '2025-09-08',
     stats: {
-      kills: 4,
-      deaths: 2,
+      kills: 0,
+      deaths: 0,
       playtime: '0',
-      missions: 3
+      missions: 0
     }
   },
   {
@@ -151,16 +151,16 @@ export const mockPlayers: Player[] = [
     avatar: 'images/avatars/MITSUKE.png',
     faction: 'FRANÇA',
     role: 'PVP',
-    level: 2,
-    reputation: 5,
+    level: 0,
+    reputation: 0,
     server: '0',
     status: 'online',
     joinDate: '2025-09-08',
     stats: {
-      kills: 3,
-      deaths: 1,
+      kills: 0,
+      deaths: 0,
       playtime: '0',
-      missions: 3
+      missions: 0
     }
   },
   {
@@ -176,9 +176,9 @@ export const mockPlayers: Player[] = [
     joinDate: '2025-09-08',
     stats: {
       kills: 0,
-      deaths: 1,
+      deaths: 0,
       playtime: '0',
-      missions: 1
+      missions: 0
     }
   },
   {
@@ -187,16 +187,16 @@ export const mockPlayers: Player[] = [
     avatar: 'images/avatars/PURPOU.png',
     faction: 'FRANÇA',
     role: 'PVP',
-    level: 5,
-    reputation: 5,
+    level: 0,
+    reputation: 0,
     server: 'METROPOLE',
     status: 'online',
     joinDate: '2025-09-08',
     stats: {
-      kills: 6,
-      deaths: 2,
+      kills: 0,
+      deaths: 0,
       playtime: '0',
-      missions: 4
+      missions: 0
     }
   },
   {
@@ -223,16 +223,16 @@ export const mockPlayers: Player[] = [
     avatar: 'images/avatars/PANICZ.png',
     faction: 'FRANÇA',
     role: 'PVP',
-    level: 2,
-    reputation: 5,
+    level: 0,
+    reputation: 0,
     server: 'METROPOLE',
     status: 'online',
     joinDate: '2025-09-08',
     stats: {
-      kills: 4,
-      deaths: 1,
+      kills: 0,
+      deaths: 0,
       playtime: '0',
-      missions: 2
+      missions: 0
     }
   },
   {
@@ -355,10 +355,10 @@ export const mockPlayers: Player[] = [
     status: 'online',
     joinDate: '2025-09-08',
     stats: {
-      kills: 3,
+      kills: 0,
       deaths: 0,
       playtime: '0',
-      missions: 1
+      missions: 0
     }
   },
   {
@@ -373,10 +373,10 @@ export const mockPlayers: Player[] = [
     status: 'online',
     joinDate: '2025-09-08',
     stats: {
-      kills: 1,
-      deaths: 3,
+      kills: 0,
+      deaths: 0,
       playtime: '0',
-      missions: 3
+      missions: 0
     }
   },
   {
@@ -439,16 +439,16 @@ export const mockPlayers: Player[] = [
     avatar: 'images/avatars/RAFINHA.png',
     faction: 'FRANÇA',
     role: 'PVP',
-    level: 6,
-    reputation: 7,
+    level: 0,
+    reputation: 0,
     server: 'METROPOLE',
     status: 'online',
     joinDate: '2025-09-08',
     stats: {
-      kills: 5,
-      deaths: 1,
+      kills: 0,
+      deaths: 0,
       playtime: '0',
-      missions: 2
+      missions: 0
     }
   },
   {
@@ -457,16 +457,16 @@ export const mockPlayers: Player[] = [
     avatar: 'images/avatars/CLOUD.png',
     faction: 'FRANÇA',
     role: 'PVP',
-    level: 1,
-    reputation: 5,
+    level: 0,
+    reputation: 0,
     server: 'METROPOLE',
     status: 'online',
     joinDate: '2025-09-08',
     stats: {
-      kills: 3,
-      deaths: 1,
+      kills: 0,
+      deaths: 0,
       playtime: '0',
-      missions: 2
+      missions: 0
     }
   },
    {
@@ -475,16 +475,16 @@ export const mockPlayers: Player[] = [
     avatar: 'images/avatars/LUIZA.png',
     faction: 'FRANÇA',
     role: 'PVP',
-    level: 1,
-    reputation: 5,
+    level: 0,
+    reputation: 0,
     server: 'METROPOLE',
     status: 'online',
     joinDate: '2025-09-08',
     stats: {
-      kills: 2,
+      kills: 0,
       deaths: 0,
       playtime: '0',
-      missions: 1
+      missions: 0
     }
   },
    {
@@ -493,8 +493,8 @@ export const mockPlayers: Player[] = [
     avatar: 'images/avatars/BERNARDIN.png',
     faction: 'FRANÇA',
     role: 'PVP',
-    level: 1,
-    reputation: 5,
+    level: 0,
+    reputation: 0,
     server: 'METROPOLE',
     status: 'online',
     joinDate: '2025-09-08',
@@ -502,7 +502,7 @@ export const mockPlayers: Player[] = [
       kills: 0,
       deaths: 0,
       playtime: '0',
-      missions: 1
+      missions: 0
     }
   },
    {
@@ -511,7 +511,7 @@ export const mockPlayers: Player[] = [
     avatar: 'images/avatars/tsuki.png',
     faction: 'FRANÇA',
     role: 'PVP',
-    level: 1,
+    level: 0,
     reputation: 0,
     server: 'METROPOLE',
     status: 'online',
