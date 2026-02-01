@@ -52,7 +52,7 @@ export const mockPlayers: Player[] = [
       kills: 7,
       deaths: 1,
       playtime: "0",
-      missions: 1,
+      missions: 2,
     },
   },
   {
@@ -358,7 +358,7 @@ export const mockPlayers: Player[] = [
       kills: 1,
       deaths: 1,
       playtime: "0",
-      missions: 1,
+      missions: 2,
     },
   },
   {
@@ -376,7 +376,7 @@ export const mockPlayers: Player[] = [
       kills: 0,
       deaths: 0,
       playtime: "0",
-      missions: 0,
+      missions: 2,
     },
   },
   {
@@ -394,7 +394,7 @@ export const mockPlayers: Player[] = [
       kills: 0,
       deaths: 0,
       playtime: "0",
-      missions: 0,
+      missions: 2,
     },
   },
   {
@@ -430,7 +430,7 @@ export const mockPlayers: Player[] = [
       kills: 2,
       deaths: 1,
       playtime: "0",
-      missions: 1,
+      missions: 2,
     },
   },
   {
@@ -448,7 +448,7 @@ export const mockPlayers: Player[] = [
       kills: 1,
       deaths: 1,
       playtime: "0",
-      missions: 1,
+      missions: 2,
     },
   },
   {
