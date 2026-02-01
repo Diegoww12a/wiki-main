@@ -53,34 +53,55 @@ export default function App() {
   
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-purple-900/20 to-gray-900">
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-purple-900/20 via-transparent to-transparent" />
-      
-      <div className="relative">
-        <Header
-          onSearch={handleSearch}
-          activeSection={activeSection}
-          onSectionChange={setActiveSection}
-        />
-        
-        <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          {renderContent()}
-        </main>
+   <div
+  className="min-h-screen bg-gradient-to-br select-none from-gray-900 via-purple-900/20 to-gray-900 relative overflow-hidden"
+  style={{
+    background: "#000000",
+    backgroundImage: `
+      linear-gradient(to right, rgba(75, 85, 99, 0.2) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(75, 85, 99, 0.2) 1px, transparent 1px)
+    `,
+    backgroundSize: "40px 40px",
+  }}
+>
+  {/* Radial overlay */}
+  <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-purple-900/20 via-transparent to-transparent" />
 
-        {selectedPlayer && (
-          <PlayerModal player={selectedPlayer} onClose={handleCloseModal} />
-        )}
+  {/* Bolinhas caindo */}
+  {[...Array(50)].map((_, i) => (
+    <div
+      key={i}
+      className="absolute w-1 h-1 rounded-full bg-white animate-fall"
+      style={{
+        left: `${Math.random() * 100}%`,
+        top: `${Math.random() * -100}%`,
+        animationDelay: `${Math.random() * 5}s`,
+        animationDuration: `${6 + Math.random() * 12}s`,
+      }}
+    />
+  ))}
 
-        
+  <div className="relative">
+    <Header
+      onSearch={handleSearch}
+      activeSection={activeSection}
+      onSectionChange={setActiveSection}
+    />
+    
+    <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      {renderContent()}
+    </main>
 
-       
+    {selectedPlayer && (
+      <PlayerModal player={selectedPlayer} onClose={handleCloseModal} />
+    )}
 
-        <footer className="border-t border-gray-700/50 mt-16 py-8">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-gray-400">
-            <p>&copy; 2025 FiveM Wiki. Feito pela comunidade, para a comunidade.</p>
-          </div>
-        </footer>
+    <footer className="border-t border-gray-700/50 mt-16 py-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-gray-400">
+        <p>&copy; 2025 FrançaRp. Feito pela comunidade, para a comunidade. Feito por Snowfps_x</p>
       </div>
-    </div>
+    </footer>
+  </div>
+</div>
   );
 }

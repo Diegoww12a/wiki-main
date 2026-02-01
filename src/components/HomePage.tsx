@@ -15,10 +15,10 @@ export default function HomePage({ onPlayerClick }: HomePageProps) {
 
  
   const stats = [
-    { label: 'Players Registrados', value: '100', icon: Users, color: 'text-purple-400' },
+    { label: 'Players Registrados', value: '30', icon: Users, color: 'text-purple-400' },
     // { label: 'Facções Ativas', value: '12', icon: Shield, color: 'text-red-400' },
     // { label: 'Servidores Ativos', value: '247', icon: Server, color: 'text-cyan-400' },
-    { label: 'Players Online', value: '100', icon: TrendingUp, color: 'text-green-400' }
+    { label: 'Players Online', value: '30', icon: TrendingUp, color: 'text-green-400' }
   ];
 
   return (
@@ -33,7 +33,7 @@ export default function HomePage({ onPlayerClick }: HomePageProps) {
         </p>
         <div className="flex flex-wrap justify-center gap-4">
           <div className="bg-purple-500/20 px-6 py-3 rounded-full text-purple-300 border border-purple-500/30">
-            🔥 Mais de 100 players cadastrados
+            🔥 Mais de 30 players cadastrados
           </div>
           <div className="bg-cyan-500/20 px-6 py-3 rounded-full text-cyan-300 border border-cyan-500/30">
             ⚡ Atualizado diariamente
@@ -61,7 +61,7 @@ export default function HomePage({ onPlayerClick }: HomePageProps) {
 
       {/* Top Players */}
       <section>
-        <div className="flex items-center space-x-3 mb-6">
+        <div className="flex items-center  space-x-3  mb-6">
           <Trophy className="w-6 h-6 text-yellow-400" />
           <h2 className="text-2xl font-bold text-white">Top Players</h2>
         </div>
