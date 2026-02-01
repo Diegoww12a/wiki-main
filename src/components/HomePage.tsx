@@ -10,8 +10,9 @@ interface HomePageProps {
 
 export default function HomePage({ onPlayerClick }: HomePageProps) {
   const topPlayers = mockPlayers
-    .sort((a, b) => b.reputation - a.reputation)
-    .slice(0, 3);
+    .sort((a, b) => b.stats.kills - a.stats.kills)
+    .slice(0, 3); 
+    
 
  
   const stats = [
@@ -67,7 +68,7 @@ export default function HomePage({ onPlayerClick }: HomePageProps) {
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {topPlayers.map((player) => (
-            <PlayerCard key={player.id} player={player} onClick={onPlayerClick} />
+            <PlayerCard key={player.id} player={player} onClick={() => onPlayerClick(player)} />
           ))}
         </div>
       </section>
