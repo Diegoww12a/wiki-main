@@ -50,9 +50,9 @@ export const mockPlayers: Player[] = [
     joinDate: "2025-09-08",
     stats: {
       kills: 7,
-      deaths: 1,
+      deaths: 2,
       playtime: "0",
-      missions: 2,
+      missions: 3,
     },
   },
   {
@@ -85,10 +85,10 @@ export const mockPlayers: Player[] = [
     status: "online",
     joinDate: "2025-09-08",
     stats: {
-      kills: 3,
+      kills: 9,
       deaths: 1,
       playtime: "0",
-      missions: 1,
+      missions: 2,
     },
   },
   {
@@ -193,10 +193,10 @@ export const mockPlayers: Player[] = [
     status: "online",
     joinDate: "2025-09-08",
     stats: {
-      kills: 0,
+      kills: 4,
       deaths: 0,
       playtime: "0",
-      missions: 0,
+      missions: 1,
     },
   },
   {
@@ -337,10 +337,10 @@ export const mockPlayers: Player[] = [
     status: "online",
     joinDate: "2025-09-08",
     stats: {
-      kills: 0,
+      kills: 2,
       deaths: 0,
       playtime: "0",
-      missions: 0,
+      missions: 1,
     },
   },
   {
@@ -356,9 +356,9 @@ export const mockPlayers: Player[] = [
     joinDate: "2025-09-08",
     stats: {
       kills: 1,
-      deaths: 1,
+      deaths: 2,
       playtime: "0",
-      missions: 2,
+      missions: 3,
     },
   },
   {
@@ -373,10 +373,10 @@ export const mockPlayers: Player[] = [
     status: "online",
     joinDate: "2025-09-08",
     stats: {
-      kills: 0,
+      kills: 1,
       deaths: 0,
       playtime: "0",
-      missions: 2,
+      missions: 3,
     },
   },
   {
@@ -427,10 +427,10 @@ export const mockPlayers: Player[] = [
     status: "online",
     joinDate: "2025-09-08",
     stats: {
-      kills: 2,
-      deaths: 1,
+      kills: 6,
+      deaths: 3,
       playtime: "0",
-      missions: 2,
+      missions: 3,
     },
   },
   {
@@ -446,9 +446,9 @@ export const mockPlayers: Player[] = [
     joinDate: "2025-09-08",
     stats: {
       kills: 1,
-      deaths: 1,
+      deaths: 3,
       playtime: "0",
-      missions: 2,
+      missions: 3,
     },
   },
   {
@@ -481,10 +481,10 @@ export const mockPlayers: Player[] = [
     status: "online",
     joinDate: "2025-09-08",
     stats: {
-      kills: 0,
-      deaths: 0,
+      kills: 5,
+      deaths: 1,
       playtime: "0",
-      missions: 0,
+      missions: 1,
     },
   },
   {
