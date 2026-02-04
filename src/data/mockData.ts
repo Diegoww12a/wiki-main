@@ -175,10 +175,10 @@ export const mockPlayers: Player[] = [
     status: "online",
     joinDate: "2025-09-08",
     stats: {
-      kills: 0,
-      deaths: 0,
+      kills: 5,
+      deaths: 1,
       playtime: "0",
-      missions: 0,
+      missions: 1,
     },
   },
   {
