@@ -108,7 +108,7 @@ export default function App() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-gray-400">
             <p>
               &copy; 2025 FrançaRp. Feito pela comunidade, para a comunidade.
-              Feito por Snowfps_x
+              Feito por Diego
             </p>
 
             <a
