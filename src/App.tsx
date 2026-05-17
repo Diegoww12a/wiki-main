@@ -194,7 +194,7 @@ export default function App() {
   const handleAdminLogin = () => {
     const password = prompt('Senha admin');
     if (!password) return;
-    if (password === '1234') {
+    if (password === 'franca1234') {
       setIsAdmin(true);
       alert('Modo admin ativado');
     } else {
