@@ -25,3 +25,12 @@
   animation-timing-function: linear;
   animation-iteration-count: infinite;
 }
+
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}

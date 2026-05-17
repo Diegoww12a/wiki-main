@@ -1,5 +1,5 @@
 import { Player } from '../types';
-import { X, Shield, Users, Award, Calendar, Zap } from 'lucide-react';
+import { X, Shield, Users, Award, Calendar } from 'lucide-react';
 
 interface PlayerModalProps {
   player: Player;
@@ -96,7 +96,6 @@ export default function PlayerModal({ player, onClose, onEdit, onDelete, isAdmin
 
           {/* INFOS */}
           <div className="grid grid-cols-2 gap-3 mb-4">
-
             <div className="bg-white/[0.03] border border-white/5 rounded-xl p-4">
               <div className="flex items-center gap-2 mb-1">
                 <Shield className="w-4 h-4 text-purple-400" />
@@ -112,7 +111,6 @@ export default function PlayerModal({ player, onClose, onEdit, onDelete, isAdmin
               </div>
               <p className="text-white font-semibold">{player.server || '—'}</p>
             </div>
-
           </div>
 
           {/* LEVEL */}
@@ -153,23 +151,29 @@ export default function PlayerModal({ player, onClose, onEdit, onDelete, isAdmin
             ))}
           </div>
 
-          {/* ADMIN BUTTONS */}
-          {onEdit && onDelete && (
-            <div className="flex gap-3 mb-4">
-              <button
-                onClick={() => onEdit(player)}
-                className="flex-1 py-2.5 rounded-xl border border-yellow-500/30 bg-yellow-500/10 text-yellow-400 text-sm font-semibold hover:bg-yellow-500/20 transition-all"
-              >
-                Editar
-              </button>
-              <button
-                onClick={() => onDelete(player.id)}
-                className="flex-1 py-2.5 rounded-xl border border-red-500/30 bg-red-500/10 text-red-400 text-sm font-semibold hover:bg-red-500/20 transition-all"
-              >
-                Excluir
-              </button>
-            </div>
-          )}
+          {/* BOTÕES — sempre visíveis, bloqueados sem admin */}
+          <div className="flex gap-3 mb-4">
+            <button
+              onClick={() => isAdmin && onEdit?.(player)}
+              className={`flex-1 py-2.5 rounded-xl border text-sm font-semibold transition-all ${
+                isAdmin
+                  ? 'border-yellow-500/30 bg-yellow-500/10 text-yellow-400 hover:bg-yellow-500/20 cursor-pointer'
+                  : 'border-white/5 bg-red-500/[0.2] text-white   cursor-not-allowed'
+              }`}
+            >
+              {isAdmin ? 'Editar' : '🔒 Editar'}
+            </button>
+            <button
+              onClick={() => isAdmin && onDelete?.(player.id)}
+              className={`flex-1 py-2.5 rounded-xl border text-sm font-semibold transition-all ${
+                isAdmin
+                  ? 'border-red-500/30 bg-red-500/10 text-red-400 hover:bg-red-500/20 cursor-pointer'
+                  : 'border-white/5 bg-red-500/[0.2] text-white cursor-not-allowed'
+              }`}
+            >
+              {isAdmin ? 'Excluir' : '🔒 Excluir'}
+            </button>
+          </div>
 
           {/* DATA */}
           <div className="flex items-center text-xs text-gray-600 pt-4 border-t border-white/5">

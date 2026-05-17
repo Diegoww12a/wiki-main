@@ -330,14 +330,14 @@ export default function App() {
       </div>
 
       {selectedPlayer && (
-        <PlayerModal
-          player={selectedPlayer}
-          onClose={handleCloseModal}
-          onEdit={isAdmin ? setEditingPlayer : undefined}
-          onDelete={isAdmin ? handleDeletePlayer : undefined}
-          isAdmin={isAdmin}
-        />
-      )}
+  <PlayerModal
+    player={selectedPlayer}
+    onClose={handleCloseModal}
+    onEdit={setEditingPlayer}
+    onDelete={handleDeletePlayer}
+    isAdmin={isAdmin}
+  />
+)}
 
       {editingPlayer && (
         <EditPlayerModal
