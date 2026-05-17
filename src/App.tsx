@@ -23,18 +23,28 @@ export default function App() {
 
   // 🔥 BUSCA DO BANCO AO INICIAR
   useEffect(() => {
-    fetch('/.netlify/functions/getPlayers')
-      .then(r => r.json())
-      .then(data => {
-        if (data.length > 0) {
-          setPlayers(data);
-        } else {
-          setPlayers(mockPlayers);
-        }
-      })
-      .catch(() => setPlayers(mockPlayers))
-      .finally(() => setLoading(false));
-  }, []);
+  fetch('/.netlify/functions/getPlayers')
+    .then(r => r.json())
+    .then(async (data) => {
+      if (data.length > 0) {
+        setPlayers(data);
+      } else {
+        // Banco vazio — popula com mockPlayers
+        setPlayers(mockPlayers);
+
+        await Promise.all(
+          mockPlayers.map(player =>
+            fetch('/.netlify/functions/savePlayer', {
+              method: 'POST',
+              body: JSON.stringify(player),
+            })
+          )
+        );
+      }
+    })
+    .catch(() => setPlayers(mockPlayers))
+    .finally(() => setLoading(false));
+}, []);
 
   const handleSearch = (query: string) => {
     setSearchQuery(query);
