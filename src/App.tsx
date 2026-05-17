@@ -5,7 +5,6 @@ import HomePage from './components/HomePage';
 import PlayersPage from './components/PlayersPage';
 import RankingsPage from './components/RankingsPage';
 import AdminPanel from './components/AdminPanel';
-
 import PlayerModal from './components/PlayerModal';
 import EditPlayerModal from './components/EditPlayerModal';
 
@@ -16,68 +15,67 @@ export default function App() {
 
   const [activeSection, setActiveSection] = useState('home');
   const [searchQuery, setSearchQuery] = useState('');
-
-  // 🔥 ADMIN MODE (SÓ LIBERA PERMISSÃO)
   const [isAdmin, setIsAdmin] = useState(false);
-
-  const [players, setPlayers] = useState<Player[]>(() => {
-    const saved = localStorage.getItem('players');
-    return saved ? JSON.parse(saved) : mockPlayers;
-  });
-
+  const [players, setPlayers] = useState<Player[]>([]);
   const [selectedPlayer, setSelectedPlayer] = useState<Player | null>(null);
   const [editingPlayer, setEditingPlayer] = useState<Player | null>(null);
+  const [loading, setLoading] = useState(true);
 
+  // 🔥 BUSCA DO BANCO AO INICIAR
   useEffect(() => {
-    localStorage.setItem('players', JSON.stringify(players));
-  }, [players]);
+    fetch('/.netlify/functions/getPlayers')
+      .then(r => r.json())
+      .then(data => {
+        if (data.length > 0) {
+          setPlayers(data);
+        } else {
+          setPlayers(mockPlayers);
+        }
+      })
+      .catch(() => setPlayers(mockPlayers))
+      .finally(() => setLoading(false));
+  }, []);
 
   const handleSearch = (query: string) => {
     setSearchQuery(query);
     if (query.trim()) setActiveSection('players');
   };
 
-  const handlePlayerClick = (player: Player) => {
-    setSelectedPlayer(player);
-  };
+  const handlePlayerClick = (player: Player) => setSelectedPlayer(player);
+  const handleCloseModal = () => setSelectedPlayer(null);
 
-  const handleCloseModal = () => {
-    setSelectedPlayer(null);
-  };
-
-  const handleSavePlayer = (updated: Player) => {
-    setPlayers(prev =>
-      prev.map(p => p.id === updated.id ? updated : p)
-    );
-
+  const handleSavePlayer = async (updated: Player) => {
+    await fetch('/.netlify/functions/savePlayer', {
+      method: 'POST',
+      body: JSON.stringify(updated),
+    });
+    setPlayers(prev => prev.map(p => p.id === updated.id ? updated : p));
     setEditingPlayer(null);
     setSelectedPlayer(updated);
   };
 
-  const handleDeletePlayer = (id: string) => {
+  const handleDeletePlayer = async (id: string) => {
     const ok = confirm('Excluir player?');
     if (!ok) return;
 
+    await fetch('/.netlify/functions/deletePlayer', {
+      method: 'POST',
+      body: JSON.stringify({ id }),
+    });
     setPlayers(prev => prev.filter(p => p.id !== id));
     setSelectedPlayer(null);
   };
 
-  const handleAddPlayer = (player: Player) => {
+  const handleAddPlayer = async (player: Player) => {
+    await fetch('/.netlify/functions/savePlayer', {
+      method: 'POST',
+      body: JSON.stringify(player),
+    });
     setPlayers(prev => [...prev, player]);
   };
 
-  const handleResetAll = () => {
-    const ok = confirm('Resetar tudo?');
-    if (!ok) return;
-
-    localStorage.removeItem('players');
-    setPlayers(mockPlayers);
-  };
-
-  // 🔥 LOGIN (SÓ ATIVA MODO ADMIN)
   const handleAdminLogin = () => {
     const password = prompt('Senha admin');
-
     if (!password) return;
 
     if (password === '1234') {
@@ -95,8 +93,15 @@ export default function App() {
   };
 
   const renderContent = () => {
-    switch (activeSection) {
+    if (loading) {
+      return (
+        <div className="flex items-center justify-center mt-40">
+          <div className="text-gray-400 text-sm animate-pulse">Carregando players...</div>
+        </div>
+      );
+    }
 
+    switch (activeSection) {
       case 'players':
         return (
           <PlayersPage
@@ -105,7 +110,6 @@ export default function App() {
             searchQuery={searchQuery}
           />
         );
-
       case 'rankings':
         return (
           <RankingsPage
@@ -113,7 +117,6 @@ export default function App() {
             onPlayerClick={handlePlayerClick}
           />
         );
-
       case 'admin':
         return isAdmin ? (
           <div className="max-w-7xl mx-auto px-4 py-8">
@@ -124,7 +127,6 @@ export default function App() {
             Acesso negado
           </div>
         );
-
       default:
         return (
           <HomePage
@@ -136,8 +138,8 @@ export default function App() {
   };
 
   return (
-     <div
-      className="min-h-screen bg-gradient-to-br select-none from-gray-900 via-purple-900/20 to-gray-900 relative overflow-hidden"
+    <div
+      className="min-h-screen select-none relative overflow-hidden"
       style={{
         background: "#000000",
         backgroundImage: `
@@ -147,9 +149,8 @@ export default function App() {
         backgroundSize: "40px 40px",
       }}
     >
-      <div className="absolute inset-0 pointer-events-none  bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-purple-900/20 via-transparent to-transparent" />
+      <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-purple-900/20 via-transparent to-transparent" />
 
-      {/* Bolinhas caindo */}
       {[...Array(50)].map((_, i) => (
         <div
           key={i}
@@ -169,35 +170,28 @@ export default function App() {
         onSectionChange={setActiveSection}
       />
 
-      {/* BOTÕES ADMIN (SÓ CONTROLE, NÃO ABRE NADA AUTOMÁTICO) */}
-      <div className="max-w-7xl mx-auto px-4 pt-6 flex gap-3 flex-wrap">
-
+      <div className="max-w-7xl mx-auto px-4 pt-6">
         {!isAdmin ? (
           <button
             onClick={handleAdminLogin}
-            className="fixed bottom-5 text-white uppercase text-xs font-medium  right-5 bg-green-600 hover:bg-green-700 px-5 py-3 rounded-full shadow-lg z-50"
+            className="fixed bottom-5 right-5 text-white uppercase text-xs font-medium bg-green-600 hover:bg-green-700 px-5 py-3 rounded-full shadow-lg z-50"
           >
             Entrar Admin
           </button>
         ) : (
-          <>
-            <button
-              onClick={handleAdminLogout}
-              className="fixed bottom-5 right-5 text-white bg-red-600 hover:bg-red-700 px-5 py-3 rounded-full shadow-lg z-50"
-            >
-              Sair Admin
-            </button>
-          </>
+          <button
+            onClick={handleAdminLogout}
+            className="fixed bottom-5 right-5 text-white bg-red-600 hover:bg-red-700 px-5 py-3 rounded-full shadow-lg z-50"
+          >
+            Sair Admin
+          </button>
         )}
-
       </div>
 
-      {/* MAIN */}
       <main className="max-w-7xl mx-auto px-4 py-8">
         {renderContent()}
       </main>
 
-      {/* MODALS (EDIT SÓ FUNCIONA SE FOR ADMIN) */}
       {selectedPlayer && (
         <PlayerModal
           player={selectedPlayer}
@@ -215,7 +209,6 @@ export default function App() {
           onSave={handleSavePlayer}
         />
       )}
-
     </div>
   );
 }
