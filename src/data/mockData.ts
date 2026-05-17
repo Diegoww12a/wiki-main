@@ -57,8 +57,8 @@ export const mockPlayers: Player[] = [
   },
   {
     id: "4",
-    name: "GORDAONS",
-    avatar: "images/avatars/GORDAO.png",
+    name: "NECOTREM",
+    avatar: "images/avatars/neco.png",
     faction: "FRANÇA",
     role: "PVP",
     server: "METROPOLE",

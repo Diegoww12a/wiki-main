@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { Search, User, Trophy,  Menu, X, } from 'lucide-react';
-import { Home } from 'lucide-react';
+import { Search, User, Trophy, Menu, X, Home, Shield } from 'lucide-react';
 
 interface HeaderProps {
   onSearch: (query: string) => void;
@@ -8,7 +7,12 @@ interface HeaderProps {
   onSectionChange: (section: string) => void;
 }
 
-export default function Header({ onSearch, activeSection, onSectionChange }: HeaderProps) {
+export default function Header({
+  onSearch,
+  activeSection,
+  onSectionChange
+}: HeaderProps) {
+
   const [searchQuery, setSearchQuery] = useState('');
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -20,47 +24,58 @@ export default function Header({ onSearch, activeSection, onSectionChange }: Hea
   const navItems = [
     { id: 'home', label: 'Home', icon: Home },
     { id: 'players', label: 'Players', icon: User },
-    // { id: 'factions', label: 'Facções', icon: Shield },
-    // { id: 'wars', label: 'Guerras', icon: Sword },
-    { id: 'rankings', label: 'Rankings', icon: Trophy }
+    { id: 'rankings', label: 'Rankings', icon: Trophy },
+
+    // 🔥 ADMIN ADICIONADO
+    { id: 'admin', label: 'Admin', icon: Shield }
   ];
 
   return (
     <header className="bg-gray-900/95 backdrop-blur-md border-b border-purple-500/20 sticky top-0 z-50">
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
         <div className="flex justify-between items-center py-4">
-          {/* Logo */}
+
+          {/* LOGO */}
           <div className="flex items-center space-x-3">
-            <img src={`${import.meta.env.BASE_URL}images/franca.png`} alt="Logo" className="w-8 h-8 rounded-md" />
+            <img
+              src={`${import.meta.env.BASE_URL}images/franca.png`}
+              alt="Logo"
+              className="w-8 h-8 rounded-md"
+            />
+
             <div>
               <h1 className="text-xl font-bold text-white">França</h1>
               <p className="text-xs text-gray-400">Players</p>
             </div>
           </div>
 
-          {/* Navigation - Desktop */}
+          {/* NAV DESKTOP */}
           <nav className="hidden md:flex space-x-8">
-  {navItems.map((item) => {
-    const Icon = item.icon;
 
-    return (
-      <button
-        key={item.id}
-        onClick={() => onSectionChange(item.id)}
-        className={`flex items-center space-x-2 px-3 py-2 rounded-lg transition-all duration-200 ${
-          activeSection === item.id
-            ? 'bg-purple-500/20 text-purple-400'
-            : 'text-gray-300 hover:text-white hover:bg-gray-800/50'
-        }`}
-      >
-        <Icon className="w-4 h-4" />
-        <span>{item.label}</span>
-      </button>
-    );
-  })}
-</nav>
+            {navItems.map((item) => {
+              const Icon = item.icon;
 
-          {/* Search */}
+              return (
+                <button
+                  key={item.id}
+                  onClick={() => onSectionChange(item.id)}
+                  className={`flex items-center space-x-2 px-3 py-2 rounded-lg transition-all duration-200 ${
+                    activeSection === item.id
+                      ? 'bg-purple-500/20 text-purple-400'
+                      : 'text-gray-300 hover:text-white hover:bg-gray-800/50'
+                  }`}
+                >
+                  <Icon className="w-4 h-4" />
+                  <span>{item.label}</span>
+                </button>
+              );
+            })}
+
+          </nav>
+
+          {/* SEARCH */}
           <form onSubmit={handleSearch} className="hidden sm:block">
             <div className="relative">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
@@ -74,21 +89,28 @@ export default function Header({ onSearch, activeSection, onSectionChange }: Hea
             </div>
           </form>
 
-          {/* Mobile Menu Button */}
+          {/* MOBILE BUTTON */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             className="md:hidden p-2 text-gray-400 hover:text-white"
           >
-            {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            {isMobileMenuOpen
+              ? <X className="w-6 h-6" />
+              : <Menu className="w-6 h-6" />
+            }
           </button>
+
         </div>
 
-        {/* Mobile Menu */}
+        {/* MOBILE MENU */}
         {isMobileMenuOpen && (
           <div className="md:hidden py-4 border-t border-gray-700">
+
             <nav className="space-y-2">
+
               {navItems.map((item) => {
                 const Icon = item.icon;
+
                 return (
                   <button
                     key={item.id}
@@ -96,7 +118,7 @@ export default function Header({ onSearch, activeSection, onSectionChange }: Hea
                       onSectionChange(item.id);
                       setIsMobileMenuOpen(false);
                     }}
-                    className={`flex items-center space-x-2 px-3 py-2 rounded-lg transition-all duration-200 w-full text-left ${
+                    className={`flex items-center space-x-2 px-3 py-2 rounded-lg w-full text-left ${
                       activeSection === item.id
                         ? 'bg-purple-500/20 text-purple-400'
                         : 'text-gray-300 hover:text-white hover:bg-gray-800/50'
@@ -107,9 +129,10 @@ export default function Header({ onSearch, activeSection, onSectionChange }: Hea
                   </button>
                 );
               })}
+
             </nav>
-            
-            {/* Mobile Search */}
+
+            {/* SEARCH MOBILE */}
             <form onSubmit={handleSearch} className="mt-4">
               <div className="relative">
                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
@@ -118,12 +141,14 @@ export default function Header({ onSearch, activeSection, onSectionChange }: Hea
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder="Buscar player..."
-                  className="pl-10 pr-4 py-2 bg-gray-800/50 border border-gray-700 rounded-lg text-white placeholder-gray-400 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 transition-colors w-full"
+                  className="pl-10 pr-4 py-2 bg-gray-800/50 border border-gray-700 rounded-lg text-white placeholder-gray-400 w-full"
                 />
               </div>
             </form>
+
           </div>
         )}
+
       </div>
     </header>
   );

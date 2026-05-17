@@ -57,7 +57,7 @@ export default function PlayerCard({ player, onClick }: PlayerCardProps) {
       <div className="flex items-start space-x-4">
         <div className="relative">
           <img
-            src={`${import.meta.env.BASE_URL}${player.avatar}`}
+            src={player.avatar}
             alt={player.name}
             className="w-16 h-16 rounded-lg object-cover
             border-2 border-gray-600 group-hover:border-purple-500
