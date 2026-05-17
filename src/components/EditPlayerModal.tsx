@@ -1,7 +1,6 @@
 import { useState } from 'react';
-import { mockPlayers } from '../data/mockData';
-import { X, Save, RotateCcw, Skull, Target, Crosshair, Flag, Shield, Users } from 'lucide-react';
 import { Player } from '../types';
+import { X, Save, RotateCcw, Skull, Target, Crosshair, Flag, Shield, Users } from 'lucide-react';
 
 interface EditPlayerModalProps {
   player: Player;
@@ -19,12 +18,23 @@ export default function EditPlayerModal({ player, onClose, onSave }: EditPlayerM
     role:     player.role,
     faction:  player.faction,
     server:   player.server,
+    tags:     player.tags || [],
   });
 
   const [saved, setSaved] = useState(false);
 
   const handleChange = (field: string, value: string | number) => {
     setForm(prev => ({ ...prev, [field]: value }));
+    setSaved(false);
+  };
+
+  const toggleBanido = () => {
+    setForm(prev => ({
+      ...prev,
+      tags: prev.tags.includes('banido')
+        ? prev.tags.filter(t => t !== 'banido')
+        : [...prev.tags, 'banido']
+    }));
     setSaved(false);
   };
 
@@ -35,6 +45,7 @@ export default function EditPlayerModal({ player, onClose, onSave }: EditPlayerM
       role:    form.role,
       faction: form.faction,
       server:  form.server,
+      tags:    form.tags,
       stats: {
         ...player.stats,
         kills:    Number(form.kills),
@@ -48,44 +59,40 @@ export default function EditPlayerModal({ player, onClose, onSave }: EditPlayerM
     setTimeout(() => setSaved(false), 2000);
   };
 
- const handleReset = () => {
+  const handleReset = () => {
+    const resetPlayer: Player = {
+      ...player,
+      faction: '',
+      role: '',
+      server: '',
+      status: 'offline',
+      tags: [],
+      stats: {
+        kills: 0,
+        deaths: 0,
+        missions: 0,
+        playtime: '0',
+      }
+    };
 
-  const resetPlayer: Player = {
-
-    ...player,
-
-    faction: '',
-    role: '',
-    server: '',
-    status: 'offline',
-
-    stats: {
+    setForm({
       kills: 0,
       deaths: 0,
       missions: 0,
       playtime: '0',
-    }
+      status: 'offline',
+      role: '',
+      faction: '',
+      server: '',
+      tags: [],
+    });
 
+    onSave(resetPlayer);
+    setSaved(false);
   };
 
-  setForm({
-    kills: 0,
-    deaths: 0,
-    missions: 0,
-    playtime: '0',
-    status: 'offline',
-    role: '',
-    faction: '',
-    server: '',
-  });
-
-  onSave(resetPlayer);
-
-  setSaved(false);
-
-};
-
   const kd = Number(form.kills) / Math.max(Number(form.deaths), 1);
+  const isBanido = form.tags.includes('banido');
 
   return (
     <div className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 z-50">
@@ -263,6 +270,32 @@ export default function EditPlayerModal({ player, onClose, onSave }: EditPlayerM
                   onChange={e => handleChange('server', e.target.value)}
                   className="w-full bg-transparent text-white text-sm font-medium focus:outline-none"
                 />
+              </div>
+            </div>
+          </div>
+
+          {/* BANIDO TOGGLE */}
+          <div>
+            <p className="text-xs font-medium text-gray-500 uppercase tracking-wider mb-3">Tags</p>
+            <div
+              onClick={toggleBanido}
+              className={`flex items-center justify-between px-4 py-3 rounded-xl border cursor-pointer transition-all ${
+                isBanido
+                  ? 'bg-red-500/10 border-red-500/40'
+                  : 'bg-gray-800/60 border-gray-700/50 hover:border-gray-500'
+              }`}
+            >
+              <div className="flex items-center gap-3">
+                <span className="text-lg">🚫</span>
+                <div>
+                  <p className={`text-sm font-medium ${isBanido ? 'text-red-400' : 'text-gray-400'}`}>
+                    Marcar como Banido
+                  </p>
+                  <p className="text-xs text-gray-600">Player receberá tag de banido</p>
+                </div>
+              </div>
+              <div className={`w-10 h-5 rounded-full transition-all relative ${isBanido ? 'bg-red-500' : 'bg-gray-700'}`}>
+                <div className={`absolute top-0.5 w-4 h-4 rounded-full bg-white transition-all ${isBanido ? 'left-5' : 'left-0.5'}`} />
               </div>
             </div>
           </div>
