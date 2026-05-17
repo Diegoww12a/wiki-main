@@ -34,7 +34,7 @@ export default function AdminPanel({ onAddPlayer }: Props) {
       avatar,
       faction: 'FRANÇA',
       role: 'PVP',
-      server: 'METROPOLE',
+      server: 'COMPLEXO',
       status: 'online',
       level: 0,
       reputation: 0,
