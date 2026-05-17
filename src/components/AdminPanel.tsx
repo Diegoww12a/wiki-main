@@ -12,10 +12,15 @@ export default function AdminPanel({ onAddPlayer }: Props) {
   const [notification, setNotification] = useState('');
 
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-    setAvatar(URL.createObjectURL(file));
+  const file = e.target.files?.[0];
+  if (!file) return;
+
+  const reader = new FileReader();
+  reader.onloadend = () => {
+    setAvatar(reader.result as string);
   };
+  reader.readAsDataURL(file);
+};
 
   const addPlayer = () => {
     if (!name || !avatar) {
@@ -47,7 +52,7 @@ export default function AdminPanel({ onAddPlayer }: Props) {
     setAvatar('');
     setNotification('Player adicionado com sucesso!');
 
-    setTimeout(() => {
+    setTimeout(() => {''
       setNotification('');
     }, 2500);
   };
