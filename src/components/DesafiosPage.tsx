@@ -2,19 +2,20 @@
 import React, { useState, useEffect } from 'react';
 import { Challenge, Team, Player } from '../types';
 import {
-  Sword, Clock, Trophy, Check, X, Plus, Users, Coins, Zap,
+  Sword, Clock, Trophy, Check, X, Plus, Coins, Zap,
   Eye, BarChart, History, Target, Award, AlertCircle, Send,
   Search as SearchIcon, User, Calendar, TrendingUp, TrendingDown,
-  Crosshair, Skull, Activity
+  Crosshair, Skull, Activity, Globe, Shield
 } from 'lucide-react';
 
 interface DesafiosPageProps {
   challenges: Challenge[];
   teams: Team[];
+  allTimes: Team[];
   players: Player[];
   onRefresh: () => void;
-  onCriarDesafio: (timeId: string, timeAdversarioId: string, aposta: number) => void;
-  onAceitarDesafio: (challengeId: string, recusar?: boolean) => void;
+  onCriarDesafio: (timeId: string, timeAdversarioId: string, aposta: number) => Promise<void>;
+  onAceitarDesafio: (challengeId: string, recusar?: boolean) => Promise<void>;
 }
 
 interface ChallengeDetailModalProps {
@@ -32,33 +33,30 @@ function ChallengeDetailModal({ challenge, teamA, teamB, players, onClose }: Cha
   const getPlayerName = (id: string) => players.find(p => p.id === id)?.name || 'Desconhecido';
   const getPlayerKills = (id: string) => {
     const p = players.find(p => p.id === id);
-    return p?.stats?.kills || Math.floor(Math.random() * 10) + 1; // simulação
+    return p?.stats?.kills || Math.floor(Math.random() * 10) + 1;
   };
   const getPlayerDeaths = (id: string) => {
     const p = players.find(p => p.id === id);
     return p?.stats?.deaths || Math.floor(Math.random() * 8) + 1;
   };
 
-  // Simula estatísticas de combate
-  const totalKillsA = teamA.jogadores.reduce((acc, id) => acc + getPlayerKills(id), 0);
-  const totalKillsB = teamB.jogadores.reduce((acc, id) => acc + getPlayerKills(id), 0);
+  const totalKillsA = challenge.placar_desafiante ?? teamA.jogadores.reduce((acc, id) => acc + getPlayerKills(id), 0);
+  const totalKillsB = challenge.placar_desafiado ?? teamB.jogadores.reduce((acc, id) => acc + getPlayerKills(id), 0);
   const totalDeathsA = teamA.jogadores.reduce((acc, id) => acc + getPlayerDeaths(id), 0);
   const totalDeathsB = teamB.jogadores.reduce((acc, id) => acc + getPlayerDeaths(id), 0);
   const kdA = totalDeathsA > 0 ? (totalKillsA / totalDeathsA) : totalKillsA;
   const kdB = totalDeathsB > 0 ? (totalKillsB / totalDeathsB) : totalKillsB;
 
-  // MVP (mais kills)
   const allPlayers = [...teamA.jogadores, ...teamB.jogadores];
   let mvpId = allPlayers[0];
   let maxKills = 0;
   allPlayers.forEach(id => {
     const kills = getPlayerKills(id);
-    if (kills > maxKills) {
-      maxKills = kills;
-      mvpId = id;
-    }
+    if (kills > maxKills) { maxKills = kills; mvpId = id; }
   });
   const mvpName = getPlayerName(mvpId);
+  const vencedorNome = challenge.vencedor_id === teamA.id ? teamA.nome
+    : challenge.vencedor_id === teamB.id ? teamB.nome : 'Empate';
 
   return (
     <div className="fixed inset-0 bg-black/80 backdrop-blur-md flex items-center justify-center z-50 p-4">
@@ -70,7 +68,7 @@ function ChallengeDetailModal({ challenge, teamA, teamB, players, onClose }: Cha
             </div>
             <div>
               <h3 className="text-lg font-black text-white">Resultado do Duelo</h3>
-              <p className="text-xs text-gray-500">{new Date(challenge.data).toLocaleString()}</p>
+              <p className="text-xs text-gray-500">{new Date(challenge.data).toLocaleString('pt-BR')}</p>
             </div>
           </div>
           <button onClick={onClose} className="p-2 rounded-lg hover:bg-white/5 text-gray-400 hover:text-white transition">
@@ -79,29 +77,26 @@ function ChallengeDetailModal({ challenge, teamA, teamB, players, onClose }: Cha
         </div>
 
         <div className="space-y-6">
-          {/* Placar de Abates */}
+          {/* Placar */}
           <div className="flex items-center justify-center gap-8 py-4 bg-white/5 rounded-xl border border-white/5">
             <div className="text-center">
-              <img src={teamA.escudo} alt={teamA.nome} className="w-12 h-12 rounded-full mx-auto border border-purple-500/30" />
+              {teamA.escudo ? <img src={teamA.escudo} alt={teamA.nome} className="w-12 h-12 rounded-full mx-auto border border-purple-500/30 object-cover" /> : <div className="w-12 h-12 rounded-full mx-auto border border-purple-500/30 bg-purple-500/10 flex items-center justify-center"><Shield className="w-6 h-6 text-purple-400" /></div>}
               <p className="text-white font-bold mt-1">{teamA.nome}</p>
               <p className="text-3xl font-black text-red-400">{totalKillsA}</p>
               <p className="text-xs text-gray-500">abates</p>
             </div>
             <div className="text-center">
-              <div className="w-12 h-12 rounded-full bg-purple-500/10 flex items-center justify-center border border-purple-500/20">
-                <Swords className="w-6 h-6 text-purple-400" />
-              </div>
-              <p className="text-xs text-gray-500 mt-1">VS</p>
+              <div className="w-12 h-12 rounded-full bg-purple-500/10 flex items-center justify-center border border-purple-500/20 text-purple-400 font-bold text-sm">VS</div>
             </div>
             <div className="text-center">
-              <img src={teamB.escudo} alt={teamB.nome} className="w-12 h-12 rounded-full mx-auto border border-purple-500/30" />
+              {teamB.escudo ? <img src={teamB.escudo} alt={teamB.nome} className="w-12 h-12 rounded-full mx-auto border border-purple-500/30 object-cover" /> : <div className="w-12 h-12 rounded-full mx-auto border border-purple-500/30 bg-purple-500/10 flex items-center justify-center"><Shield className="w-6 h-6 text-purple-400" /></div>}
               <p className="text-white font-bold mt-1">{teamB.nome}</p>
               <p className="text-3xl font-black text-red-400">{totalKillsB}</p>
               <p className="text-xs text-gray-500">abates</p>
             </div>
           </div>
 
-          {/* Estatísticas de Combate */}
+          {/* Estatísticas */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
             <div className="bg-white/5 rounded-xl p-3 text-center border border-white/5">
               <p className="text-xs text-gray-500">Total Abates</p>
@@ -109,21 +104,19 @@ function ChallengeDetailModal({ challenge, teamA, teamB, players, onClose }: Cha
             </div>
             <div className="bg-white/5 rounded-xl p-3 text-center border border-white/5">
               <p className="text-xs text-gray-500">Vencedor</p>
-              <p className="text-lg font-bold text-green-400">
-                {totalKillsA > totalKillsB ? teamA.nome : (totalKillsB > totalKillsA ? teamB.nome : 'Empate')}
-              </p>
+              <p className="text-lg font-bold text-green-400">{vencedorNome}</p>
             </div>
             <div className="bg-white/5 rounded-xl p-3 text-center border border-white/5">
-              <p className="text-xs text-gray-500">K/D Time A</p>
+              <p className="text-xs text-gray-500">K/D {teamA.nome}</p>
               <p className="text-lg font-bold text-yellow-400">{kdA.toFixed(2)}</p>
             </div>
             <div className="bg-white/5 rounded-xl p-3 text-center border border-white/5">
-              <p className="text-xs text-gray-500">K/D Time B</p>
+              <p className="text-xs text-gray-500">K/D {teamB.nome}</p>
               <p className="text-lg font-bold text-yellow-400">{kdB.toFixed(2)}</p>
             </div>
           </div>
 
-          {/* MVP e Artilheiros (Top Fraggers) */}
+          {/* MVP */}
           <div className="bg-white/5 rounded-xl p-4 border border-white/5">
             <h4 className="text-sm font-medium text-gray-400 mb-3 flex items-center gap-2">
               <Skull className="w-4 h-4 text-red-400" /> MVP do Duelo – <span className="text-yellow-400 font-bold">{mvpName}</span> ({maxKills} abates)
@@ -139,7 +132,6 @@ function ChallengeDetailModal({ challenge, teamA, teamB, players, onClose }: Cha
             </div>
           </div>
 
-          {/* Informações da aposta */}
           <div className="flex justify-between text-sm bg-white/5 rounded-xl p-3 border border-white/5">
             <span className="text-gray-400">Aposta</span>
             <span className="text-yellow-400 font-bold">{challenge.aposta} 🪙</span>
@@ -160,12 +152,13 @@ function ChallengeDetailModal({ challenge, teamA, teamB, players, onClose }: Cha
 export default function DesafiosPage({
   challenges,
   teams,
+  allTimes,
   players,
   onRefresh,
   onCriarDesafio,
   onAceitarDesafio,
 }: DesafiosPageProps) {
-  const [activeTab, setActiveTab] = useState<'recebidos' | 'enviados' | 'historico' | 'estatisticas'>('recebidos');
+  const [activeTab, setActiveTab] = useState<'todos_times' | 'recebidos' | 'enviados' | 'historico' | 'estatisticas'>('todos_times');
   const [loading, setLoading] = useState(false);
   const [showCreateModal, setShowCreateModal] = useState(false);
   const [selectedChallenge, setSelectedChallenge] = useState<Challenge | null>(null);
@@ -173,85 +166,60 @@ export default function DesafiosPage({
   const [selectedOpponent, setSelectedOpponent] = useState<string>('');
   const [apostaValue, setApostaValue] = useState(50);
   const [toast, setToast] = useState<{ message: string; type: 'success' | 'error' | 'info' } | null>(null);
+  const [searchTeams, setSearchTeams] = useState('');
 
   const myTeam = teams[0];
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      // Verifica expiração
-      const now = new Date();
-      // Pode adicionar lógica para remover desafios expirados
-    }, 60000);
-    return () => clearInterval(interval);
-  }, []);
 
   const showToast = (message: string, type: 'success' | 'error' | 'info' = 'info') => {
     setToast({ message, type });
     setTimeout(() => setToast(null), 4000);
   };
 
-  const getTeam = (id: string) => teams.find(t => t.id === id);
+  const getTeam = (id: string) => allTimes.find(t => t.id === id) || teams.find(t => t.id === id);
   const isExpired = (expiraEm: string) => new Date(expiraEm) < new Date();
 
   const filteredChallenges = challenges.filter(ch => {
-    if (activeTab === 'recebidos') {
-      return ch.status === 'pendente' && ch.time_desafiado_id === myTeam?.id && !isExpired(ch.expira_em);
-    }
-    if (activeTab === 'enviados') {
-      return ch.status === 'pendente' && ch.time_desafiante_id === myTeam?.id && !isExpired(ch.expira_em);
-    }
-    if (activeTab === 'historico') {
-      return ch.status === 'finalizado' || ch.status === 'recusado';
-    }
-    if (activeTab === 'estatisticas') {
-      return ch.status === 'finalizado';
-    }
+    if (activeTab === 'recebidos') return ch.status === 'pendente' && ch.time_desafiado_id === myTeam?.id && !isExpired(ch.expira_em);
+    if (activeTab === 'enviados') return ch.status === 'pendente' && ch.time_desafiante_id === myTeam?.id && !isExpired(ch.expira_em);
+    if (activeTab === 'historico') return ch.status === 'finalizado' || ch.status === 'recusado';
+    if (activeTab === 'estatisticas') return ch.status === 'finalizado';
     return false;
   });
 
-  // Estatísticas PvP
   const stats = {
     total: challenges.filter(c => c.status === 'finalizado').length,
     vitorias: challenges.filter(c => c.status === 'finalizado' && c.vencedor_id === myTeam?.id).length,
     derrotas: challenges.filter(c => c.status === 'finalizado' && c.vencedor_id !== myTeam?.id && c.vencedor_id).length,
     empates: challenges.filter(c => c.status === 'finalizado' && !c.vencedor_id).length,
-    totalMoedasGanhas: challenges
-      .filter(c => c.status === 'finalizado' && c.vencedor_id === myTeam?.id)
-      .reduce((acc, c) => acc + c.aposta, 0),
-    totalAbates: challenges
-      .filter(c => c.status === 'finalizado')
-      .reduce((acc, c) => acc + (c.placar_desafiante || 0) + (c.placar_desafiado || 0), 0),
+    totalMoedasGanhas: challenges.filter(c => c.status === 'finalizado' && c.vencedor_id === myTeam?.id).reduce((acc, c) => acc + c.aposta, 0),
+    totalAbates: challenges.filter(c => c.status === 'finalizado').reduce((acc, c) => acc + (c.placar_desafiante || 0) + (c.placar_desafiado || 0), 0),
   };
 
-  const handleAccept = (challengeId: string) => {
+  const handleAccept = async (challengeId: string) => {
     if (!confirm('Aceitar este duelo e simular a batalha?')) return;
     setLoading(true);
     try {
-      onAceitarDesafio(challengeId, false);
-      showToast('⚔️ Duelo aceito! Resultado calculado.', 'success');
-      onRefresh();
-    } catch (error) {
-      showToast('❌ Erro ao aceitar duelo.', 'error');
+      await onAceitarDesafio(challengeId, false);
+    } catch (_) {
+      // toast already shown by parent
     } finally {
       setLoading(false);
     }
   };
 
-  const handleRefuse = (challengeId: string) => {
+  const handleRefuse = async (challengeId: string) => {
     if (!confirm('Recusar este duelo?')) return;
     setLoading(true);
     try {
-      onAceitarDesafio(challengeId, true);
-      showToast('❌ Duelo recusado.', 'error');
-      onRefresh();
-    } catch (error) {
-      showToast('❌ Erro ao recusar.', 'error');
+      await onAceitarDesafio(challengeId, true);
+    } catch (_) {
+      // toast already shown by parent
     } finally {
       setLoading(false);
     }
   };
 
-  const handleCreateChallenge = () => {
+  const handleCreateChallenge = async () => {
     if (!selectedOpponent || !apostaValue) {
       showToast('Selecione um adversário e defina a aposta.', 'error');
       return;
@@ -264,16 +232,160 @@ export default function DesafiosPage({
       showToast('Você não pode desafiar a si mesmo.', 'error');
       return;
     }
-    onCriarDesafio(myTeam!.id, selectedOpponent, apostaValue);
-    showToast('📤 Desafio enviado com sucesso!', 'success');
-    setShowCreateModal(false);
-    setSelectedOpponent('');
-    setApostaValue(50);
-    onRefresh();
+    setLoading(true);
+    try {
+      await onCriarDesafio(myTeam!.id, selectedOpponent, apostaValue);
+      setShowCreateModal(false);
+      setSelectedOpponent('');
+      setSearchOpponent('');
+      setApostaValue(50);
+    } catch (_) {
+      // toast already shown by parent
+    } finally {
+      setLoading(false);
+    }
   };
 
-  const handleViewDetails = (challenge: Challenge) => {
-    setSelectedChallenge(challenge);
+  // ===== ABA TODOS OS TIMES =====
+  const filteredAllTimes = allTimes.filter(t =>
+    t.nome.toLowerCase().includes(searchTeams.toLowerCase())
+  );
+
+  const renderAllTimes = () => {
+    if (allTimes.length === 0) {
+      return (
+        <div className="text-center py-16 text-gray-500">
+          <Globe className="w-12 h-12 mx-auto text-gray-600 mb-3" />
+          <p>Nenhum time encontrado.</p>
+          <p className="text-xs text-gray-600 mt-1">Seja o primeiro a criar um time!</p>
+        </div>
+      );
+    }
+    return (
+      <div className="space-y-4">
+        {/* Busca */}
+        <div className="relative">
+          <SearchIcon className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 w-4 h-4" />
+          <input
+            value={searchTeams}
+            onChange={e => setSearchTeams(e.target.value)}
+            placeholder="Buscar time..."
+            className="w-full pl-9 pr-4 py-2.5 bg-white/5 border border-white/10 rounded-xl text-sm text-white placeholder-gray-500 focus:border-purple-500/50 outline-none transition-all"
+          />
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+          {filteredAllTimes.map(team => {
+            const isMyTeam = team.id === myTeam?.id;
+            const wins = team.vitorias || 0;
+            const losses = team.derrotas || 0;
+            const total = wins + losses;
+            const winRate = total > 0 ? Math.round((wins / total) * 100) : 0;
+
+            // Buscar desafios pendentes com este time
+            const desafiosPendentes = challenges.filter(c =>
+              c.status === 'pendente' &&
+              (c.time_desafiante_id === team.id || c.time_desafiado_id === team.id)
+            ).length;
+
+            return (
+              <div
+                key={team.id}
+                className={`group bg-gradient-to-br from-[#0d0d12] to-[#111116] border rounded-xl p-4 transition-all duration-300 ${
+                  isMyTeam
+                    ? 'border-purple-500/40 shadow-[0_0_20px_rgba(139,92,246,0.1)]'
+                    : 'border-white/5 hover:border-purple-500/30 hover:shadow-[0_8px_32px_rgba(139,92,246,0.1)]'
+                }`}
+              >
+                <div className="flex items-center gap-3 mb-3">
+                  {team.escudo ? (
+                    <img src={team.escudo} alt={team.nome} className="w-12 h-12 rounded-full border border-white/10 object-cover" />
+                  ) : (
+                    <div className="w-12 h-12 rounded-full bg-purple-500/10 border border-purple-500/20 flex items-center justify-center">
+                      <Shield className="w-6 h-6 text-purple-400" />
+                    </div>
+                  )}
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-2 flex-wrap">
+                      <h3 className="text-white font-bold text-sm truncate">{team.nome}</h3>
+                      {isMyTeam && (
+                        <span className="text-[10px] px-2 py-0.5 rounded-full bg-purple-500/20 text-purple-400 border border-purple-500/30 shrink-0">
+                          Seu time
+                        </span>
+                      )}
+                    </div>
+                    {(team as any).dono_nick && (
+                      <p className="text-xs text-gray-500 truncate">
+                        👤 {(team as any).dono_nick}
+                      </p>
+                    )}
+                    <p className="text-xs text-gray-600">
+                      {team.jogadores?.length || 0} jogadores
+                    </p>
+                  </div>
+                  <div className="text-right shrink-0">
+                    <p className="text-yellow-400 font-bold text-sm">{team.elo || 1200}</p>
+                    <p className="text-[10px] text-gray-500">ELO</p>
+                  </div>
+                </div>
+
+                {/* Stats */}
+                <div className="grid grid-cols-3 gap-2 mb-3">
+                  <div className="bg-white/5 rounded-lg p-2 text-center border border-white/5">
+                    <p className="text-green-400 font-bold text-sm">{wins}</p>
+                    <p className="text-[10px] text-gray-500">Vitórias</p>
+                  </div>
+                  <div className="bg-white/5 rounded-lg p-2 text-center border border-white/5">
+                    <p className="text-red-400 font-bold text-sm">{losses}</p>
+                    <p className="text-[10px] text-gray-500">Derrotas</p>
+                  </div>
+                  <div className="bg-white/5 rounded-lg p-2 text-center border border-white/5">
+                    <p className="text-blue-400 font-bold text-sm">{winRate}%</p>
+                    <p className="text-[10px] text-gray-500">Win rate</p>
+                  </div>
+                </div>
+
+                {/* Jogadores */}
+                {team.jogadores && team.jogadores.length > 0 && (
+                  <div className="flex flex-wrap gap-1 mb-3">
+                    {team.jogadores.slice(0, 5).map(pid => {
+                      const pl = players.find(p => p.id === pid);
+                      return pl ? (
+                        <span key={pid} className="text-[10px] px-2 py-0.5 rounded-full bg-white/5 text-gray-400 border border-white/5 truncate max-w-[80px]">
+                          {pl.name}
+                        </span>
+                      ) : null;
+                    })}
+                  </div>
+                )}
+
+                {/* Botão de desafio */}
+                {!isMyTeam && myTeam && (
+                  <button
+                    onClick={() => {
+                      setSelectedOpponent(team.id);
+                      setSearchOpponent(team.nome);
+                      setShowCreateModal(true);
+                    }}
+                    className="w-full py-1.5 rounded-lg bg-purple-600/20 border border-purple-500/30 text-purple-400 text-xs font-medium hover:bg-purple-600/40 transition flex items-center justify-center gap-1.5"
+                  >
+                    <Sword className="w-3.5 h-3.5" /> Desafiar
+                  </button>
+                )}
+                {!isMyTeam && !myTeam && (
+                  <p className="text-center text-[10px] text-gray-600 mt-1">Crie um time para desafiar</p>
+                )}
+                {desafiosPendentes > 0 && (
+                  <p className="text-center text-[10px] text-orange-400 mt-1">
+                    ⚔️ {desafiosPendentes} duelo(s) pendente(s)
+                  </p>
+                )}
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    );
   };
 
   const renderChallengeList = (list: Challenge[]) => {
@@ -305,7 +417,6 @@ export default function DesafiosPage({
           className="group bg-gradient-to-br from-[#0d0d12] to-[#111116] border border-white/5 rounded-xl p-4 transition-all duration-300 hover:border-purple-500/40 hover:shadow-[0_8px_32px_rgba(139,92,246,0.15)]"
         >
           <div className="flex flex-wrap items-center justify-between gap-3">
-            {/* Times */}
             <div className="flex items-center gap-3 min-w-[200px]">
               <div className="flex items-center gap-2">
                 <span className="text-white font-bold text-sm">{t1?.nome || '??'}</span>
@@ -329,7 +440,6 @@ export default function DesafiosPage({
               )}
             </div>
 
-            {/* Placar de abates e aposta */}
             <div className="flex items-center gap-4 text-sm">
               {ch.status === 'finalizado' && (
                 <span className="text-red-400 font-bold">
@@ -339,18 +449,8 @@ export default function DesafiosPage({
               <span className="text-gray-400 text-xs flex items-center gap-1">
                 <Coins className="w-3 h-3 text-yellow-400" /> {ch.aposta}
               </span>
-              {ch.status === 'pendente' && (
-                <button
-                  onClick={() => handleViewDetails(ch)}
-                  className="p-1.5 bg-purple-500/10 rounded-lg hover:bg-purple-500/20 text-purple-400 transition"
-                  title="Ver detalhes"
-                >
-                  <Eye className="w-3.5 h-3.5" />
-                </button>
-              )}
             </div>
 
-            {/* Ações */}
             {activeTab === 'recebidos' && ch.status === 'pendente' && (
               <div className="flex gap-2">
                 <button
@@ -376,9 +476,9 @@ export default function DesafiosPage({
               </span>
             )}
 
-            {activeTab === 'historico' && ch.status === 'finalizado' && (
+            {activeTab === 'historico' && (ch.status === 'finalizado' || ch.status === 'recusado') && (
               <button
-                onClick={() => handleViewDetails(ch)}
+                onClick={() => setSelectedChallenge(ch)}
                 className="px-3 py-1 bg-purple-500/10 rounded-lg text-purple-400 text-xs hover:bg-purple-500/20 transition flex items-center gap-1"
               >
                 <Eye className="w-3.5 h-3.5" /> Detalhes
@@ -389,6 +489,14 @@ export default function DesafiosPage({
       );
     });
   };
+
+  const tabs: { key: typeof activeTab; label: string }[] = [
+    { key: 'todos_times', label: `🌐 Todos os Times (${allTimes.length})` },
+    { key: 'recebidos', label: `📥 Recebidos (${challenges.filter(c => c.status === 'pendente' && c.time_desafiado_id === myTeam?.id && !isExpired(c.expira_em)).length})` },
+    { key: 'enviados', label: `📤 Enviados (${challenges.filter(c => c.status === 'pendente' && c.time_desafiante_id === myTeam?.id && !isExpired(c.expira_em)).length})` },
+    { key: 'historico', label: '📜 Histórico' },
+    { key: 'estatisticas', label: '📊 Estatísticas' },
+  ];
 
   return (
     <div className="space-y-6">
@@ -410,10 +518,9 @@ export default function DesafiosPage({
         </div>
         <h2 className="text-xl font-black text-white">Duelos PvP</h2>
         <div className="flex-1 h-px bg-gradient-to-r from-purple-500/30 to-transparent" />
-
         {myTeam && (
           <button
-            onClick={() => setShowCreateModal(true)}
+            onClick={() => { setSelectedOpponent(''); setSearchOpponent(''); setShowCreateModal(true); }}
             className="flex items-center gap-2 px-4 py-2 bg-purple-600 rounded-lg text-white hover:bg-purple-700 transition text-sm font-medium shadow-[0_4px_20px_rgba(139,92,246,0.3)]"
           >
             <Plus className="w-4 h-4" /> Novo Duelo
@@ -423,28 +530,25 @@ export default function DesafiosPage({
 
       {/* Tabs */}
       <div className="flex gap-2 bg-[#0d0d12] p-1 rounded-xl border border-white/5 overflow-x-auto">
-        {(['recebidos', 'enviados', 'historico', 'estatisticas'] as const).map(tab => (
+        {tabs.map(tab => (
           <button
-            key={tab}
-            onClick={() => setActiveTab(tab)}
-            className={`px-4 py-2 rounded-lg text-sm font-medium transition-all whitespace-nowrap ${
-              activeTab === tab
+            key={tab.key}
+            onClick={() => setActiveTab(tab.key)}
+            className={`px-3 py-2 rounded-lg text-xs font-medium transition-all whitespace-nowrap ${
+              activeTab === tab.key
                 ? 'bg-purple-600 text-white shadow-[0_4px_20px_rgba(139,92,246,0.2)]'
                 : 'text-gray-400 hover:text-white hover:bg-white/5'
             }`}
           >
-            {tab === 'recebidos' && `📥 Recebidos (${challenges.filter(c => c.status === 'pendente' && c.time_desafiado_id === myTeam?.id && !isExpired(c.expira_em)).length})`}
-            {tab === 'enviados' && `📤 Enviados (${challenges.filter(c => c.status === 'pendente' && c.time_desafiante_id === myTeam?.id && !isExpired(c.expira_em)).length})`}
-            {tab === 'historico' && '📜 Histórico'}
-            {tab === 'estatisticas' && '📊 Estatísticas'}
+            {tab.label}
           </button>
         ))}
       </div>
 
       {/* Conteúdo */}
       <div className="space-y-3">
-        {activeTab === 'estatisticas' ? (
-          // Painel de Estatísticas PvP
+        {activeTab === 'todos_times' && renderAllTimes()}
+        {activeTab === 'estatisticas' && (
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             <div className="bg-[#0d0d12] border border-white/5 rounded-xl p-4 text-center">
               <p className="text-xs text-gray-500">Total Batalhas</p>
@@ -466,14 +570,13 @@ export default function DesafiosPage({
               <p className="text-xs text-gray-500">Total Abates</p>
               <p className="text-2xl font-bold text-red-400">{stats.totalAbates}</p>
             </div>
-            <div className="bg-[#0d0d12] border border-white/5 rounded-xl p-4 text-center col-span-2 md:col-span-4">
+            <div className="bg-[#0d0d12] border border-white/5 rounded-xl p-4 text-center col-span-2 md:col-span-3">
               <p className="text-xs text-gray-500">Moedas Ganhas em Duelos</p>
               <p className="text-2xl font-bold text-yellow-400">{stats.totalMoedasGanhas} 🪙</p>
             </div>
           </div>
-        ) : (
-          renderChallengeList(filteredChallenges)
         )}
+        {(activeTab === 'recebidos' || activeTab === 'enviados' || activeTab === 'historico') && renderChallengeList(filteredChallenges)}
       </div>
 
       {/* Modal de criação de duelo */}
@@ -502,30 +605,36 @@ export default function DesafiosPage({
                   <SearchIcon className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 w-4 h-4" />
                   <input
                     value={searchOpponent}
-                    onChange={(e) => setSearchOpponent(e.target.value)}
+                    onChange={e => setSearchOpponent(e.target.value)}
                     placeholder="Buscar time..."
                     className="w-full pl-9 pr-4 py-2.5 bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl text-sm text-white placeholder-gray-500 focus:border-purple-500/50 focus:ring-2 focus:ring-purple-500/20 outline-none transition-all"
                   />
                 </div>
-                <div className="mt-2 max-h-32 overflow-y-auto">
-                  {teams
+                <div className="mt-2 max-h-40 overflow-y-auto space-y-1">
+                  {allTimes
                     .filter(t => t.id !== myTeam?.id && t.nome.toLowerCase().includes(searchOpponent.toLowerCase()))
                     .map(t => (
                       <div
                         key={t.id}
-                        onClick={() => {
-                          setSelectedOpponent(t.id);
-                          setSearchOpponent(t.nome);
-                        }}
-                        className={`p-2 rounded-lg cursor-pointer transition ${
+                        onClick={() => { setSelectedOpponent(t.id); setSearchOpponent(t.nome); }}
+                        className={`p-2 rounded-lg cursor-pointer transition flex items-center gap-2 ${
                           selectedOpponent === t.id ? 'bg-purple-500/20 border border-purple-500/30' : 'hover:bg-white/5'
                         }`}
                       >
-                        <span className="text-white text-sm">{t.nome}</span>
+                        {t.escudo ? (
+                          <img src={t.escudo} alt={t.nome} className="w-6 h-6 rounded-full object-cover border border-white/10" />
+                        ) : (
+                          <div className="w-6 h-6 rounded-full bg-purple-500/10 flex items-center justify-center"><Shield className="w-3 h-3 text-purple-400" /></div>
+                        )}
+                        <div>
+                          <span className="text-white text-sm">{t.nome}</span>
+                          {(t as any).dono_nick && <span className="text-gray-500 text-xs ml-1">({(t as any).dono_nick})</span>}
+                        </div>
+                        <span className="ml-auto text-yellow-400 text-xs">{t.elo || 1200} ELO</span>
                       </div>
                     ))}
-                  {searchOpponent && teams.filter(t => t.id !== myTeam?.id && t.nome.toLowerCase().includes(searchOpponent.toLowerCase())).length === 0 && (
-                    <p className="text-xs text-gray-500 mt-1">Nenhum time encontrado</p>
+                  {searchOpponent && allTimes.filter(t => t.id !== myTeam?.id && t.nome.toLowerCase().includes(searchOpponent.toLowerCase())).length === 0 && (
+                    <p className="text-xs text-gray-500 mt-1 px-2">Nenhum time encontrado</p>
                   )}
                 </div>
               </div>
@@ -534,12 +643,9 @@ export default function DesafiosPage({
                 <label className="block text-xs font-medium text-gray-400 mb-1.5">Aposta (10-1000 🪙)</label>
                 <div className="flex items-center gap-3">
                   <input
-                    type="range"
-                    min="10"
-                    max="1000"
-                    step="10"
+                    type="range" min="10" max="1000" step="10"
                     value={apostaValue}
-                    onChange={(e) => setApostaValue(Number(e.target.value))}
+                    onChange={e => setApostaValue(Number(e.target.value))}
                     className="flex-1 accent-purple-500"
                   />
                   <span className="text-yellow-400 font-bold min-w-[60px] text-center">{apostaValue} 🪙</span>
@@ -549,6 +655,14 @@ export default function DesafiosPage({
                   <span>Máximo 1000</span>
                 </div>
               </div>
+
+              {selectedOpponent && (
+                <div className="p-3 rounded-xl bg-purple-500/5 border border-purple-500/20 text-xs text-gray-400 flex items-center gap-2">
+                  <Target className="w-4 h-4 text-purple-400 shrink-0" />
+                  Adversário: <span className="text-white font-medium">{allTimes.find(t => t.id === selectedOpponent)?.nome}</span>
+                  · ELO: <span className="text-yellow-400">{allTimes.find(t => t.id === selectedOpponent)?.elo || 1200}</span>
+                </div>
+              )}
             </div>
 
             <div className="flex gap-3 mt-6 pt-4 border-t border-white/5">
@@ -560,10 +674,10 @@ export default function DesafiosPage({
               </button>
               <button
                 onClick={handleCreateChallenge}
-                disabled={!selectedOpponent || apostaValue < 10 || apostaValue > 1000}
+                disabled={!selectedOpponent || apostaValue < 10 || apostaValue > 1000 || loading}
                 className="flex-1 px-4 py-2.5 bg-gradient-to-r from-purple-500 to-violet-500 rounded-xl text-white font-medium shadow-[0_4px_25px_rgba(139,92,246,0.3)] hover:shadow-[0_4px_35px_rgba(139,92,246,0.5)] transition-all disabled:opacity-50 disabled:cursor-not-allowed disabled:shadow-none text-sm"
               >
-                Enviar Desafio
+                {loading ? 'Enviando...' : 'Enviar Desafio'}
               </button>
             </div>
           </div>

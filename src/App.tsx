@@ -17,12 +17,10 @@ import RankingTimesPage from './components/RankingTimesPage';
 import KickPage from './components/KickPage';
 
 import { Player, Team, Challenge } from './types';
-// 🔥 REMOVA A IMPORT DO MOCK
-// import { mockPlayers } from './data/mockData';
 import { useToast } from './components/Toast';
 
 // =====================================================
-// BACKGROUND CANVAS
+// BACKGROUND CANVAS (mantido igual)
 // =====================================================
 
 function BackgroundCanvas() {
@@ -139,10 +137,69 @@ function BackgroundCanvas() {
 }
 
 // =====================================================
-// APP
+// TELA DE LOGIN (NOVO)
+// =====================================================
+
+function LoginScreen({ onLogin }: { onLogin: (nome: string) => void }) {
+  const [input, setInput] = useState('');
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const nome = input.trim();
+    if (nome.length < 2) {
+      alert('Digite um nome com pelo menos 2 caracteres.');
+      return;
+    }
+    localStorage.setItem('usuario_nome', nome);
+    onLogin(nome);
+  };
+
+  return (
+    <div className="min-h-screen flex items-center justify-center p-4" style={{ background: '#080808' }}>
+      <div className="w-full max-w-sm p-8 rounded-2xl border border-white/10" style={{ background: 'rgba(255,255,255,0.02)' }}>
+        <h1 className="text-3xl font-light text-white/90 text-center tracking-wider mb-2">Francarp</h1>
+        <p className="text-white/30 text-center text-sm mb-8">Digite seu nome para acessar</p>
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <input
+            type="text"
+            placeholder="Seu nome..."
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            className="w-full px-4 py-3 rounded-lg bg-white/5 border border-white/10 text-white/80 placeholder:text-white/20 focus:outline-none focus:border-white/30 transition-all"
+            autoFocus
+          />
+          <button
+            type="submit"
+            className="w-full py-3 rounded-lg bg-white/10 hover:bg-white/20 text-white/80 font-medium tracking-wide transition-all border border-white/10"
+          >
+            Entrar
+          </button>
+        </form>
+      </div>
+    </div>
+  );
+}
+
+// =====================================================
+// APP PRINCIPAL
 // =====================================================
 
 export default function App() {
+  // ----------------------------------------------
+  // ESTADO DO USUÁRIO LOGADO
+  // ----------------------------------------------
+  const [usuario, setUsuario] = useState<string | null>(() => {
+    return localStorage.getItem('usuario_nome');
+  });
+
+  // Se não estiver logado, mostra a tela de login
+  if (!usuario) {
+    return <LoginScreen onLogin={(nome) => setUsuario(nome)} />;
+  }
+
+  // ----------------------------------------------
+  // DEMAIS ESTADOS
+  // ----------------------------------------------
   const [activeSection, setActiveSection] = useState('home');
   const [searchQuery, setSearchQuery] = useState('');
   const [isAdmin, setIsAdmin] = useState(false);
@@ -151,20 +208,16 @@ export default function App() {
   const [editingPlayer, setEditingPlayer] = useState<Player | null>(null);
   const [loading, setLoading] = useState(true);
 
-  // Dados do usuário
+  // Dados do usuário (agora vinculados ao `usuario` logado)
   const [moedas, setMoedas] = useState(0);
   const [moedasDiaKick, setMoedasDiaKick] = useState(0);
   const [acervoIds, setAcervoIds] = useState<string[]>([]);
   const [times, setTimes] = useState<Team[]>([]);
   const [desafios, setDesafios] = useState<Challenge[]>([]);
-
-  // Status da Kick
   const [liveStatus, setLiveStatus] = useState<Record<string, boolean>>({});
+  const [allTimes, setAllTimes] = useState<Team[]>([]);
 
-  const USUARIO_ID = 'user-fixo';
   const { showToast, ToastContainer } = useToast();
-
-  // ADMIN_TOKEN (use o mesmo do .env)
   const ADMIN_TOKEN = 'meu_token_admin_secreto';
 
   // ===================================================
@@ -172,22 +225,18 @@ export default function App() {
   // ===================================================
 
   const checkKickLives = async (playersList: Player[]) => {
-    const playersWithChannel = playersList.filter((player) => player.kickChannel?.trim());
+    const playersWithChannel = playersList.filter((p) => p.kickChannel?.trim());
     if (playersWithChannel.length === 0) {
       setLiveStatus({});
       return;
     }
-
     const statusMap: Record<string, boolean> = {};
     await Promise.all(
       playersWithChannel.map(async (player) => {
         try {
           const channel = player.kickChannel!.trim();
           const response = await fetch(`/.netlify/functions/getKickStatus?channel=${encodeURIComponent(channel)}`);
-          if (!response.ok) {
-            statusMap[player.id] = false;
-            return;
-          }
+          if (!response.ok) { statusMap[player.id] = false; return; }
           const data = await response.json();
           statusMap[player.id] = Boolean(data?.isLive);
         } catch (error) {
@@ -200,7 +249,7 @@ export default function App() {
   };
 
   // ===================================================
-  // CARREGAR PLAYERS (do banco Neon, via API)
+  // CARREGAR PLAYERS (público, não depende de usuário)
   // ===================================================
 
   useEffect(() => {
@@ -226,22 +275,22 @@ export default function App() {
     loadPlayers();
   }, []);
 
-  // Atualizar status da Kick a cada 2 minutos
+  // Atualizar Kick a cada 2 minutos
   useEffect(() => {
     if (players.length === 0) return;
-    const interval = setInterval(() => {
-      checkKickLives(players);
-    }, 120000);
+    const interval = setInterval(() => checkKickLives(players), 120000);
     return () => clearInterval(interval);
   }, [players]);
 
   // ===================================================
-  // CARREGAR DADOS DO USUÁRIO
+  // CARREGAR DADOS DO USUÁRIO (USANDO O NOME LOGADO)
   // ===================================================
 
   const loadUserData = async () => {
+    if (!usuario) return;
+
     try {
-      const response = await fetch(`/.netlify/functions/getUser?usuario_id=${USUARIO_ID}`);
+      const response = await fetch(`/.netlify/functions/getUser?usuario_id=${encodeURIComponent(usuario)}`);
       if (response.ok) {
         const user = await response.json();
         setMoedas(user.moedas || 0);
@@ -252,7 +301,7 @@ export default function App() {
     }
 
     try {
-      const response = await fetch(`/.netlify/functions/getAcervo?usuario_id=${USUARIO_ID}`);
+      const response = await fetch(`/.netlify/functions/getAcervo?usuario_id=${encodeURIComponent(usuario)}`);
       if (response.ok) {
         const acervo = await response.json();
         setAcervoIds(acervo.map((item: any) => item.player_id));
@@ -262,7 +311,7 @@ export default function App() {
     }
 
     try {
-      const response = await fetch(`/.netlify/functions/getMeusTimes?usuario_id=${USUARIO_ID}`);
+      const response = await fetch(`/.netlify/functions/getMeusTimes?usuario_id=${encodeURIComponent(usuario)}`);
       if (response.ok) {
         const timesData = await response.json();
         setTimes(timesData);
@@ -272,7 +321,7 @@ export default function App() {
     }
 
     try {
-      const response = await fetch(`/.netlify/functions/getDesafios?usuario_id=${USUARIO_ID}`);
+      const response = await fetch(`/.netlify/functions/getDesafios?usuario_id=${encodeURIComponent(usuario)}`);
       if (response.ok) {
         const desafiosData = await response.json();
         setDesafios(desafiosData);
@@ -280,19 +329,82 @@ export default function App() {
     } catch (error) {
       console.error('Erro ao carregar desafios:', error);
     }
+
+    // Carrega todos os times (para desafios, independente do usuário)
+    try {
+      const response = await fetch('/.netlify/functions/getAllTimes');
+      if (response.ok) {
+        const allTimesData = await response.json();
+        setAllTimes(Array.isArray(allTimesData) ? allTimesData : []);
+      }
+    } catch (error) {
+      console.error('Erro ao carregar todos os times:', error);
+    }
   };
 
+  // Dispara o carregamento dos dados pessoais quando o usuário estiver definido e o loading dos players terminar
   useEffect(() => {
-    if (!loading) loadUserData();
-  }, [loading]);
+    if (!loading && usuario) {
+      loadUserData();
+    }
+  }, [loading, usuario]);
 
   const refreshUserData = () => loadUserData();
 
   // ===================================================
-  // FUNÇÕES DE CRUD USANDO /adminPlayers
+  // CRIAR DESAFIO
   // ===================================================
 
-  // ADICIONAR (POST)
+  const handleCriarDesafio = async (timeDesafianteId: string, timeDesafiadoId: string, aposta: number) => {
+    try {
+      const response = await fetch('/.netlify/functions/criarDesafio', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          time_desafiante_id: timeDesafianteId,
+          time_desafiado_id: timeDesafiadoId,
+          aposta,
+        }),
+      });
+      const data = await response.json();
+      if (!response.ok) {
+        throw new Error(data.error || data || 'Erro ao criar desafio');
+      }
+      showToast('📤 Desafio enviado com sucesso!', 'success');
+      await loadUserData();
+    } catch (error) {
+      showToast(`❌ ${(error as Error).message}`, 'error');
+      throw error;
+    }
+  };
+
+  const handleAceitarDesafio = async (challengeId: string, recusar?: boolean) => {
+    try {
+      const response = await fetch('/.netlify/functions/aceitarDesafio', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ challenge_id: challengeId, recusar: recusar ?? false }),
+      });
+      const data = await response.json();
+      if (!response.ok) {
+        throw new Error(data.error || data || 'Erro ao processar desafio');
+      }
+      if (recusar) {
+        showToast('❌ Desafio recusado.', 'info');
+      } else {
+        showToast('⚔️ Duelo aceito! Resultado calculado.', 'success');
+      }
+      await loadUserData();
+    } catch (error) {
+      showToast(`❌ ${(error as Error).message}`, 'error');
+      throw error;
+    }
+  };
+
+  // ===================================================
+  // FUNÇÕES DE CRUD (adminPlayers) – não dependem de usuário
+  // ===================================================
+
   const handleAddPlayer = async (player: Player) => {
     try {
       const response = await fetch('/.netlify/functions/adminPlayers', {
@@ -307,8 +419,6 @@ export default function App() {
         const errorData = await response.json();
         throw new Error(errorData.error || 'Erro ao adicionar player');
       }
-      const data = await response.json();
-      // Recarregar a lista de players para pegar o novo
       const updatedResponse = await fetch('/.netlify/functions/getPlayers');
       if (updatedResponse.ok) {
         const updatedPlayers = await updatedResponse.json();
@@ -322,7 +432,6 @@ export default function App() {
     }
   };
 
-  // EDITAR (PUT)
   const handleSavePlayer = async (updated: Player) => {
     try {
       const response = await fetch('/.netlify/functions/adminPlayers', {
@@ -337,11 +446,9 @@ export default function App() {
         const errorData = await response.json();
         throw new Error(errorData.error || 'Erro ao salvar player');
       }
-      // Atualiza localmente
       setPlayers((prev) => prev.map((p) => (p.id === updated.id ? updated : p)));
       setEditingPlayer(null);
       setSelectedPlayer(updated);
-      // Verifica Kick
       if (updated.kickChannel?.trim()) {
         await checkKickLives([updated]);
       } else {
@@ -354,7 +461,6 @@ export default function App() {
     }
   };
 
-  // DELETAR (DELETE)
   const handleDeletePlayer = async (id: string) => {
     if (!confirm('Excluir player?')) return;
     try {
@@ -385,7 +491,7 @@ export default function App() {
   };
 
   // ===================================================
-  // COMPRAR PLAYER
+  // COMPRAR / VENDER (enviam `usuario_id`)
   // ===================================================
 
   const handleCompra = async (preco: number, playerId: string) => {
@@ -401,7 +507,7 @@ export default function App() {
       const response = await fetch('/.netlify/functions/comprarPlayer', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ player_id: playerId }),
+        body: JSON.stringify({ player_id: playerId, usuario_id: usuario }),
       });
       const data = await response.json();
       if (response.ok) {
@@ -416,13 +522,12 @@ export default function App() {
     }
   };
 
-  // VENDER PLAYER
   const handleVenda = async (playerId: string, valorRecebido: number) => {
     try {
       const response = await fetch('/.netlify/functions/venderPlayer', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ player_id: playerId }),
+        body: JSON.stringify({ player_id: playerId, usuario_id: usuario }),
       });
       const data = await response.json();
       if (response.ok) {
@@ -442,7 +547,7 @@ export default function App() {
   };
 
   // ===================================================
-  // FUNÇÕES DE TIMES
+  // FUNÇÕES DE TIMES (enviam `dono_id`)
   // ===================================================
 
   const handleCriarTime = async (nome: string, escudo: string, jogadores: string[]) => {
@@ -454,7 +559,7 @@ export default function App() {
       const response = await fetch('/.netlify/functions/criarTime', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ nome, escudo, jogadores }),
+        body: JSON.stringify({ nome, escudo, jogadores, dono_id: usuario }),
       });
       const data = await response.json();
       if (response.ok) {
@@ -462,7 +567,7 @@ export default function App() {
           id: Date.now().toString(),
           nome,
           escudo: escudo || 'default-shield.png',
-          dono_id: USUARIO_ID,
+          dono_id: usuario,
           jogadores,
           elo: 1200,
           vitorias: 0,
@@ -518,7 +623,7 @@ export default function App() {
   };
 
   // ===================================================
-  // PESQUISA
+  // PESQUISA E PLAYER CLICK
   // ===================================================
 
   const handleSearch = (query: string) => {
@@ -526,15 +631,11 @@ export default function App() {
     if (query.trim()) setActiveSection('players');
   };
 
-  // ===================================================
-  // PLAYER CLICK
-  // ===================================================
-
   const handlePlayerClick = (player: Player) => setSelectedPlayer(player);
   const handleCloseModal = () => setSelectedPlayer(null);
 
   // ===================================================
-  // LOGIN ADMIN
+  // LOGIN / LOGOUT ADMIN
   // ===================================================
 
   const handleAdminLogin = () => {
@@ -552,6 +653,15 @@ export default function App() {
     setIsAdmin(false);
     setEditingPlayer(null);
     showToast('🔒 Modo admin desativado', 'info');
+  };
+
+  // ===================================================
+  // LOGOUT DO USUÁRIO (trocar de conta)
+  // ===================================================
+
+  const handleUserLogout = () => {
+    localStorage.removeItem('usuario_nome');
+    window.location.reload(); // recarrega para voltar à tela de login
   };
 
   // ===================================================
@@ -596,7 +706,17 @@ export default function App() {
       case 'acervo':
         return <AcervoPage players={players} acervoIds={acervoIds} onVender={handleVenda} />;
       case 'desafios':
-        return <DesafiosPage challenges={desafios} teams={times} players={players} onRefresh={refreshUserData} />;
+        return (
+          <DesafiosPage
+            challenges={desafios}
+            teams={times}
+            allTimes={allTimes}
+            players={players}
+            onRefresh={refreshUserData}
+            onCriarDesafio={handleCriarDesafio}
+            onAceitarDesafio={handleAceitarDesafio}
+          />
+        );
       case 'ranking-times':
         return <RankingTimesPage teams={times} />;
       case 'kick':
@@ -627,7 +747,19 @@ export default function App() {
           {renderContent()}
         </main>
 
-        <div className="fixed bottom-6 right-6 z-50">
+        {/* Botões flutuantes: Admin e Logout de usuário */}
+        <div className="fixed bottom-6 right-6 z-50 flex flex-col gap-2">
+          {/* Botão de logout (trocar de usuário) */}
+          <button
+            onClick={handleUserLogout}
+            className="flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-medium tracking-widest uppercase transition-all duration-200"
+            style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', color: 'rgba(255,255,255,0.3)' }}
+          >
+            <span className="w-1.5 h-1.5 rounded-full bg-current" />
+            Trocar usuário
+          </button>
+
+          {/* Botão Admin */}
           {!isAdmin ? (
             <button
               onClick={handleAdminLogin}
@@ -644,7 +776,7 @@ export default function App() {
               style={{ background: 'rgba(239,68,68,0.08)', border: '1px solid rgba(239,68,68,0.2)', color: 'rgba(239,68,68,0.6)' }}
             >
               <span className="w-1.5 h-1.5 rounded-full bg-current" />
-              Sair
+              Sair Admin
             </button>
           )}
         </div>

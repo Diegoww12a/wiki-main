@@ -1,5 +1,4 @@
-﻿// ===== netlify/functions/getUser.js =====
-import { neon } from '@neondatabase/serverless';
+﻿import { neon } from '@neondatabase/serverless';
 
 export const handler = async (event) => {
   try {
@@ -19,9 +18,6 @@ export const handler = async (event) => {
     };
   } catch (error) {
     console.error('Erro em getUser:', error);
-    return {
-      statusCode: 500,
-      body: JSON.stringify({ error: error.message }),
-    };
+    return { statusCode: 500, body: JSON.stringify({ error: error.message }) };
   }
 };
