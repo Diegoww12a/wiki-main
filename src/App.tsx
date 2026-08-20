@@ -344,6 +344,7 @@ export default function App() {
           time_desafiante_id: timeDesafianteId,
           time_desafiado_id: timeDesafiadoId,
           aposta,
+          usuario_id: usuario,
         }),
       });
       const data = await response.json();
