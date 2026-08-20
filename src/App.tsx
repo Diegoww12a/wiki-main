@@ -137,7 +137,7 @@ function BackgroundCanvas() {
 }
 
 // =====================================================
-// TELA DE LOGIN (NOVO)
+// TELA DE LOGIN
 // =====================================================
 
 function LoginScreen({ onLogin }: { onLogin: (nome: string) => void }) {
@@ -181,25 +181,18 @@ function LoginScreen({ onLogin }: { onLogin: (nome: string) => void }) {
 }
 
 // =====================================================
-// APP PRINCIPAL
+// APP PRINCIPAL (CORRIGIDO – TODOS OS HOOKS NO TOPO)
 // =====================================================
 
 export default function App() {
-  // ----------------------------------------------
-  // ESTADO DO USUÁRIO LOGADO
-  // ----------------------------------------------
+  // =============================================
+  // 1. TODOS OS HOOKS PRIMEIRO (antes de qualquer if)
+  // =============================================
+
   const [usuario, setUsuario] = useState<string | null>(() => {
     return localStorage.getItem('usuario_nome');
   });
 
-  // Se não estiver logado, mostra a tela de login
-  if (!usuario) {
-    return <LoginScreen onLogin={(nome) => setUsuario(nome)} />;
-  }
-
-  // ----------------------------------------------
-  // DEMAIS ESTADOS
-  // ----------------------------------------------
   const [activeSection, setActiveSection] = useState('home');
   const [searchQuery, setSearchQuery] = useState('');
   const [isAdmin, setIsAdmin] = useState(false);
@@ -208,7 +201,6 @@ export default function App() {
   const [editingPlayer, setEditingPlayer] = useState<Player | null>(null);
   const [loading, setLoading] = useState(true);
 
-  // Dados do usuário (agora vinculados ao `usuario` logado)
   const [moedas, setMoedas] = useState(0);
   const [moedasDiaKick, setMoedasDiaKick] = useState(0);
   const [acervoIds, setAcervoIds] = useState<string[]>([]);
@@ -220,9 +212,9 @@ export default function App() {
   const { showToast, ToastContainer } = useToast();
   const ADMIN_TOKEN = 'meu_token_admin_secreto';
 
-  // ===================================================
-  // VERIFICAR STATUS DA KICK
-  // ===================================================
+  // =============================================
+  // 2. TODAS AS FUNÇÕES (useEffect, useCallback, etc.)
+  // =============================================
 
   const checkKickLives = async (playersList: Player[]) => {
     const playersWithChannel = playersList.filter((p) => p.kickChannel?.trim());
@@ -248,10 +240,7 @@ export default function App() {
     setLiveStatus((prev) => ({ ...prev, ...statusMap }));
   };
 
-  // ===================================================
-  // CARREGAR PLAYERS (público, não depende de usuário)
-  // ===================================================
-
+  // Carregar players
   useEffect(() => {
     const loadPlayers = async () => {
       try {
@@ -281,10 +270,6 @@ export default function App() {
     const interval = setInterval(() => checkKickLives(players), 120000);
     return () => clearInterval(interval);
   }, [players]);
-
-  // ===================================================
-  // CARREGAR DADOS DO USUÁRIO (USANDO O NOME LOGADO)
-  // ===================================================
 
   const loadUserData = async () => {
     if (!usuario) return;
@@ -330,7 +315,6 @@ export default function App() {
       console.error('Erro ao carregar desafios:', error);
     }
 
-    // Carrega todos os times (para desafios, independente do usuário)
     try {
       const response = await fetch('/.netlify/functions/getAllTimes');
       if (response.ok) {
@@ -342,7 +326,6 @@ export default function App() {
     }
   };
 
-  // Dispara o carregamento dos dados pessoais quando o usuário estiver definido e o loading dos players terminar
   useEffect(() => {
     if (!loading && usuario) {
       loadUserData();
@@ -351,10 +334,7 @@ export default function App() {
 
   const refreshUserData = () => loadUserData();
 
-  // ===================================================
-  // CRIAR DESAFIO
-  // ===================================================
-
+  // Criar desafio
   const handleCriarDesafio = async (timeDesafianteId: string, timeDesafiadoId: string, aposta: number) => {
     try {
       const response = await fetch('/.netlify/functions/criarDesafio', {
@@ -401,10 +381,7 @@ export default function App() {
     }
   };
 
-  // ===================================================
-  // FUNÇÕES DE CRUD (adminPlayers) – não dependem de usuário
-  // ===================================================
-
+  // CRUD Admin
   const handleAddPlayer = async (player: Player) => {
     try {
       const response = await fetch('/.netlify/functions/adminPlayers', {
@@ -490,10 +467,7 @@ export default function App() {
     }
   };
 
-  // ===================================================
-  // COMPRAR / VENDER (enviam `usuario_id`)
-  // ===================================================
-
+  // Comprar / Vender
   const handleCompra = async (preco: number, playerId: string) => {
     if (moedas < preco) {
       showToast('Saldo insuficiente!', 'error');
@@ -546,10 +520,7 @@ export default function App() {
     }
   };
 
-  // ===================================================
-  // FUNÇÕES DE TIMES (enviam `dono_id`)
-  // ===================================================
-
+  // Times
   const handleCriarTime = async (nome: string, escudo: string, jogadores: string[]) => {
     if (times.length >= 1) {
       showToast('Você já tem um time. Apenas 1 time por usuário.', 'error');
@@ -589,7 +560,7 @@ export default function App() {
       const response = await fetch('/.netlify/functions/editarTime', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ id, nome, escudo, jogadores }),
+        body: JSON.stringify({ id, nome, escudo, jogadores, usuario_id: usuario }),
       });
       const data = await response.json();
       if (response.ok) {
@@ -608,7 +579,7 @@ export default function App() {
       const response = await fetch('/.netlify/functions/editarTime', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ id: teamId, delete: true }),
+        body: JSON.stringify({ id: teamId, delete: true, usuario_id: usuario }),
       });
       const data = await response.json();
       if (response.ok) {
@@ -622,9 +593,17 @@ export default function App() {
     }
   };
 
-  // ===================================================
-  // PESQUISA E PLAYER CLICK
-  // ===================================================
+  // =============================================
+  // 3. SÓ DEPOIS DE TODOS OS HOOKS E FUNÇÕES, O if
+  // =============================================
+
+  if (!usuario) {
+    return <LoginScreen onLogin={(nome) => setUsuario(nome)} />;
+  }
+
+  // =============================================
+  // 4. HANDLERS DE PESQUISA, CLICK E ADMIN
+  // =============================================
 
   const handleSearch = (query: string) => {
     setSearchQuery(query);
@@ -633,10 +612,6 @@ export default function App() {
 
   const handlePlayerClick = (player: Player) => setSelectedPlayer(player);
   const handleCloseModal = () => setSelectedPlayer(null);
-
-  // ===================================================
-  // LOGIN / LOGOUT ADMIN
-  // ===================================================
 
   const handleAdminLogin = () => {
     const password = prompt('Senha admin');
@@ -655,18 +630,14 @@ export default function App() {
     showToast('🔒 Modo admin desativado', 'info');
   };
 
-  // ===================================================
-  // LOGOUT DO USUÁRIO (trocar de conta)
-  // ===================================================
-
   const handleUserLogout = () => {
     localStorage.removeItem('usuario_nome');
-    window.location.reload(); // recarrega para voltar à tela de login
+    window.location.reload();
   };
 
-  // ===================================================
-  // RENDER CONTENT
-  // ===================================================
+  // =============================================
+  // 5. RENDERIZAÇÃO
+  // =============================================
 
   const renderContent = () => {
     if (loading) {
@@ -726,9 +697,9 @@ export default function App() {
     }
   };
 
-  // ===================================================
-  // JSX
-  // ===================================================
+  // =============================================
+  // 6. JSX
+  // =============================================
 
   return (
     <div className="min-h-screen select-none relative" style={{ background: '#080808' }}>
@@ -747,9 +718,7 @@ export default function App() {
           {renderContent()}
         </main>
 
-        {/* Botões flutuantes: Admin e Logout de usuário */}
         <div className="fixed bottom-6 right-6 z-50 flex flex-col gap-2">
-          {/* Botão de logout (trocar de usuário) */}
           <button
             onClick={handleUserLogout}
             className="flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-medium tracking-widest uppercase transition-all duration-200"
@@ -759,7 +728,6 @@ export default function App() {
             Trocar usuário
           </button>
 
-          {/* Botão Admin */}
           {!isAdmin ? (
             <button
               onClick={handleAdminLogin}
