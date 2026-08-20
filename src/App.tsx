@@ -1,3 +1,5 @@
+// ===== src/App.tsx =====
+
 import { useState, useEffect, useRef } from 'react';
 
 import Header from './components/Header';
@@ -7,16 +9,31 @@ import RankingsPage from './components/RankingsPage';
 import AdminPanel from './components/AdminPanel';
 import PlayerModal from './components/PlayerModal';
 import EditPlayerModal from './components/EditPlayerModal';
+import TimesPage from './components/TimesPage';
+import LojaPage from './components/LojaPage';
+import AcervoPage from './components/AcervoPage';
+import DesafiosPage from './components/DesafiosPage';
+import RankingTimesPage from './components/RankingTimesPage';
+import KickPage from './components/KickPage';
 
-import { Player } from './types';
-import { mockPlayers } from './data/mockData';
+import { Player, Team, Challenge } from './types';
+// 🔥 REMOVA A IMPORT DO MOCK
+// import { mockPlayers } from './data/mockData';
+import { useToast } from './components/Toast';
+
+// =====================================================
+// BACKGROUND CANVAS
+// =====================================================
 
 function BackgroundCanvas() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
-    const canvas = canvasRef.current!;
-    const ctx = canvas.getContext('2d')!;
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
     let animId: number;
     let t = 0;
 
@@ -42,7 +59,6 @@ function BackgroundCanvas() {
 
     function drawGrid() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-
       const spacingX = 120;
       const spacingZ = 120;
       const offsetX = (COLS * spacingX) / 2;
@@ -50,13 +66,13 @@ function BackgroundCanvas() {
       const baseY = 180;
       const waveAmp = 18;
 
+      // Linhas horizontais
       for (let row = 0; row <= ROWS; row++) {
         ctx.beginPath();
         for (let col = 0; col <= COLS; col++) {
           const wx = col * spacingX - offsetX;
-          const wz = row * spacingZ - offsetZ + (t * 40) % spacingZ;
-          const wy = baseY + Math.sin((col / COLS) * Math.PI * 2 + t) * waveAmp
-                           + Math.sin((row / ROWS) * Math.PI * 1.5 + t * 0.7) * waveAmp * 0.5;
+          const wz = row * spacingZ - offsetZ + ((t * 40) % spacingZ);
+          const wy = baseY + Math.sin((col / COLS) * Math.PI * 2 + t) * waveAmp + Math.sin((row / ROWS) * Math.PI * 1.5 + t * 0.7) * waveAmp * 0.5;
           const p = project(wx, wy, wz);
           const alpha = Math.max(0, Math.min(0.35, 0.35 - wz / (offsetZ * 3)));
           ctx.strokeStyle = `rgba(255,255,255,${alpha})`;
@@ -67,13 +83,13 @@ function BackgroundCanvas() {
         ctx.stroke();
       }
 
+      // Linhas verticais
       for (let col = 0; col <= COLS; col++) {
         ctx.beginPath();
         for (let row = 0; row <= ROWS; row++) {
           const wx = col * spacingX - offsetX;
-          const wz = row * spacingZ - offsetZ + (t * 40) % spacingZ;
-          const wy = baseY + Math.sin((col / COLS) * Math.PI * 2 + t) * waveAmp
-                           + Math.sin((row / ROWS) * Math.PI * 1.5 + t * 0.7) * waveAmp * 0.5;
+          const wz = row * spacingZ - offsetZ + ((t * 40) % spacingZ);
+          const wy = baseY + Math.sin((col / COLS) * Math.PI * 2 + t) * waveAmp + Math.sin((row / ROWS) * Math.PI * 1.5 + t * 0.7) * waveAmp * 0.5;
           const p = project(wx, wy, wz);
           const alpha = Math.max(0, Math.min(0.2, 0.2 - wz / (offsetZ * 3)));
           ctx.strokeStyle = `rgba(255,255,255,${alpha})`;
@@ -84,12 +100,12 @@ function BackgroundCanvas() {
         ctx.stroke();
       }
 
+      // Pontos
       for (let col = 0; col <= COLS; col++) {
         for (let row = 0; row <= ROWS; row++) {
           const wx = col * spacingX - offsetX;
-          const wz = row * spacingZ - offsetZ + (t * 40) % spacingZ;
-          const wy = baseY + Math.sin((col / COLS) * Math.PI * 2 + t) * waveAmp
-                           + Math.sin((row / ROWS) * Math.PI * 1.5 + t * 0.7) * waveAmp * 0.5;
+          const wz = row * spacingZ - offsetZ + ((t * 40) % spacingZ);
+          const wy = baseY + Math.sin((col / COLS) * Math.PI * 2 + t) * waveAmp + Math.sin((row / ROWS) * Math.PI * 1.5 + t * 0.7) * waveAmp * 0.5;
           const p = project(wx, wy, wz);
           const alpha = Math.max(0, Math.min(0.5, 0.5 - wz / (offsetZ * 3)));
           ctx.beginPath();
@@ -105,7 +121,6 @@ function BackgroundCanvas() {
       drawGrid();
       animId = requestAnimationFrame(loop);
     }
-
     loop();
 
     return () => {
@@ -118,10 +133,14 @@ function BackgroundCanvas() {
     <canvas
       ref={canvasRef}
       className="fixed inset-0 w-full h-full pointer-events-none"
-      style={{ zIndex: 0, opacity: 0.6 }}
+      style={{ zIndex: 0, opacity: 0.3 }}
     />
   );
 }
+
+// =====================================================
+// APP
+// =====================================================
 
 export default function App() {
   const [activeSection, setActiveSection] = useState('home');
@@ -132,81 +151,412 @@ export default function App() {
   const [editingPlayer, setEditingPlayer] = useState<Player | null>(null);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    fetch('/.netlify/functions/getPlayers')
-      .then(r => r.json())
-      .then(async (data) => {
-        if (data.length > 0) {
-          setPlayers(data);
-        } else {
-          setPlayers(mockPlayers);
-          await Promise.all(
-            mockPlayers.map(player =>
-              fetch('/.netlify/functions/savePlayer', {
-                method: 'POST',
-                body: JSON.stringify(player),
-              })
-            )
-          );
+  // Dados do usuário
+  const [moedas, setMoedas] = useState(0);
+  const [moedasDiaKick, setMoedasDiaKick] = useState(0);
+  const [acervoIds, setAcervoIds] = useState<string[]>([]);
+  const [times, setTimes] = useState<Team[]>([]);
+  const [desafios, setDesafios] = useState<Challenge[]>([]);
+
+  // Status da Kick
+  const [liveStatus, setLiveStatus] = useState<Record<string, boolean>>({});
+
+  const USUARIO_ID = 'user-fixo';
+  const { showToast, ToastContainer } = useToast();
+
+  // ADMIN_TOKEN (use o mesmo do .env)
+  const ADMIN_TOKEN = 'meu_token_admin_secreto';
+
+  // ===================================================
+  // VERIFICAR STATUS DA KICK
+  // ===================================================
+
+  const checkKickLives = async (playersList: Player[]) => {
+    const playersWithChannel = playersList.filter((player) => player.kickChannel?.trim());
+    if (playersWithChannel.length === 0) {
+      setLiveStatus({});
+      return;
+    }
+
+    const statusMap: Record<string, boolean> = {};
+    await Promise.all(
+      playersWithChannel.map(async (player) => {
+        try {
+          const channel = player.kickChannel!.trim();
+          const response = await fetch(`/.netlify/functions/getKickStatus?channel=${encodeURIComponent(channel)}`);
+          if (!response.ok) {
+            statusMap[player.id] = false;
+            return;
+          }
+          const data = await response.json();
+          statusMap[player.id] = Boolean(data?.isLive);
+        } catch (error) {
+          console.error(`Erro ao verificar Kick de ${player.name}:`, error);
+          statusMap[player.id] = false;
         }
       })
-      .catch(() => setPlayers(mockPlayers))
-      .finally(() => setLoading(false));
+    );
+    setLiveStatus((prev) => ({ ...prev, ...statusMap }));
+  };
+
+  // ===================================================
+  // CARREGAR PLAYERS (do banco Neon, via API)
+  // ===================================================
+
+  useEffect(() => {
+    const loadPlayers = async () => {
+      try {
+        const response = await fetch('/.netlify/functions/getPlayers');
+        if (!response.ok) throw new Error('Erro ao carregar players');
+        const data = await response.json();
+        if (Array.isArray(data)) {
+          setPlayers(data);
+          await checkKickLives(data);
+        } else {
+          setPlayers([]);
+        }
+      } catch (error) {
+        console.error('Erro ao carregar players:', error);
+        setPlayers([]);
+        showToast('Erro ao carregar jogadores', 'error');
+      } finally {
+        setLoading(false);
+      }
+    };
+    loadPlayers();
   }, []);
+
+  // Atualizar status da Kick a cada 2 minutos
+  useEffect(() => {
+    if (players.length === 0) return;
+    const interval = setInterval(() => {
+      checkKickLives(players);
+    }, 120000);
+    return () => clearInterval(interval);
+  }, [players]);
+
+  // ===================================================
+  // CARREGAR DADOS DO USUÁRIO
+  // ===================================================
+
+  const loadUserData = async () => {
+    try {
+      const response = await fetch(`/.netlify/functions/getUser?usuario_id=${USUARIO_ID}`);
+      if (response.ok) {
+        const user = await response.json();
+        setMoedas(user.moedas || 0);
+        setMoedasDiaKick(user.moedas_dia_kick || 0);
+      }
+    } catch (error) {
+      console.error('Erro ao carregar usuário:', error);
+    }
+
+    try {
+      const response = await fetch(`/.netlify/functions/getAcervo?usuario_id=${USUARIO_ID}`);
+      if (response.ok) {
+        const acervo = await response.json();
+        setAcervoIds(acervo.map((item: any) => item.player_id));
+      }
+    } catch (error) {
+      console.error('Erro ao carregar acervo:', error);
+    }
+
+    try {
+      const response = await fetch(`/.netlify/functions/getMeusTimes?usuario_id=${USUARIO_ID}`);
+      if (response.ok) {
+        const timesData = await response.json();
+        setTimes(timesData);
+      }
+    } catch (error) {
+      console.error('Erro ao carregar times:', error);
+    }
+
+    try {
+      const response = await fetch(`/.netlify/functions/getDesafios?usuario_id=${USUARIO_ID}`);
+      if (response.ok) {
+        const desafiosData = await response.json();
+        setDesafios(desafiosData);
+      }
+    } catch (error) {
+      console.error('Erro ao carregar desafios:', error);
+    }
+  };
+
+  useEffect(() => {
+    if (!loading) loadUserData();
+  }, [loading]);
+
+  const refreshUserData = () => loadUserData();
+
+  // ===================================================
+  // FUNÇÕES DE CRUD USANDO /adminPlayers
+  // ===================================================
+
+  // ADICIONAR (POST)
+  const handleAddPlayer = async (player: Player) => {
+    try {
+      const response = await fetch('/.netlify/functions/adminPlayers', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${ADMIN_TOKEN}`,
+        },
+        body: JSON.stringify(player),
+      });
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || 'Erro ao adicionar player');
+      }
+      const data = await response.json();
+      // Recarregar a lista de players para pegar o novo
+      const updatedResponse = await fetch('/.netlify/functions/getPlayers');
+      if (updatedResponse.ok) {
+        const updatedPlayers = await updatedResponse.json();
+        setPlayers(updatedPlayers);
+        await checkKickLives(updatedPlayers);
+      }
+      showToast('✅ Player adicionado!', 'success');
+    } catch (error) {
+      console.error('Erro ao adicionar player:', error);
+      showToast(`❌ ${(error as Error).message}`, 'error');
+    }
+  };
+
+  // EDITAR (PUT)
+  const handleSavePlayer = async (updated: Player) => {
+    try {
+      const response = await fetch('/.netlify/functions/adminPlayers', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${ADMIN_TOKEN}`,
+        },
+        body: JSON.stringify(updated),
+      });
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || 'Erro ao salvar player');
+      }
+      // Atualiza localmente
+      setPlayers((prev) => prev.map((p) => (p.id === updated.id ? updated : p)));
+      setEditingPlayer(null);
+      setSelectedPlayer(updated);
+      // Verifica Kick
+      if (updated.kickChannel?.trim()) {
+        await checkKickLives([updated]);
+      } else {
+        setLiveStatus((prev) => ({ ...prev, [updated.id]: false }));
+      }
+      showToast('✅ Player atualizado!', 'success');
+    } catch (error) {
+      console.error('Erro ao salvar player:', error);
+      showToast(`❌ ${(error as Error).message}`, 'error');
+    }
+  };
+
+  // DELETAR (DELETE)
+  const handleDeletePlayer = async (id: string) => {
+    if (!confirm('Excluir player?')) return;
+    try {
+      const response = await fetch('/.netlify/functions/adminPlayers', {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${ADMIN_TOKEN}`,
+        },
+        body: JSON.stringify({ id }),
+      });
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || 'Erro ao excluir player');
+      }
+      setPlayers((prev) => prev.filter((p) => p.id !== id));
+      setLiveStatus((prev) => {
+        const copy = { ...prev };
+        delete copy[id];
+        return copy;
+      });
+      setSelectedPlayer(null);
+      showToast('🗑️ Player excluído!', 'success');
+    } catch (error) {
+      console.error('Erro ao excluir player:', error);
+      showToast(`❌ ${(error as Error).message}`, 'error');
+    }
+  };
+
+  // ===================================================
+  // COMPRAR PLAYER
+  // ===================================================
+
+  const handleCompra = async (preco: number, playerId: string) => {
+    if (moedas < preco) {
+      showToast('Saldo insuficiente!', 'error');
+      return;
+    }
+    if (acervoIds.includes(playerId)) {
+      showToast('Você já possui este player.', 'info');
+      return;
+    }
+    try {
+      const response = await fetch('/.netlify/functions/comprarPlayer', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ player_id: playerId }),
+      });
+      const data = await response.json();
+      if (response.ok) {
+        setMoedas((prev) => prev - preco);
+        setAcervoIds((prev) => [...prev, playerId]);
+        showToast(`✅ Compra realizada! -${preco} 🪙`, 'success');
+      } else {
+        showToast(`❌ ${data.error || 'Erro na compra'}`, 'error');
+      }
+    } catch (error) {
+      showToast('❌ Erro de rede. Tente novamente.', 'error');
+    }
+  };
+
+  // VENDER PLAYER
+  const handleVenda = async (playerId: string, valorRecebido: number) => {
+    try {
+      const response = await fetch('/.netlify/functions/venderPlayer', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ player_id: playerId }),
+      });
+      const data = await response.json();
+      if (response.ok) {
+        setAcervoIds((prev) => prev.filter((id) => id !== playerId));
+        setMoedas((prev) => prev + valorRecebido);
+        showToast(`✅ Venda realizada! +${valorRecebido} 🪙`, 'success');
+      } else {
+        if (data.error?.includes('remova-o antes de vender')) {
+          showToast('❌ Este player está em um time. Remova-o antes de vender.', 'error');
+        } else {
+          showToast(`❌ ${data.error || 'Erro na venda'}`, 'error');
+        }
+      }
+    } catch (error) {
+      showToast('❌ Erro de rede. Tente novamente.', 'error');
+    }
+  };
+
+  // ===================================================
+  // FUNÇÕES DE TIMES
+  // ===================================================
+
+  const handleCriarTime = async (nome: string, escudo: string, jogadores: string[]) => {
+    if (times.length >= 1) {
+      showToast('Você já tem um time. Apenas 1 time por usuário.', 'error');
+      return;
+    }
+    try {
+      const response = await fetch('/.netlify/functions/criarTime', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ nome, escudo, jogadores }),
+      });
+      const data = await response.json();
+      if (response.ok) {
+        const novoTime: Team = {
+          id: Date.now().toString(),
+          nome,
+          escudo: escudo || 'default-shield.png',
+          dono_id: USUARIO_ID,
+          jogadores,
+          elo: 1200,
+          vitorias: 0,
+          derrotas: 0,
+          data_criacao: new Date().toISOString(),
+        };
+        setTimes((prev) => [...prev, novoTime]);
+        showToast(`✅ Time "${nome}" criado com sucesso!`, 'success');
+      } else {
+        showToast(`❌ ${data.error || 'Erro ao criar time'}`, 'error');
+      }
+    } catch (error) {
+      showToast('❌ Erro de rede. Tente novamente.', 'error');
+    }
+  };
+
+  const handleEditarTime = async (id: string, nome: string, escudo: string, jogadores: string[]) => {
+    try {
+      const response = await fetch('/.netlify/functions/editarTime', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id, nome, escudo, jogadores }),
+      });
+      const data = await response.json();
+      if (response.ok) {
+        setTimes((prev) => prev.map((team) => (team.id === id ? { ...team, nome, escudo, jogadores } : team)));
+        showToast(`✅ Time "${nome}" atualizado!`, 'success');
+      } else {
+        showToast(`❌ ${data.error || 'Erro ao editar time'}`, 'error');
+      }
+    } catch (error) {
+      showToast('❌ Erro de rede. Tente novamente.', 'error');
+    }
+  };
+
+  const handleDeletarTime = async (teamId: string) => {
+    try {
+      const response = await fetch('/.netlify/functions/editarTime', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id: teamId, delete: true }),
+      });
+      const data = await response.json();
+      if (response.ok) {
+        setTimes((prev) => prev.filter((team) => team.id !== teamId));
+        showToast('🗑️ Time deletado com sucesso!', 'success');
+      } else {
+        showToast(`❌ ${data.error || 'Erro ao deletar time'}`, 'error');
+      }
+    } catch (error) {
+      showToast('❌ Erro de rede. Tente novamente.', 'error');
+    }
+  };
+
+  // ===================================================
+  // PESQUISA
+  // ===================================================
 
   const handleSearch = (query: string) => {
     setSearchQuery(query);
     if (query.trim()) setActiveSection('players');
   };
 
+  // ===================================================
+  // PLAYER CLICK
+  // ===================================================
+
   const handlePlayerClick = (player: Player) => setSelectedPlayer(player);
   const handleCloseModal = () => setSelectedPlayer(null);
 
-  const handleSavePlayer = async (updated: Player) => {
-    await fetch('/.netlify/functions/savePlayer', {
-      method: 'POST',
-      body: JSON.stringify(updated),
-    });
-    setPlayers(prev => prev.map(p => p.id === updated.id ? updated : p));
-    setEditingPlayer(null);
-    setSelectedPlayer(updated);
-  };
-
-  const handleDeletePlayer = async (id: string) => {
-    const ok = confirm('Excluir player?');
-    if (!ok) return;
-    await fetch('/.netlify/functions/deletePlayer', {
-      method: 'POST',
-      body: JSON.stringify({ id }),
-    });
-    setPlayers(prev => prev.filter(p => p.id !== id));
-    setSelectedPlayer(null);
-  };
-
-  const handleAddPlayer = async (player: Player) => {
-    await fetch('/.netlify/functions/savePlayer', {
-      method: 'POST',
-      body: JSON.stringify(player),
-    });
-    setPlayers(prev => [...prev, player]);
-  };
+  // ===================================================
+  // LOGIN ADMIN
+  // ===================================================
 
   const handleAdminLogin = () => {
     const password = prompt('Senha admin');
-    if (!password) return;
     if (password === 'franca1234') {
       setIsAdmin(true);
-      alert('Modo admin ativado');
+      showToast('🔓 Modo admin ativado', 'success');
     } else {
       setIsAdmin(false);
-      alert('Senha errada');
+      showToast('❌ Senha errada', 'error');
     }
   };
 
   const handleAdminLogout = () => {
     setIsAdmin(false);
     setEditingPlayer(null);
+    showToast('🔒 Modo admin desativado', 'info');
   };
+
+  // ===================================================
+  // RENDER CONTENT
+  // ===================================================
 
   const renderContent = () => {
     if (loading) {
@@ -222,63 +572,58 @@ export default function App() {
 
     switch (activeSection) {
       case 'players':
-        return (
-          <PlayersPage
-            players={players}
-            onPlayerClick={handlePlayerClick}
-            searchQuery={searchQuery}
-          />
-        );
+        return <PlayersPage players={players} onPlayerClick={handlePlayerClick} searchQuery={searchQuery} liveStatus={liveStatus} />;
+      case 'home':
+        return <HomePage players={players} onPlayerClick={handlePlayerClick} liveStatus={liveStatus} />;
       case 'rankings':
-        return (
-          <RankingsPage
-            players={players}
-            onPlayerClick={handlePlayerClick}
-          />
-        );
+        return <RankingsPage players={players} onPlayerClick={handlePlayerClick} />;
       case 'admin':
-        return isAdmin ? (
-          <div className="max-w-7xl mx-auto px-4 py-8">
-            <AdminPanel onAddPlayer={handleAddPlayer} />
-          </div>
-        ) : (
-          <div className="text-center text-white/20 mt-20 text-sm tracking-widest uppercase">
-            Acesso negado
-          </div>
-        );
-      default:
+        return isAdmin ? <AdminPanel onAddPlayer={handleAddPlayer} /> : <div className="text-center text-white/20 mt-20">Acesso negado</div>;
+      case 'times':
         return (
-          <HomePage
+          <TimesPage
+            teams={times}
             players={players}
-            onPlayerClick={handlePlayerClick}
+            acervoIds={acervoIds}
+            onRefresh={refreshUserData}
+            onCriarTime={handleCriarTime}
+            onEditarTime={handleEditarTime}
+            onDeletarTime={handleDeletarTime}
           />
         );
+      case 'loja':
+        return <LojaPage players={players} acervoIds={acervoIds} moedas={moedas} onCompra={handleCompra} />;
+      case 'acervo':
+        return <AcervoPage players={players} acervoIds={acervoIds} onVender={handleVenda} />;
+      case 'desafios':
+        return <DesafiosPage challenges={desafios} teams={times} players={players} onRefresh={refreshUserData} />;
+      case 'ranking-times':
+        return <RankingTimesPage teams={times} />;
+      case 'kick':
+        return <KickPage moedasDiaKick={moedasDiaKick} onPing={() => setMoedasDiaKick((prev) => Math.min(prev + 10, 500))} />;
+      default:
+        return <HomePage players={players} onPlayerClick={handlePlayerClick} liveStatus={liveStatus} />;
     }
   };
 
-  return (
-    <div
-      className="min-h-screen select-none relative"
-      style={{ background: '#080808' }}
-    >
-      <BackgroundCanvas />
+  // ===================================================
+  // JSX
+  // ===================================================
 
-      <div
-        className="fixed inset-0 pointer-events-none"
-        style={{
-          background: 'radial-gradient(ellipse 80% 50% at 50% 0%, rgba(255,255,255,0.03) 0%, transparent 70%)',
-          zIndex: 1,
-        }}
-      />
+  return (
+    <div className="min-h-screen select-none relative" style={{ background: '#080808' }}>
+      <BackgroundCanvas />
+      <div className="fixed inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse 80% 50% at 50% 0%, rgba(255,255,255,0.03) 0%, transparent 70%)', zIndex: 1 }} />
 
       <div className="relative" style={{ zIndex: 2 }}>
         <Header
           onSearch={handleSearch}
           activeSection={activeSection}
           onSectionChange={setActiveSection}
+          moedas={moedas}
         />
 
-        <main className="max-w-7xl mx-auto px-4 py-8">
+        <main className="max-w-7xl mx-auto px-4 py-8 animate-fade-up">
           {renderContent()}
         </main>
 
@@ -287,19 +632,7 @@ export default function App() {
             <button
               onClick={handleAdminLogin}
               className="flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-medium tracking-widest uppercase transition-all duration-200"
-              style={{
-                background: 'rgba(255,255,255,0.04)',
-                border: '1px solid rgba(255,255,255,0.08)',
-                color: 'rgba(255,255,255,0.3)',
-              }}
-              onMouseEnter={e => {
-                (e.currentTarget as HTMLButtonElement).style.background = 'rgba(255,255,255,0.08)';
-                (e.currentTarget as HTMLButtonElement).style.color = 'rgba(255,255,255,0.7)';
-              }}
-              onMouseLeave={e => {
-                (e.currentTarget as HTMLButtonElement).style.background = 'rgba(255,255,255,0.04)';
-                (e.currentTarget as HTMLButtonElement).style.color = 'rgba(255,255,255,0.3)';
-              }}
+              style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', color: 'rgba(255,255,255,0.3)' }}
             >
               <span className="w-1.5 h-1.5 rounded-full bg-current" />
               Admin
@@ -308,19 +641,7 @@ export default function App() {
             <button
               onClick={handleAdminLogout}
               className="flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-medium tracking-widest uppercase transition-all duration-200"
-              style={{
-                background: 'rgba(239,68,68,0.08)',
-                border: '1px solid rgba(239,68,68,0.2)',
-                color: 'rgba(239,68,68,0.6)',
-              }}
-              onMouseEnter={e => {
-                (e.currentTarget as HTMLButtonElement).style.background = 'rgba(239,68,68,0.15)';
-                (e.currentTarget as HTMLButtonElement).style.color = 'rgba(239,68,68,0.9)';
-              }}
-              onMouseLeave={e => {
-                (e.currentTarget as HTMLButtonElement).style.background = 'rgba(239,68,68,0.08)';
-                (e.currentTarget as HTMLButtonElement).style.color = 'rgba(239,68,68,0.6)';
-              }}
+              style={{ background: 'rgba(239,68,68,0.08)', border: '1px solid rgba(239,68,68,0.2)', color: 'rgba(239,68,68,0.6)' }}
             >
               <span className="w-1.5 h-1.5 rounded-full bg-current" />
               Sair
@@ -330,14 +651,15 @@ export default function App() {
       </div>
 
       {selectedPlayer && (
-  <PlayerModal
-    player={selectedPlayer}
-    onClose={handleCloseModal}
-    onEdit={setEditingPlayer}
-    onDelete={handleDeletePlayer}
-    isAdmin={isAdmin}
-  />
-)}
+        <PlayerModal
+          player={selectedPlayer}
+          onClose={handleCloseModal}
+          onEdit={setEditingPlayer}
+          onDelete={handleDeletePlayer}
+          isAdmin={isAdmin}
+          isLive={liveStatus[selectedPlayer.id] || false}
+        />
+      )}
 
       {editingPlayer && (
         <EditPlayerModal
@@ -346,6 +668,8 @@ export default function App() {
           onSave={handleSavePlayer}
         />
       )}
+
+      <ToastContainer />
     </div>
   );
 }
